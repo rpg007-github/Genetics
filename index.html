@@ -3,958 +3,907 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Genetics Fundamentals — Principles of Modern Genetics</title>
-  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <title>Genetics Made Simple</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #faf8f5;
-      --bg-card: #ffffff;
-      --text: #2c2c2c;
-      --text-muted: #6b6b6b;
-      --accent: #6b3fa0;
-      --accent-light: #f0e8f7;
-      --accent-warm: #8b5e3c;
-      --border: #e2ddd6;
-      --border-light: #f0ece6;
-      --highlight: #fffbe6;
-      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
-      --shadow-hover: 0 2px 8px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.06);
+      --bg: #f4f1eb;
+      --bg-warm: #ece7dd;
+      --card: #fffdf9;
+      --text: #2a2520;
+      --text-soft: #6d6359;
+      --green: #3a7d5c;
+      --green-light: #e8f3ec;
+      --green-dark: #2c5e44;
+      --amber: #c9890a;
+      --amber-light: #fdf5e3;
+      --coral: #c75c3a;
+      --coral-light: #fceee8;
+      --blue: #4a6fa5;
+      --blue-light: #eaf0f8;
+      --border: #ddd6ca;
+      --shadow: 0 1px 4px rgba(42,37,32,0.06), 0 6px 20px rgba(42,37,32,0.04);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; font-size: 16px; }
-    .hero { background: linear-gradient(135deg, #2d1b4e 0%, #6b3fa0 40%, #8b5fbf 100%); color: white; padding: 4rem 2rem 3.5rem; text-align: center; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); opacity: 0.5; }
-    .hero h1 { font-family: 'Crimson Pro', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 300; letter-spacing: 0.02em; margin-bottom: 0.5rem; position: relative; }
-    .hero .subtitle { font-size: 1.1rem; font-weight: 300; opacity: 0.85; position: relative; max-width: 650px; margin: 0 auto; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
-    .intro-note { font-family: 'Crimson Pro', serif; font-size: 1.15rem; line-height: 1.8; color: var(--text-muted); max-width: 800px; margin: 0 auto 3rem; text-align: center; padding: 0 1rem; }
-    .toc { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 3rem; box-shadow: var(--shadow); }
-    .toc h2 { font-family: 'Crimson Pro', serif; font-size: 1.2rem; font-weight: 600; color: var(--accent); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.08em; }
-    .toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.4rem 2rem; }
-    .toc a { color: var(--text); text-decoration: none; font-size: 0.95rem; padding: 0.25rem 0; display: block; border-bottom: 1px solid transparent; transition: all 0.2s; }
-    .toc a:hover { color: var(--accent); border-bottom-color: var(--accent); }
-    .toc a .num { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; margin-right: 0.5rem; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+    /* ---- HERO ---- */
+    .hero {
+      background: var(--green-dark);
+      color: white;
+      padding: 3.5rem 2rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '🧬';
+      position: absolute;
+      font-size: 12rem;
+      opacity: 0.06;
+      top: -1.5rem;
+      right: -1rem;
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      position: relative;
+    }
+    .hero p {
+      font-size: 1.05rem;
+      opacity: 0.8;
+      max-width: 500px;
+      margin: 0.5rem auto 0;
+      position: relative;
+      font-weight: 400;
+    }
+
+    /* ---- LAYOUT ---- */
+    .container { max-width: 860px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+
+    .intro-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow);
+      font-size: 1rem;
+      color: var(--text-soft);
+      line-height: 1.8;
+    }
+    .intro-box strong { color: var(--text); }
+
+    /* ---- SECTION ---- */
     .section { margin-bottom: 3rem; }
-    .section-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--accent); }
-    .section-number { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: white; background: var(--accent); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .section-header h2 { font-family: 'Crimson Pro', serif; font-size: 1.6rem; font-weight: 600; color: var(--text); }
-    .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; }
-    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem 1.5rem; box-shadow: var(--shadow); transition: box-shadow 0.2s, transform 0.2s; }
-    .card:hover { box-shadow: var(--shadow-hover); transform: translateY(-1px); }
-    .card h3 { font-family: 'Crimson Pro', serif; font-size: 1.1rem; font-weight: 600; color: var(--accent); margin-bottom: 0.6rem; }
-    .card p, .card li { font-size: 0.93rem; line-height: 1.65; }
-    .card ul { list-style: none; padding: 0; }
-    .card ul li { padding: 0.2rem 0; padding-left: 1rem; position: relative; }
-    .card ul li::before { content: '·'; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
-    .fact-table { width: 100%; border-collapse: collapse; background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; box-shadow: var(--shadow); margin-bottom: 1rem; }
-    .fact-table th { background: var(--accent-light); font-family: 'Crimson Pro', serif; font-weight: 600; font-size: 0.9rem; text-align: left; padding: 0.6rem 1rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; }
-    .fact-table td { padding: 0.5rem 1rem; font-size: 0.93rem; border-top: 1px solid var(--border-light); }
-    .fact-table tr:hover td { background: #fdfcfa; }
-    .formula { font-family: 'JetBrains Mono', monospace; background: var(--accent-light); padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.88rem; color: var(--accent); white-space: nowrap; }
-    .constant { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--accent-warm); }
-    .mnemonic { background: var(--highlight); border-left: 3px solid #d4a843; padding: 0.6rem 1rem; margin: 0.5rem 0; border-radius: 0 4px 4px 0; font-size: 0.9rem; font-style: italic; }
-    .card-full { grid-column: 1 / -1; }
-    .two-col-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 2rem; }
-    .footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 2rem; }
-    @media (max-width: 700px) { .card-grid { grid-template-columns: 1fr; } .two-col-list { grid-template-columns: 1fr; } .toc-grid { grid-template-columns: 1fr; } .hero { padding: 3rem 1.5rem 2.5rem; } .flashcard-grid { grid-template-columns: 1fr; } }
-    .quiz-question { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem 1.5rem; box-shadow: var(--shadow); margin-bottom: 1rem; }
-    .quiz-question p.q-text { font-family: 'Crimson Pro', serif; font-size: 1.05rem; font-weight: 500; margin-bottom: 0.75rem; color: var(--text); }
-    .quiz-question .q-number { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
-    .quiz-options { list-style: none; padding: 0; }
-    .quiz-options li { margin-bottom: 0.35rem; }
-    .quiz-options label { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.5rem 0.75rem; border-radius: 5px; cursor: pointer; font-size: 0.93rem; line-height: 1.5; transition: background 0.15s; border: 1px solid transparent; }
-    .quiz-options label:hover { background: var(--accent-light); }
-    .quiz-options input[type="radio"] { margin-top: 0.25rem; accent-color: var(--accent); flex-shrink: 0; }
-    .quiz-options label.correct { background: #e6f4ea; border-color: #34a853; color: #1a7431; }
-    .quiz-options label.incorrect { background: #fce8e6; border-color: #ea4335; color: #a8281e; }
-    .quiz-options label.reveal-correct { background: #e6f4ea; border-color: #34a853; }
-    .quiz-feedback { margin-top: 0.6rem; padding: 0.5rem 0.75rem; border-radius: 4px; font-size: 0.88rem; line-height: 1.5; display: none; }
-    .quiz-feedback.show { display: block; }
-    .quiz-feedback.correct-fb { background: #e6f4ea; color: #1a7431; border-left: 3px solid #34a853; }
-    .quiz-feedback.incorrect-fb { background: #fce8e6; color: #a8281e; border-left: 3px solid #ea4335; }
-    .quiz-controls { display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
-    .quiz-btn { font-family: 'Source Sans 3', sans-serif; font-size: 0.95rem; font-weight: 500; padding: 0.6rem 1.5rem; border-radius: 5px; border: none; cursor: pointer; transition: all 0.2s; }
-    .quiz-btn-primary { background: var(--accent); color: white; }
-    .quiz-btn-primary:hover { background: #522d80; }
-    .quiz-btn-secondary { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
-    .quiz-btn-secondary:hover { background: var(--border-light); }
-    .quiz-score { background: var(--accent-light); border: 1px solid var(--accent); border-radius: 6px; padding: 1rem 1.5rem; margin-top: 1rem; display: none; text-align: center; }
-    .quiz-score .score-number { font-family: 'Crimson Pro', serif; font-size: 2.5rem; font-weight: 700; color: var(--accent); }
-    .quiz-score .score-label { font-size: 0.9rem; color: var(--text-muted); }
-    .flashcard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
-    .flashcard { perspective: 800px; height: 220px; cursor: pointer; }
-    .flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s ease; transform-style: preserve-3d; }
-    .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
-    .flashcard-front, .flashcard-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 6px; border: 1px solid var(--border); box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.25rem; text-align: center; }
-    .flashcard-front { background: var(--bg-card); }
-    .flashcard-front .fc-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.75rem; }
-    .flashcard-front .fc-question { font-family: 'Crimson Pro', serif; font-size: 1.1rem; font-weight: 500; color: var(--text); line-height: 1.5; }
-    .flashcard-front .fc-hint { font-size: 0.78rem; color: var(--text-muted); margin-top: auto; padding-top: 0.5rem; }
-    .flashcard-back { background: var(--accent); color: white; transform: rotateY(180deg); }
-    .flashcard-back .fc-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; margin-bottom: 0.75rem; }
-    .flashcard-back .fc-answer { font-size: 1rem; line-height: 1.6; font-weight: 400; }
-    .flashcard:hover .flashcard-inner { box-shadow: var(--shadow-hover); }
-    .fc-category-filter { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
-    .fc-filter-btn { font-family: 'Source Sans 3', sans-serif; font-size: 0.85rem; padding: 0.35rem 0.9rem; border-radius: 20px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
-    .fc-filter-btn:hover { border-color: var(--accent); color: var(--accent); }
-    .fc-filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
-    .sa-question { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem 1.5rem; box-shadow: var(--shadow); margin-bottom: 1rem; }
-    .sa-question .q-number { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
-    .sa-question p.q-text { font-family: 'Crimson Pro', serif; font-size: 1.05rem; font-weight: 500; margin-bottom: 0.75rem; color: var(--text); }
-    .sa-textarea { width: 100%; min-height: 70px; padding: 0.6rem 0.75rem; border: 1px solid var(--border); border-radius: 5px; font-family: 'Source Sans 3', sans-serif; font-size: 0.93rem; line-height: 1.5; resize: vertical; transition: border-color 0.2s; background: var(--bg); }
-    .sa-textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(107, 63, 160, 0.15); }
-    .sa-submit-btn { margin-top: 0.6rem; font-family: 'Source Sans 3', sans-serif; font-size: 0.88rem; font-weight: 500; padding: 0.45rem 1.2rem; border-radius: 5px; border: 1px solid var(--accent); background: white; color: var(--accent); cursor: pointer; transition: all 0.2s; }
-    .sa-submit-btn:hover { background: var(--accent); color: white; }
-    .sa-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    .sa-feedback { margin-top: 0.6rem; padding: 0.6rem 0.75rem; border-radius: 4px; font-size: 0.9rem; line-height: 1.55; display: none; }
-    .sa-feedback.show { display: block; }
-    .sa-feedback.grade-good { background: #e6f4ea; color: #1a7431; border-left: 3px solid #34a853; }
-    .sa-feedback.grade-partial { background: #fef7e0; color: #7a6215; border-left: 3px solid #f9ab00; }
-    .sa-feedback.grade-needs-work { background: #fce8e6; color: #a8281e; border-left: 3px solid #ea4335; }
-    .sa-feedback.grade-error { background: #f5f5f5; color: #666; border-left: 3px solid #999; }
-    .sa-loading { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.88rem; color: var(--text-muted); margin-top: 0.5rem; }
-    .sa-loading .spinner { width: 14px; height: 14px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .sa-note { font-size: 0.82rem; color: var(--text-muted); font-style: italic; margin-top: 1.5rem; padding: 0.75rem; background: var(--border-light); border-radius: 4px; }
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.35rem;
+    }
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.01em;
+    }
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      margin-bottom: 1.25rem;
+      max-width: 650px;
+    }
+
+    /* ---- CARDS ---- */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem 1.75rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 0.6rem;
+    }
+    .card p { font-size: 0.95rem; line-height: 1.75; margin-bottom: 0.6rem; }
+    .card p:last-child { margin-bottom: 0; }
+
+    .example-box {
+      background: var(--amber-light);
+      border-left: 3px solid var(--amber);
+      border-radius: 0 6px 6px 0;
+      padding: 0.75rem 1rem;
+      margin: 0.75rem 0;
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+    .example-box .label {
+      font-weight: 600;
+      color: var(--amber);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.2rem;
+    }
+
+    .key-point {
+      background: var(--green-light);
+      border-left: 3px solid var(--green);
+      border-radius: 0 6px 6px 0;
+      padding: 0.75rem 1rem;
+      margin: 0.75rem 0;
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+    .key-point .label {
+      font-weight: 600;
+      color: var(--green-dark);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.2rem;
+    }
+
+    .vocab {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 0.1rem 1rem;
+      font-size: 0.93rem;
+      margin: 0.5rem 0;
+    }
+    .vocab dt {
+      font-weight: 600;
+      color: var(--green-dark);
+      padding: 0.3rem 0;
+    }
+    .vocab dd {
+      padding: 0.3rem 0;
+      border-bottom: 1px solid var(--bg-warm);
+    }
+
+    .formula-inline {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--blue-light);
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-size: 0.88rem;
+      color: var(--blue);
+      white-space: nowrap;
+    }
+
+    .simple-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      margin: 0.75rem 0;
+    }
+    .simple-table th {
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      background: var(--bg-warm);
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-soft);
+      border-bottom: 2px solid var(--border);
+    }
+    .simple-table td {
+      padding: 0.45rem 0.75rem;
+      border-bottom: 1px solid var(--bg-warm);
+    }
+
+    /* ---- TWO COL GRID ---- */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 650px) { .grid-2 { grid-template-columns: 1fr; } .vocab { grid-template-columns: 110px 1fr; } }
+
+    /* ---- QUIZ ---- */
+    .quiz-q {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 1rem;
+    }
+    .quiz-q .q-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.25rem;
+    }
+    .quiz-q .q-text {
+      font-family: 'Fraunces', serif;
+      font-size: 1.02rem;
+      font-weight: 500;
+      margin-bottom: 0.7rem;
+    }
+    .quiz-opts { list-style: none; }
+    .quiz-opts li { margin-bottom: 0.3rem; }
+    .quiz-opts label {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 0.45rem 0.65rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.93rem;
+      border: 1px solid transparent;
+      transition: background 0.15s;
+    }
+    .quiz-opts label:hover { background: var(--bg-warm); }
+    .quiz-opts input[type="radio"] { margin-top: 0.25rem; accent-color: var(--green); flex-shrink: 0; }
+    .quiz-opts label.correct { background: var(--green-light); border-color: var(--green); }
+    .quiz-opts label.wrong { background: var(--coral-light); border-color: var(--coral); }
+    .quiz-opts label.show-right { background: var(--green-light); border-color: var(--green); }
+    .quiz-fb {
+      margin-top: 0.5rem;
+      padding: 0.5rem 0.7rem;
+      border-radius: 5px;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      display: none;
+    }
+    .quiz-fb.show { display: block; }
+    .quiz-fb.ok { background: var(--green-light); color: var(--green-dark); border-left: 3px solid var(--green); }
+    .quiz-fb.nope { background: var(--coral-light); color: #8b3a22; border-left: 3px solid var(--coral); }
+    .btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 0.55rem 1.4rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-primary { background: var(--green); color: white; }
+    .btn-primary:hover { background: var(--green-dark); }
+    .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border); }
+    .btn-secondary:hover { background: var(--bg-warm); }
+    .quiz-controls { display: flex; gap: 0.75rem; margin-top: 1.25rem; flex-wrap: wrap; }
+    .quiz-score {
+      background: var(--green-light);
+      border: 1px solid var(--green);
+      border-radius: 10px;
+      padding: 1rem 1.5rem;
+      margin-top: 1rem;
+      display: none;
+      text-align: center;
+    }
+    .quiz-score .big { font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 700; color: var(--green-dark); }
+    .quiz-score .sub { font-size: 0.9rem; color: var(--text-soft); }
+
+    /* ---- FLASHCARDS ---- */
+    .fc-filters { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
+    .fc-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text-soft);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .fc-btn:hover { border-color: var(--green); color: var(--green); }
+    .fc-btn.active { background: var(--green); color: white; border-color: var(--green); }
+    .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+    .fc {
+      perspective: 700px;
+      height: 200px;
+      cursor: pointer;
+    }
+    .fc-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.45s ease;
+      transform-style: preserve-3d;
+    }
+    .fc.flipped .fc-inner { transform: rotateY(180deg); }
+    .fc-front, .fc-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .fc-front { background: var(--card); }
+    .fc-front .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green); margin-bottom: 0.6rem; }
+    .fc-front .question { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 500; line-height: 1.5; }
+    .fc-front .hint { font-size: 0.75rem; color: var(--text-soft); margin-top: auto; padding-top: 0.4rem; }
+    .fc-back { background: var(--green-dark); color: white; transform: rotateY(180deg); }
+    .fc-back .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; margin-bottom: 0.6rem; }
+    .fc-back .answer { font-size: 0.95rem; line-height: 1.65; }
+
+    .footer { text-align: center; padding: 2rem 1rem; color: var(--text-soft); font-size: 0.82rem; border-top: 1px solid var(--border); margin-top: 2rem; }
   </style>
 </head>
 <body>
 
 <div class="hero">
-  <h1>Genetics Fundamentals</h1>
-  <p class="subtitle">Origin, development, and principles of modern genetics and genetic manipulations. The core facts you need to know.</p>
+  <h1>Genetics Made Simple</h1>
+  <p>The basics, explained clearly with real examples. No jargon overload.</p>
 </div>
 
 <div class="container">
 
-  <p class="intro-note">
-    This is the essential reference for Genetics. Mendelian principles, chromosome behavior, DNA structure and replication, gene expression, mutation, recombinant DNA technology, and population genetics. Everything you need to have down cold.
-  </p>
-
-  <!-- TABLE OF CONTENTS -->
-  <div class="toc">
-    <h2>Contents</h2>
-    <div class="toc-grid">
-      <a href="#s1"><span class="num">01</span> Mendelian Genetics</a>
-      <a href="#s2"><span class="num">02</span> Extensions of Mendelism</a>
-      <a href="#s3"><span class="num">03</span> Chromosome Theory &amp; Linkage</a>
-      <a href="#s4"><span class="num">04</span> DNA Structure &amp; Replication</a>
-      <a href="#s5"><span class="num">05</span> Transcription &amp; Translation</a>
-      <a href="#s6"><span class="num">06</span> Gene Regulation</a>
-      <a href="#s7"><span class="num">07</span> Mutation &amp; DNA Repair</a>
-      <a href="#s8"><span class="num">08</span> Chromosome Variation</a>
-      <a href="#s9"><span class="num">09</span> Recombinant DNA &amp; Biotechnology</a>
-      <a href="#s10"><span class="num">10</span> Genomics &amp; Epigenetics</a>
-      <a href="#s11"><span class="num">11</span> Population &amp; Evolutionary Genetics</a>
-      <a href="#s12"><span class="num">12</span> Key Numbers &amp; Formulas</a>
-      <a href="#s13"><span class="num">13</span> Self-Test Quiz</a>
-      <a href="#s14"><span class="num">14</span> Flashcards</a>
-      <a href="#s15"><span class="num">15</span> Short Answer Practice</a>
-    </div>
+  <div class="intro-box">
+    This guide covers <strong>the core ideas in genetics</strong> that you actually need to understand. Each topic starts with a plain-English explanation and a concrete example before introducing any terminology. Scroll through the concepts, then test yourself with the quiz and flashcards at the bottom.
   </div>
 
-  <!-- SECTION 1 -->
+  <!-- ============================================ -->
+  <!-- SECTION 1: What Is a Gene? -->
+  <!-- ============================================ -->
   <div class="section" id="s1">
-    <div class="section-header"><span class="section-number">1</span><h2>Mendelian Genetics</h2></div>
-    <div class="card-grid">
-      <div class="card">
-        <h3>Key Terminology</h3>
-        <ul>
-          <li><strong>Gene</strong>: a unit of heredity; a segment of DNA encoding a functional product</li>
-          <li><strong>Allele</strong>: an alternative form of a gene at a given locus</li>
-          <li><strong>Locus</strong>: the specific physical position of a gene on a chromosome</li>
-          <li><strong>Homozygous</strong>: two identical alleles (AA or aa)</li>
-          <li><strong>Heterozygous</strong>: two different alleles (Aa)</li>
-          <li><strong>Genotype</strong>: the genetic makeup (e.g., Aa)</li>
-          <li><strong>Phenotype</strong>: the observable trait (e.g., purple flowers)</li>
-          <li><strong>Dominant</strong>: allele expressed in the heterozygote. <strong>Recessive</strong>: masked in the heterozygote, expressed only when homozygous.</li>
-        </ul>
+    <div class="section-tag">Section 01</div>
+    <div class="section-title">What Is a Gene?</div>
+    <p class="section-subtitle">The basic vocabulary you need before anything else makes sense.</p>
+
+    <div class="card">
+      <h3>The Big Idea</h3>
+      <p>Your body is built from instructions stored in your DNA. A <strong>gene</strong> is one specific instruction, like a recipe in a cookbook. Different versions of the same recipe are called <strong>alleles</strong>. You get one copy from mom, one from dad.</p>
+
+      <div class="example-box">
+        <div class="label">Example</div>
+        Think of eye color. There is a gene for eye color (the recipe), but the gene comes in different versions (alleles): one version might code for brown, another for blue. You inherited one allele from each parent.
       </div>
-      <div class="card">
-        <h3>Mendel's Laws</h3>
-        <ul>
-          <li><strong>Law of Segregation</strong>: during gamete formation, the two alleles for a gene separate so each gamete carries only one allele. This corresponds to the separation of homologous chromosomes in meiosis I.</li>
-          <li><strong>Law of Independent Assortment</strong>: genes on different (non-homologous) chromosomes sort independently during gamete formation. This corresponds to the random orientation of homologous pairs at the metaphase plate in meiosis I.</li>
-        </ul>
+
+      <dl class="vocab">
+        <dt>Gene</dt>
+        <dd>A segment of DNA that codes for a trait</dd>
+        <dt>Allele</dt>
+        <dd>A version of a gene (e.g., brown vs. blue)</dd>
+        <dt>Locus</dt>
+        <dd>The specific spot on a chromosome where a gene lives</dd>
+        <dt>Homozygous</dt>
+        <dd>Both alleles are the same (BB or bb)</dd>
+        <dt>Heterozygous</dt>
+        <dd>The two alleles are different (Bb)</dd>
+        <dt>Genotype</dt>
+        <dd>The alleles you carry (e.g., Bb)</dd>
+        <dt>Phenotype</dt>
+        <dd>What you actually look like (e.g., brown eyes)</dd>
+        <dt>Dominant</dt>
+        <dd>The allele that shows up even with just one copy (B)</dd>
+        <dt>Recessive</dt>
+        <dd>Only shows up when you have two copies (bb)</dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- SECTION 2: Mendel's Laws -->
+  <!-- ============================================ -->
+  <div class="section" id="s2">
+    <div class="section-tag">Section 02</div>
+    <div class="section-title">Mendel's Laws</div>
+    <p class="section-subtitle">Two rules that predict how traits are passed from parents to offspring.</p>
+
+    <div class="card">
+      <h3>Law of Segregation</h3>
+      <p>When your body makes egg or sperm cells, the two alleles for every gene <strong>split apart</strong> so each egg or sperm gets only <strong>one</strong> allele. This happens because the matching (homologous) chromosomes separate during meiosis I.</p>
+      <div class="example-box">
+        <div class="label">Example</div>
+        If you are Bb for eye color, half your sperm or eggs carry B and the other half carry b. Each child gets one allele from you, chosen at random.
       </div>
-      <div class="card">
-        <h3>Monohybrid Cross</h3>
-        <p>Cross between two individuals heterozygous for one gene: <span class="formula">Aa x Aa</span></p>
-        <ul>
-          <li>Genotypic ratio: <span class="formula">1 AA : 2 Aa : 1 aa</span></li>
-          <li>Phenotypic ratio: <span class="formula">3 dominant : 1 recessive</span></li>
-        </ul>
-        <p style="margin-top:0.5rem">A <strong>testcross</strong> crosses an individual of unknown genotype (dominant phenotype) with a homozygous recessive (aa) to determine if it is AA or Aa.</p>
+    </div>
+
+    <div class="card">
+      <h3>Law of Independent Assortment</h3>
+      <p>Genes on <strong>different chromosomes</strong> get sorted into eggs and sperm independently of each other. Getting the "B" allele for one gene doesn't affect which allele you get for a gene on a different chromosome.</p>
+      <div class="example-box">
+        <div class="label">Example</div>
+        If you are Bb (eye color) and Tt (tongue-rolling), the B allele is equally likely to end up with T or with t. The genes don't travel as a package because they sit on different chromosomes.
       </div>
-      <div class="card">
-        <h3>Dihybrid Cross</h3>
-        <p>Cross between two individuals heterozygous for two genes: <span class="formula">AaBb x AaBb</span></p>
-        <ul>
-          <li>Phenotypic ratio: <span class="formula">9:3:3:1</span></li>
-          <li>9 A_B_ : 3 A_bb : 3 aaB_ : 1 aabb</li>
-          <li>This 9:3:3:1 ratio confirms independent assortment</li>
-        </ul>
-        <div class="mnemonic">Use the "forked-line method" or a 4x4 Punnett square (16 boxes) for dihybrid crosses.</div>
-      </div>
-      <div class="card">
-        <h3>Probability Rules</h3>
-        <ul>
-          <li><strong>Multiplication rule</strong> (AND): probability of two independent events both occurring = product of their individual probabilities</li>
-          <li><strong>Addition rule</strong> (OR): probability of one event OR another occurring = sum of their individual probabilities (for mutually exclusive events)</li>
-          <li>Example: Aa x Aa. P(Aa offspring) = P(A from dad AND a from mom) + P(a from dad AND A from mom) = (1/2)(1/2) + (1/2)(1/2) = <span class="formula">1/2</span></li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Chi-Square Goodness of Fit</h3>
-        <p>Tests whether observed data fit an expected genetic ratio.</p>
-        <p><span class="formula">&chi;&sup2; = &Sigma; (observed - expected)&sup2; / expected</span></p>
-        <ul>
-          <li>Degrees of freedom = number of classes - 1</li>
-          <li>Compare calculated &chi;&sup2; to critical value at p = 0.05</li>
-          <li>If &chi;&sup2; &lt; critical value: fail to reject the null hypothesis (data fit the expected ratio)</li>
-          <li>If &chi;&sup2; &gt; critical value: reject the null hypothesis (data do not fit)</li>
-        </ul>
+    </div>
+
+    <div class="card">
+      <h3>The Classic Crosses</h3>
+      <p>The easiest way to predict offspring is a <strong>Punnett square</strong>. Here are the two crosses you will see over and over:</p>
+
+      <p><strong>Monohybrid cross</strong> (one gene, both parents Aa):</p>
+      <table class="simple-table">
+        <tr><th></th><th>A</th><th>a</th></tr>
+        <tr><td><strong>A</strong></td><td>AA</td><td>Aa</td></tr>
+        <tr><td><strong>a</strong></td><td>Aa</td><td>aa</td></tr>
+      </table>
+      <p>Result: <span class="formula-inline">3 dominant : 1 recessive</span> phenotypic ratio.</p>
+
+      <p style="margin-top:1rem"><strong>Dihybrid cross</strong> (two genes, both parents AaBb):</p>
+      <p>Use a 4x4 Punnett square (16 boxes). The phenotypic ratio comes out <span class="formula-inline">9:3:3:1</span>, which confirms independent assortment.</p>
+
+      <div class="key-point">
+        <div class="label">Key Point</div>
+        A <strong>testcross</strong> is when you cross a dominant-phenotype individual with a homozygous recessive (aa) to figure out whether the dominant individual is AA or Aa. If any recessive offspring appear, the parent must be Aa.
       </div>
     </div>
   </div>
 
-  <!-- SECTION 2 -->
-  <div class="section" id="s2">
-    <div class="section-header"><span class="section-number">2</span><h2>Extensions of Mendelism</h2></div>
-    <div class="card-grid">
+  <!-- ============================================ -->
+  <!-- SECTION 3: Beyond Simple Dominance -->
+  <!-- ============================================ -->
+  <div class="section" id="s3">
+    <div class="section-tag">Section 03</div>
+    <div class="section-title">Beyond Simple Dominance</div>
+    <p class="section-subtitle">Not every trait follows the neat dominant/recessive pattern.</p>
+
+    <div class="grid-2">
       <div class="card">
         <h3>Incomplete Dominance</h3>
-        <p>The heterozygote shows an <strong>intermediate phenotype</strong> between the two homozygotes. Neither allele is fully dominant.</p>
-        <ul>
-          <li>Example: red (RR) x white (R'R') snapdragons = pink (RR') F1</li>
-          <li>F2 ratio: <span class="formula">1 red : 2 pink : 1 white</span></li>
-        </ul>
+        <p>The heterozygote is a <strong>blend</strong> of the two homozygotes.</p>
+        <div class="example-box">
+          <div class="label">Example</div>
+          Red flower (RR) × White flower (R'R') = <strong>Pink</strong> flower (RR'). The F2 ratio becomes 1 red : 2 pink : 1 white instead of 3:1.
+        </div>
       </div>
       <div class="card">
         <h3>Codominance</h3>
-        <p><strong>Both alleles are fully expressed</strong> in the heterozygote (not blended).</p>
-        <ul>
-          <li>Example: ABO blood types. I<sup>A</sup>I<sup>B</sup> individuals express <strong>both</strong> A and B antigens on red blood cells (type AB)</li>
-          <li>Sickle cell heterozygotes (HbA HbS) produce both normal and sickle hemoglobin</li>
-        </ul>
+        <p>Both alleles show up <strong>fully and separately</strong> (no blending).</p>
+        <div class="example-box">
+          <div class="label">Example</div>
+          Blood type AB. People with genotype I<sup>A</sup>I<sup>B</sup> have <em>both</em> A and B antigens on their red blood cells, not a mix.
+        </div>
       </div>
-      <div class="card">
-        <h3>Multiple Alleles: ABO Blood Group</h3>
-        <table class="fact-table">
-          <tr><th>Genotype</th><th>Blood Type</th><th>Antigens</th><th>Antibodies</th></tr>
-          <tr><td>I<sup>A</sup>I<sup>A</sup> or I<sup>A</sup>i</td><td>A</td><td>A</td><td>Anti-B</td></tr>
-          <tr><td>I<sup>B</sup>I<sup>B</sup> or I<sup>B</sup>i</td><td>B</td><td>B</td><td>Anti-A</td></tr>
-          <tr><td>I<sup>A</sup>I<sup>B</sup></td><td>AB</td><td>A and B</td><td>Neither</td></tr>
-          <tr><td>ii</td><td>O</td><td>Neither</td><td>Anti-A and Anti-B</td></tr>
-        </table>
-        <p>I<sup>A</sup> and I<sup>B</sup> are codominant to each other; both are dominant over i.</p>
-      </div>
+    </div>
+
+    <div class="card">
+      <h3>ABO Blood Types (Multiple Alleles)</h3>
+      <p>Three alleles exist in the population (I<sup>A</sup>, I<sup>B</sup>, and i), but each person only carries two. I<sup>A</sup> and I<sup>B</sup> are codominant with each other and both are dominant over i.</p>
+      <table class="simple-table">
+        <tr><th>Genotype</th><th>Blood Type</th><th>Antigens on Cells</th><th>Antibodies in Blood</th></tr>
+        <tr><td>I<sup>A</sup>I<sup>A</sup> or I<sup>A</sup>i</td><td>A</td><td>A</td><td>Anti-B</td></tr>
+        <tr><td>I<sup>B</sup>I<sup>B</sup> or I<sup>B</sup>i</td><td>B</td><td>B</td><td>Anti-A</td></tr>
+        <tr><td>I<sup>A</sup>I<sup>B</sup></td><td>AB</td><td>A and B</td><td>Neither</td></tr>
+        <tr><td>ii</td><td>O</td><td>Neither</td><td>Anti-A and Anti-B</td></tr>
+      </table>
+    </div>
+
+    <div class="grid-2">
       <div class="card">
         <h3>Epistasis</h3>
-        <p>One gene <strong>masks or modifies</strong> the expression of a different gene. Modifies the 9:3:3:1 dihybrid ratio.</p>
-        <ul>
-          <li><strong>Recessive epistasis</strong> (9:3:4): e.g., Labrador coat color. The ee genotype at the E locus makes the dog yellow regardless of B locus genotype</li>
-          <li><strong>Duplicate recessive epistasis</strong> (9:7): two genes required; homozygous recessive at either locus blocks expression</li>
-          <li><strong>Complementary gene interaction</strong> (9:7), <strong>duplicate dominant epistasis</strong> (15:1): recognize these modified ratios</li>
-        </ul>
+        <p>One gene <strong>overrides</strong> another gene entirely, changing the expected 9:3:3:1 ratio.</p>
+        <div class="example-box">
+          <div class="label">Example</div>
+          In Labradors, the E gene controls whether pigment is deposited at all. Dogs with ee are yellow regardless of whether they carry the B (black) or b (chocolate) allele. The E gene is "epistatic" to the B gene.
+        </div>
       </div>
       <div class="card">
-        <h3>Pleiotropy &amp; Polygenic Inheritance</h3>
-        <ul>
-          <li><strong>Pleiotropy</strong>: one gene affects <strong>multiple</strong> phenotypic traits. Example: sickle cell allele affects blood, spleen, brain, heart.</li>
-          <li><strong>Polygenic inheritance</strong>: <strong>multiple genes</strong> contribute to a single trait, producing a continuous distribution. Examples: skin color, height, weight.</li>
-          <li>Polygenic traits often show a <strong>bell curve</strong> distribution and are strongly influenced by environment.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Other Extensions</h3>
-        <ul>
-          <li><strong>Lethal alleles</strong>: homozygosity for certain alleles causes death (often in utero). Modifies Mendelian ratios (e.g., 2:1 instead of 3:1). Example: yellow mice (A<sup>Y</sup>A<sup>Y</sup> is lethal).</li>
-          <li><strong>Penetrance</strong>: the percentage of individuals with a given genotype who show the expected phenotype. Can be <strong>complete</strong> or <strong>incomplete</strong>.</li>
-          <li><strong>Expressivity</strong>: the <strong>degree</strong> to which a genotype is phenotypically expressed. Can be <strong>variable</strong>.</li>
-          <li><strong>Environmental effects</strong>: phenotype = genotype + environment. Example: temperature-sensitive coat color in Siamese cats.</li>
-        </ul>
+        <h3>Pleiotropy &amp; Polygenic Traits</h3>
+        <p><strong>Pleiotropy</strong>: one gene affects many traits. Sickle cell allele impacts blood, spleen, heart, and brain.</p>
+        <p><strong>Polygenic</strong>: many genes affect one trait, creating a smooth bell curve. Height and skin color are classic examples.</p>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 3 -->
-  <div class="section" id="s3">
-    <div class="section-header"><span class="section-number">3</span><h2>Chromosome Theory &amp; Linkage</h2></div>
-    <div class="card-grid">
-      <div class="card">
-        <h3>Chromosome Theory of Inheritance</h3>
-        <ul>
-          <li>Genes are located on chromosomes, which are the physical basis of Mendel's laws</li>
-          <li>Chromosomes exist in homologous pairs in diploid organisms</li>
-          <li>Segregation of alleles = separation of homologs during meiosis I</li>
-          <li>Independent assortment = random orientation of different homologous pairs at the metaphase plate</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Sex Determination</h3>
-        <ul>
-          <li>Humans: <span class="formula">XX = female, XY = male</span></li>
-          <li>The <strong>SRY gene</strong> on the Y chromosome triggers male development</li>
-          <li>Other systems: ZW (birds, butterflies: ZZ = male, ZW = female), XO (grasshoppers), haplodiploidy (bees: haploid males, diploid females)</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>X-Linked Inheritance</h3>
-        <ul>
-          <li>Males are <strong>hemizygous</strong> for X-linked genes (only one copy)</li>
-          <li>X-linked recessive traits appear more frequently in <strong>males</strong> because they need only one copy of the recessive allele</li>
-          <li>An affected father passes the allele to all daughters (carriers) but no sons</li>
-          <li>A carrier mother passes the allele to 1/2 of sons (affected) and 1/2 of daughters (carriers)</li>
-          <li>Examples: hemophilia, red-green color blindness, Duchenne muscular dystrophy</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>X-Inactivation</h3>
-        <ul>
-          <li>In female mammals, one X chromosome is randomly inactivated in each cell during early development, forming a <strong>Barr body</strong></li>
-          <li>Ensures dosage compensation between XX females and XY males</li>
-          <li>Results in <strong>mosaic</strong> expression of X-linked genes in heterozygous females</li>
-          <li>Example: calico cats (patches of orange and black fur)</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Genetic Linkage</h3>
-        <ul>
-          <li>Genes on the <strong>same chromosome</strong> tend to be inherited together (linked genes)</li>
-          <li>Linked genes do NOT assort independently; they violate Mendel's second law</li>
-          <li>A <strong>testcross</strong> with a dihybrid reveals linkage when offspring ratios deviate significantly from 1:1:1:1</li>
-          <li>Parental (non-recombinant) classes are more frequent; recombinant classes are less frequent</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Recombination &amp; Gene Mapping</h3>
-        <ul>
-          <li><strong>Crossing over</strong> during meiosis I can separate linked genes, producing recombinant gametes</li>
-          <li><strong>Recombination frequency (RF)</strong> = (recombinant offspring / total offspring) x 100%</li>
-          <li>RF is a measure of <strong>map distance</strong>: 1% recombination = <span class="formula">1 centiMorgan (cM)</span> = 1 map unit</li>
-          <li>Maximum RF = 50% (genes appear unlinked because they are far apart on the same chromosome or on different chromosomes)</li>
-          <li><strong>Three-point testcross</strong>: used to map three linked genes simultaneously. The least frequent class = double crossover, and comparing it to parentals reveals the <strong>gene order</strong>.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- SECTION 4 -->
+  <!-- ============================================ -->
+  <!-- SECTION 4: Chromosomes & Sex Linkage -->
+  <!-- ============================================ -->
   <div class="section" id="s4">
-    <div class="section-header"><span class="section-number">4</span><h2>DNA Structure &amp; Replication</h2></div>
-    <div class="card-grid">
-      <div class="card">
-        <h3>DNA Structure</h3>
-        <ul>
-          <li>Double helix of two antiparallel polynucleotide strands (Watson &amp; Crick, 1953)</li>
-          <li>Each nucleotide = <strong>deoxyribose sugar + phosphate group + nitrogenous base</strong></li>
-          <li>Sugar-phosphate backbone on the outside; bases on the inside</li>
-          <li>Strands run <strong>antiparallel</strong>: one 5'&rarr;3', the other 3'&rarr;5'</li>
-          <li>Strands held together by <strong>hydrogen bonds</strong> between complementary base pairs</li>
-        </ul>
+    <div class="section-tag">Section 04</div>
+    <div class="section-title">Chromosomes &amp; Sex Linkage</div>
+    <p class="section-subtitle">Why some traits are more common in one sex, and how genes that sit close together on the same chromosome get inherited as a package.</p>
+
+    <div class="card">
+      <h3>Sex Determination</h3>
+      <p>In humans, females are <span class="formula-inline">XX</span> and males are <span class="formula-inline">XY</span>. The <strong>SRY gene</strong> on the Y chromosome triggers male development. No SRY = female development.</p>
+    </div>
+
+    <div class="card">
+      <h3>X-Linked Inheritance</h3>
+      <p>Genes on the X chromosome follow special rules because males only have <strong>one X</strong>. If that single X carries a recessive allele, the male will show the trait (there is no second X to mask it). This is why conditions like color blindness and hemophilia are far more common in males.</p>
+      <div class="example-box">
+        <div class="label">Example</div>
+        A carrier mom (X<sup>H</sup>X<sup>h</sup>) and a normal dad (X<sup>H</sup>Y): half of their sons will be X<sup>h</sup>Y (affected), half their daughters will be carriers. None of the daughters show the disease, but half carry it.
       </div>
-      <div class="card">
-        <h3>Base Pairing Rules (Chargaff's Rules)</h3>
-        <ul>
-          <li><span class="formula">A = T</span> (2 hydrogen bonds)</li>
-          <li><span class="formula">G &equiv; C</span> (3 hydrogen bonds)</li>
-          <li>Purines (A, G) always pair with pyrimidines (T, C)</li>
-          <li>Therefore: %A = %T and %G = %C in double-stranded DNA</li>
-          <li>Higher G-C content = higher melting temperature (more H-bonds)</li>
-        </ul>
-        <div class="mnemonic">"Pure As Gold" = Purines are Adenine and Guanine. "CUT the Py" = Pyrimidines are Cytosine, Uracil (RNA), Thymine.</div>
+
+      <div class="key-point">
+        <div class="label">Key Point</div>
+        <strong>X-inactivation</strong>: In every cell of a female mammal, one X chromosome is randomly shut off (forming a Barr body). This is why calico cats have patches of orange and black fur; different cells inactivated different X chromosomes.
       </div>
-      <div class="card">
-        <h3>DNA Replication: Overview</h3>
-        <ul>
-          <li><strong>Semiconservative</strong>: each daughter molecule contains one original strand and one newly synthesized strand (proved by Meselson-Stahl experiment)</li>
-          <li>Proceeds <strong>bidirectionally</strong> from origins of replication</li>
-          <li>New strand synthesized <span class="formula">5' &rarr; 3'</span> only</li>
-          <li><strong>Leading strand</strong>: synthesized continuously toward the replication fork</li>
-          <li><strong>Lagging strand</strong>: synthesized discontinuously as <strong>Okazaki fragments</strong>, away from the fork</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Key Replication Enzymes</h3>
-        <table class="fact-table">
-          <tr><th>Enzyme</th><th>Function</th></tr>
-          <tr><td>Helicase</td><td>Unwinds the double helix at the replication fork</td></tr>
-          <tr><td>Single-strand binding proteins (SSBPs)</td><td>Stabilize separated strands</td></tr>
-          <tr><td>Topoisomerase (Gyrase)</td><td>Relieves torsional strain ahead of the fork</td></tr>
-          <tr><td>Primase</td><td>Synthesizes short RNA primer to initiate synthesis</td></tr>
-          <tr><td>DNA Polymerase III</td><td>Main replication enzyme; adds nucleotides 5'&rarr;3', has proofreading (3'&rarr;5' exonuclease)</td></tr>
-          <tr><td>DNA Polymerase I</td><td>Removes RNA primers and replaces with DNA</td></tr>
-          <tr><td>DNA Ligase</td><td>Joins Okazaki fragments by sealing nicks in the backbone</td></tr>
-          <tr><td>Telomerase</td><td>Extends telomeres (chromosome ends) in germ cells; prevents shortening</td></tr>
-        </table>
-      </div>
-      <div class="card">
-        <h3>Prokaryotic vs. Eukaryotic Replication</h3>
-        <table class="fact-table">
-          <tr><th>Feature</th><th>Prokaryotes</th><th>Eukaryotes</th></tr>
-          <tr><td>Chromosome</td><td>Single, circular</td><td>Multiple, linear</td></tr>
-          <tr><td>Origins of replication</td><td>One (oriC)</td><td>Many (thousands)</td></tr>
-          <tr><td>Speed</td><td>~1000 nt/sec</td><td>~50 nt/sec</td></tr>
-          <tr><td>DNA polymerase</td><td>Pol III (main)</td><td>Pol &delta; and Pol &epsilon; (main)</td></tr>
-          <tr><td>Okazaki fragments</td><td>~1000-2000 nt</td><td>~100-200 nt</td></tr>
-          <tr><td>Telomere issue</td><td>No (circular)</td><td>Yes (telomerase needed)</td></tr>
-        </table>
+    </div>
+
+    <div class="card">
+      <h3>Linkage &amp; Recombination</h3>
+      <p>Genes on the <strong>same chromosome</strong> tend to travel together (they are "linked"). They break Mendel's Law of Independent Assortment because they don't sort independently.</p>
+      <p>However, <strong>crossing over</strong> during meiosis I can swap pieces between homologous chromosomes, creating new allele combinations (recombinants).</p>
+      <div class="key-point">
+        <div class="label">Key Point</div>
+        <strong>1% recombination = 1 centiMorgan (cM) = 1 map unit.</strong> The farther apart two genes are on a chromosome, the more often crossing over happens between them. Maximum recombination = 50%.
       </div>
     </div>
   </div>
 
-  <!-- SECTION 5 -->
+  <!-- ============================================ -->
+  <!-- SECTION 5: DNA Structure & Replication -->
+  <!-- ============================================ -->
   <div class="section" id="s5">
-    <div class="section-header"><span class="section-number">5</span><h2>Transcription &amp; Translation</h2></div>
-    <div class="card-grid">
-      <div class="card card-full">
-        <h3>The Central Dogma</h3>
-        <p><span class="formula">DNA &rarr; (transcription) &rarr; RNA &rarr; (translation) &rarr; Protein</span></p>
-        <p>Information flows from DNA to RNA to protein. Reverse transcriptase (retroviruses) can copy RNA back to DNA, but protein sequence is never reverse-translated.</p>
+    <div class="section-tag">Section 05</div>
+    <div class="section-title">DNA Structure &amp; Replication</div>
+    <p class="section-subtitle">What DNA looks like and how it copies itself.</p>
+
+    <div class="card">
+      <h3>DNA Structure</h3>
+      <p>DNA is a double helix: two strands twisted around each other, running in <strong>opposite directions</strong> (antiparallel). The outside is a sugar-phosphate backbone. The inside has paired bases held together by hydrogen bonds.</p>
+      <p><strong>Base pairing rules (Chargaff's rules):</strong></p>
+      <p style="margin-left:1rem"><span class="formula-inline">A pairs with T</span> (2 hydrogen bonds)<br><span class="formula-inline">G pairs with C</span> (3 hydrogen bonds)</p>
+      <p>Because G-C has more hydrogen bonds, DNA with more G-C is harder to pull apart (higher melting temperature).</p>
+      <div class="key-point">
+        <div class="label">Memory Trick</div>
+        <strong>Purines</strong> (A, G) have two rings. <strong>Pyrimidines</strong> (C, T, U) have one ring. A purine always pairs with a pyrimidine.
       </div>
-      <div class="card">
-        <h3>Transcription: DNA &rarr; mRNA</h3>
-        <ul>
-          <li><strong>RNA polymerase</strong> reads the <strong>template strand</strong> (3'&rarr;5') and synthesizes mRNA in the <span class="formula">5' &rarr; 3'</span> direction</li>
-          <li>The mRNA sequence is identical to the <strong>coding strand</strong> (non-template), except U replaces T</li>
-          <li><strong>Promoter</strong>: DNA sequence where RNA polymerase binds to start transcription</li>
-          <li><strong>Terminator</strong>: signal that ends transcription</li>
-          <li>In prokaryotes: transcription and translation are <strong>coupled</strong> (occur simultaneously)</li>
-          <li>In eukaryotes: transcription in the <strong>nucleus</strong>, translation in the <strong>cytoplasm</strong></li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Eukaryotic mRNA Processing</h3>
-        <ul>
-          <li><strong>5' cap</strong>: modified guanine added to the 5' end; protects mRNA, aids ribosome binding</li>
-          <li><strong>3' poly-A tail</strong>: ~200 adenines added to the 3' end; protects from degradation, aids export from nucleus</li>
-          <li><strong>RNA splicing</strong>: <strong>introns</strong> are removed, <strong>exons</strong> are joined together by the <strong>spliceosome</strong></li>
-          <li><strong>Alternative splicing</strong>: different combinations of exons produce different mRNAs (and proteins) from the same gene</li>
-        </ul>
-        <div class="mnemonic">"Exons are Expressed, Introns are In the trash."</div>
-      </div>
-      <div class="card">
-        <h3>The Genetic Code</h3>
-        <ul>
-          <li><strong>Triplet code</strong>: three nucleotides (a <strong>codon</strong>) specify one amino acid</li>
-          <li><span class="formula">64 codons</span> total (4&sup3;), coding for <span class="formula">20 amino acids</span></li>
-          <li>Code is <strong>degenerate</strong> (redundant): most amino acids are specified by more than one codon (usually the 3rd position varies)</li>
-          <li>Code is <strong>universal</strong> (nearly all organisms use the same code, with rare exceptions)</li>
-          <li>Code is <strong>non-overlapping</strong> and read in a specific <strong>reading frame</strong></li>
-          <li><strong>Start codon</strong>: <span class="formula">AUG</span> (methionine; also sets reading frame)</li>
-          <li><strong>Stop codons</strong>: <span class="formula">UAA, UAG, UGA</span></li>
-        </ul>
-        <div class="mnemonic">"U Are Annoying, U Are Gone, U Go Away" for UAA, UAG, UGA stop codons.</div>
-      </div>
-      <div class="card">
-        <h3>Translation: mRNA &rarr; Protein</h3>
-        <ul>
-          <li>Occurs on <strong>ribosomes</strong> (in cytoplasm or on rough ER)</li>
-          <li><strong>tRNA</strong> molecules carry amino acids; each has an <strong>anticodon</strong> complementary to the mRNA codon</li>
-          <li>Ribosome has three sites: <strong>A</strong> (aminoacyl/incoming), <strong>P</strong> (peptidyl/growing chain), <strong>E</strong> (exit)</li>
-          <li><strong>Initiation</strong>: small subunit binds mRNA at AUG, initiator tRNA enters P site, large subunit joins</li>
-          <li><strong>Elongation</strong>: tRNA enters A site, peptide bond forms (by peptidyl transferase/ribosomal RNA), ribosome translocates</li>
-          <li><strong>Termination</strong>: stop codon in A site, release factor binds, polypeptide is released</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Key Differences: DNA vs. RNA</h3>
-        <table class="fact-table">
-          <tr><th>Feature</th><th>DNA</th><th>RNA</th></tr>
-          <tr><td>Sugar</td><td>Deoxyribose</td><td>Ribose</td></tr>
-          <tr><td>Bases</td><td>A, T, G, C</td><td>A, U, G, C</td></tr>
-          <tr><td>Structure</td><td>Double-stranded</td><td>Usually single-stranded</td></tr>
-          <tr><td>Location</td><td>Nucleus (eukaryotes)</td><td>Nucleus and cytoplasm</td></tr>
-          <tr><td>Stability</td><td>More stable</td><td>Less stable</td></tr>
-        </table>
-      </div>
+    </div>
+
+    <div class="card">
+      <h3>How DNA Copies Itself</h3>
+      <p>Replication is <strong>semiconservative</strong>: each new double helix contains one old strand and one brand-new strand (shown by the Meselson-Stahl experiment).</p>
+      <p>New DNA is always built in the <span class="formula-inline">5' → 3'</span> direction. This creates an asymmetry:</p>
+      <p style="margin-left:1rem"><strong>Leading strand</strong>: built continuously toward the replication fork.<br>
+      <strong>Lagging strand</strong>: built in short pieces called <strong>Okazaki fragments</strong>, which are later glued together.</p>
+
+      <table class="simple-table">
+        <tr><th>Enzyme</th><th>What It Does</th></tr>
+        <tr><td>Helicase</td><td>Unzips the double helix</td></tr>
+        <tr><td>Primase</td><td>Lays down a short RNA starter (primer)</td></tr>
+        <tr><td>DNA Pol III</td><td>Builds the new strand, 5'→3', also proofreads</td></tr>
+        <tr><td>DNA Pol I</td><td>Replaces RNA primers with DNA</td></tr>
+        <tr><td>Ligase</td><td>Glues Okazaki fragments together</td></tr>
+        <tr><td>Telomerase</td><td>Extends chromosome tips (telomeres) so they don't shrink</td></tr>
+      </table>
     </div>
   </div>
 
-  <!-- SECTION 6 -->
+  <!-- ============================================ -->
+  <!-- SECTION 6: Gene Expression -->
+  <!-- ============================================ -->
   <div class="section" id="s6">
-    <div class="section-header"><span class="section-number">6</span><h2>Gene Regulation</h2></div>
-    <div class="card-grid">
-      <div class="card">
-        <h3>Prokaryotic Gene Regulation: The Operon Model</h3>
-        <ul>
-          <li>An <strong>operon</strong> is a cluster of co-regulated genes under one promoter, transcribed as a single mRNA (polycistronic)</li>
-          <li>Components: <strong>promoter</strong>, <strong>operator</strong> (repressor binding site), <strong>structural genes</strong>, <strong>regulatory gene</strong> (encodes repressor)</li>
-        </ul>
+    <div class="section-tag">Section 06</div>
+    <div class="section-title">From Gene to Protein</div>
+    <p class="section-subtitle">How the information in DNA becomes a working protein, in two major steps.</p>
+
+    <div class="card">
+      <h3>The Central Dogma</h3>
+      <p style="text-align:center; font-family:'JetBrains Mono',monospace; font-size:1rem; color:var(--green-dark); margin:0.5rem 0;">DNA → <em>transcription</em> → mRNA → <em>translation</em> → Protein</p>
+      <p>Information flows from DNA to RNA to protein. The first step (making an RNA copy) is <strong>transcription</strong>. The second step (reading the RNA to build a protein) is <strong>translation</strong>.</p>
+    </div>
+
+    <div class="card">
+      <h3>Step 1: Transcription (DNA → mRNA)</h3>
+      <p>RNA polymerase reads one strand of the DNA (the <strong>template strand</strong>, read 3'→5') and builds a messenger RNA (mRNA) copy in the <span class="formula-inline">5' → 3'</span> direction. In eukaryotes, this happens in the <strong>nucleus</strong>.</p>
+      <p>Before the mRNA leaves the nucleus, it gets three modifications:</p>
+      <p style="margin-left:1rem">1. A <strong>5' cap</strong> (protects it, helps ribosomes find it)<br>
+      2. A <strong>poly-A tail</strong> on the 3' end (protects from degradation)<br>
+      3. <strong>Splicing</strong>: introns (non-coding) are cut out, exons (coding) are kept</p>
+      <div class="key-point">
+        <div class="label">Memory Trick</div>
+        <strong>Ex</strong>ons are <strong>Ex</strong>pressed. <strong>In</strong>trons stay <strong>In</strong>side (the nucleus, in the trash). <strong>Alternative splicing</strong> lets one gene produce multiple different proteins by mixing and matching exons.
       </div>
-      <div class="card">
-        <h3>lac Operon (Inducible)</h3>
-        <ul>
-          <li>Encodes enzymes for <strong>lactose metabolism</strong></li>
-          <li><strong>No lactose present</strong>: repressor binds operator, blocks transcription (OFF)</li>
-          <li><strong>Lactose present</strong>: allolactose (inducer) binds repressor, changes its shape, repressor falls off operator, transcription proceeds (ON)</li>
-          <li>Also regulated by <strong>CAP-cAMP</strong>: when glucose is absent, cAMP is high, CAP-cAMP binds upstream and enhances transcription. When glucose is present, cAMP is low, no enhancement (catabolite repression).</li>
-        </ul>
-        <div class="mnemonic">The lac operon needs BOTH conditions: lactose present AND glucose absent for maximum expression.</div>
-      </div>
-      <div class="card">
-        <h3>trp Operon (Repressible)</h3>
-        <ul>
-          <li>Encodes enzymes for <strong>tryptophan biosynthesis</strong></li>
-          <li><strong>Trp absent</strong>: repressor is inactive, transcription is ON (cell makes tryptophan)</li>
-          <li><strong>Trp present</strong>: tryptophan acts as a <strong>corepressor</strong>, binds the repressor, activates it so it binds the operator and blocks transcription (OFF)</li>
-          <li>Logic: why make tryptophan if it is already available?</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Eukaryotic Gene Regulation</h3>
-        <p>Regulation occurs at <strong>multiple levels</strong>:</p>
-        <ul>
-          <li><strong>Chromatin remodeling</strong>: acetylation of histones loosens chromatin (promotes transcription); methylation of DNA typically silences genes</li>
-          <li><strong>Transcriptional</strong>: transcription factors, enhancers, silencers, mediator complexes</li>
-          <li><strong>Post-transcriptional</strong>: alternative splicing, mRNA stability, miRNA (degrades mRNA or blocks translation)</li>
-          <li><strong>Translational</strong>: initiation factor regulation</li>
-          <li><strong>Post-translational</strong>: protein folding, modification (phosphorylation, ubiquitination), degradation</li>
-        </ul>
+    </div>
+
+    <div class="card">
+      <h3>Step 2: Translation (mRNA → Protein)</h3>
+      <p>Ribosomes read the mRNA three letters at a time. Each group of three (a <strong>codon</strong>) specifies one amino acid. Transfer RNA (tRNA) molecules deliver the right amino acid by matching their <strong>anticodon</strong> to the mRNA codon.</p>
+      <p><strong>Key numbers:</strong> <span class="formula-inline">64 codons</span> code for <span class="formula-inline">20 amino acids</span> (the code is redundant).</p>
+      <p><strong>Start codon:</strong> <span class="formula-inline">AUG</span> (methionine) sets the reading frame.</p>
+      <p><strong>Stop codons:</strong> <span class="formula-inline">UAA, UAG, UGA</span> (no amino acid; release factor ends translation).</p>
+      <div class="example-box">
+        <div class="label">Example</div>
+        The mRNA sequence AUG-GCA-UAA would be read as: start (Met) - Ala - STOP. The protein would be just two amino acids long.
       </div>
     </div>
   </div>
 
-  <!-- SECTION 7 -->
+  <!-- ============================================ -->
+  <!-- SECTION 7: Gene Regulation -->
+  <!-- ============================================ -->
   <div class="section" id="s7">
-    <div class="section-header"><span class="section-number">7</span><h2>Mutation &amp; DNA Repair</h2></div>
-    <div class="card-grid">
-      <div class="card">
-        <h3>Types of Point Mutations</h3>
-        <table class="fact-table">
-          <tr><th>Type</th><th>Change</th><th>Effect</th></tr>
-          <tr><td>Silent</td><td>Base change, same amino acid</td><td>No effect on protein (due to code degeneracy)</td></tr>
-          <tr><td>Missense</td><td>Base change, different amino acid</td><td>May or may not affect function (depends on location)</td></tr>
-          <tr><td>Nonsense</td><td>Base change creates a stop codon</td><td>Truncated protein, usually nonfunctional</td></tr>
-        </table>
-      </div>
-      <div class="card">
-        <h3>Frameshift Mutations</h3>
-        <ul>
-          <li>Caused by <strong>insertions or deletions</strong> (indels) of nucleotides that are NOT multiples of three</li>
-          <li>Shifts the entire reading frame downstream of the mutation</li>
-          <li>Usually produces a completely <strong>nonfunctional protein</strong></li>
-          <li>Insertions or deletions of 3 nucleotides (or multiples of 3) add or remove amino acids but do not cause a frameshift</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Mutagens</h3>
-        <ul>
-          <li><strong>Chemical mutagens</strong>: base analogs (5-bromouracil), alkylating agents, deaminating agents, intercalating agents (cause frameshifts)</li>
-          <li><strong>Physical mutagens</strong>: UV light (causes thymine dimers), X-rays and gamma rays (cause breaks in DNA)</li>
-          <li><strong>Biological mutagens</strong>: transposons (jumping genes)</li>
-          <li><strong>Spontaneous mutations</strong>: replication errors, depurination, deamination</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>DNA Repair Mechanisms</h3>
-        <ul>
-          <li><strong>Proofreading</strong>: DNA polymerase 3'&rarr;5' exonuclease activity corrects errors during replication</li>
-          <li><strong>Mismatch repair</strong>: enzymes detect and fix base mismatches after replication</li>
-          <li><strong>Nucleotide excision repair (NER)</strong>: removes bulky lesions like thymine dimers. Defective in <strong>xeroderma pigmentosum</strong>.</li>
-          <li><strong>Base excision repair (BER)</strong>: removes individual damaged bases via glycosylase</li>
-          <li><strong>SOS repair</strong>: error-prone emergency repair in prokaryotes when damage is extensive</li>
-        </ul>
-      </div>
+    <div class="section-tag">Section 07</div>
+    <div class="section-title">Gene Regulation</div>
+    <p class="section-subtitle">Cells don't use every gene all the time. Here's how they turn genes on and off.</p>
+
+    <div class="card">
+      <h3>Prokaryotic Regulation: Operons</h3>
+      <p>Bacteria group related genes together under one on/off switch called an <strong>operon</strong>. The two you need to know:</p>
+
+      <p style="margin-top:0.75rem"><strong>lac operon</strong> (inducible, for digesting lactose):</p>
+      <p style="margin-left:1rem">No lactose → repressor blocks transcription (OFF)<br>
+      Lactose present → lactose removes the repressor (ON)<br>
+      For <em>maximum</em> expression, glucose must also be absent (high cAMP activates CAP protein, which boosts transcription).</p>
+
+      <p style="margin-top:0.75rem"><strong>trp operon</strong> (repressible, for making tryptophan):</p>
+      <p style="margin-left:1rem">No tryptophan → operon is ON (cell needs to make it)<br>
+      Tryptophan abundant → tryptophan activates the repressor, which shuts things down (OFF). Why make it if you already have it?</p>
+    </div>
+
+    <div class="card">
+      <h3>Eukaryotic Regulation (Multiple Levels)</h3>
+      <p>Eukaryotes regulate genes at many stages. The quick version:</p>
+      <p style="margin-left:1rem">
+        <strong>Chromatin level</strong>: Acetylation of histones = loosens DNA = gene ON. DNA methylation = tightens DNA = gene OFF.<br>
+        <strong>Transcription level</strong>: Transcription factors, enhancers, and silencers control whether RNA polymerase starts.<br>
+        <strong>After transcription</strong>: Alternative splicing, mRNA stability, and small RNAs (miRNA) fine-tune the message.<br>
+        <strong>After translation</strong>: Proteins can be modified, activated, or tagged for destruction.
+      </p>
     </div>
   </div>
 
-  <!-- SECTION 8 -->
+  <!-- ============================================ -->
+  <!-- SECTION 8: Mutations -->
+  <!-- ============================================ -->
   <div class="section" id="s8">
-    <div class="section-header"><span class="section-number">8</span><h2>Chromosome Variation</h2></div>
-    <div class="card-grid">
-      <div class="card">
-        <h3>Changes in Chromosome Number</h3>
-        <ul>
-          <li><strong>Euploidy</strong>: changes in complete sets of chromosomes</li>
-          <li><strong>Polyploidy</strong>: 3n (triploid), 4n (tetraploid), etc. Common in plants, often from nondisjunction. Important in plant speciation and agriculture.</li>
-          <li><strong>Aneuploidy</strong>: gain or loss of individual chromosomes, usually from <strong>nondisjunction</strong> during meiosis</li>
-          <li><strong>Monosomy</strong> (2n - 1): one chromosome missing. <strong>Trisomy</strong> (2n + 1): one extra chromosome.</li>
-        </ul>
+    <div class="section-tag">Section 08</div>
+    <div class="section-title">Mutations &amp; DNA Repair</div>
+    <p class="section-subtitle">What happens when the DNA instructions get a typo.</p>
+
+    <div class="card">
+      <h3>Point Mutations (Single Base Changes)</h3>
+      <table class="simple-table">
+        <tr><th>Type</th><th>What Happens</th><th>Effect</th></tr>
+        <tr><td>Silent</td><td>Base changes but the amino acid stays the same</td><td>None (thanks to code redundancy)</td></tr>
+        <tr><td>Missense</td><td>Base changes, different amino acid inserted</td><td>May or may not affect protein function</td></tr>
+        <tr><td>Nonsense</td><td>Base change creates a premature STOP codon</td><td>Truncated protein, usually broken</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Frameshift Mutations</h3>
+      <p>If you <strong>insert or delete</strong> nucleotides in a number that isn't a multiple of 3, you shift the entire reading frame. Every codon downstream is now wrong. These are almost always devastating.</p>
+      <div class="example-box">
+        <div class="label">Example</div>
+        Original: <span class="formula-inline">AUG-GCA-UUC-...</span><br>
+        Delete one "G": <span class="formula-inline">AUG-CAU-UC...</span> Everything after the deletion is misread.
       </div>
-      <div class="card">
-        <h3>Human Aneuploidies</h3>
-        <table class="fact-table">
-          <tr><th>Condition</th><th>Karyotype</th><th>Key Features</th></tr>
-          <tr><td>Down syndrome</td><td>Trisomy 21</td><td>Intellectual disability, characteristic facial features; most common autosomal trisomy</td></tr>
-          <tr><td>Edwards syndrome</td><td>Trisomy 18</td><td>Severe defects, most die in infancy</td></tr>
-          <tr><td>Patau syndrome</td><td>Trisomy 13</td><td>Severe defects, most die in infancy</td></tr>
-          <tr><td>Turner syndrome</td><td>45, XO</td><td>Female, short stature, infertile; only viable human monosomy</td></tr>
-          <tr><td>Klinefelter syndrome</td><td>47, XXY</td><td>Male, tall, often infertile, small testes</td></tr>
-        </table>
-      </div>
-      <div class="card">
-        <h3>Changes in Chromosome Structure</h3>
-        <ul>
-          <li><strong>Deletion</strong>: loss of a chromosome segment. Example: Cri-du-chat (5p deletion).</li>
-          <li><strong>Duplication</strong>: a segment is copied and present twice. Can lead to gene dosage effects.</li>
-          <li><strong>Inversion</strong>: a segment is flipped 180&deg; within the chromosome. Paracentric (does not include centromere) vs. pericentric (includes centromere).</li>
-          <li><strong>Translocation</strong>: a segment moves to a non-homologous chromosome. <strong>Reciprocal</strong>: exchange between two chromosomes. <strong>Robertsonian</strong>: two acrocentric chromosomes fuse at centromeres.</li>
-        </ul>
-      </div>
+    </div>
+
+    <div class="card">
+      <h3>DNA Repair</h3>
+      <p>Cells have multiple proofreading and repair systems:</p>
+      <p style="margin-left:1rem">
+        <strong>Proofreading</strong>: DNA Pol III catches and fixes errors as it builds.<br>
+        <strong>Mismatch repair</strong>: Fixes base-pairing mistakes after replication.<br>
+        <strong>Nucleotide excision repair (NER)</strong>: Cuts out big damage like UV-caused thymine dimers. A defect here causes xeroderma pigmentosum (extreme sun sensitivity).<br>
+        <strong>Base excision repair</strong>: Fixes individual damaged bases.
+      </p>
     </div>
   </div>
 
-  <!-- SECTION 9 -->
+  <!-- ============================================ -->
+  <!-- SECTION 9: Chromosome Changes & Biotech -->
+  <!-- ============================================ -->
   <div class="section" id="s9">
-    <div class="section-header"><span class="section-number">9</span><h2>Recombinant DNA &amp; Biotechnology</h2></div>
-    <div class="card-grid">
-      <div class="card">
-        <h3>Restriction Enzymes</h3>
-        <ul>
-          <li>Bacterial enzymes that cut DNA at specific <strong>palindromic recognition sequences</strong></li>
-          <li>Produce <strong>sticky ends</strong> (overhanging single-stranded) or <strong>blunt ends</strong></li>
-          <li>Sticky ends are preferred for cloning because they can base-pair with complementary sticky ends from another source</li>
-          <li><strong>DNA ligase</strong> seals fragments together to create recombinant DNA</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Cloning Vectors &amp; Gene Cloning</h3>
-        <ul>
-          <li>A <strong>vector</strong> carries foreign DNA into a host cell. Common vectors: <strong>plasmids</strong>, bacteriophages, BACs, YACs.</li>
-          <li>Plasmid vectors typically contain: origin of replication, selectable marker (e.g., antibiotic resistance gene), multiple cloning site</li>
-          <li>Steps: cut vector and insert DNA with same restriction enzyme, ligate together, <strong>transform</strong> into bacteria, select for transformants (e.g., on ampicillin plates)</li>
-          <li><strong>cDNA library</strong>: made from mRNA using reverse transcriptase; represents only expressed genes</li>
-          <li><strong>Genomic library</strong>: contains fragments of the entire genome</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>PCR (Polymerase Chain Reaction)</h3>
-        <ul>
-          <li>Amplifies a specific DNA sequence in vitro (millions of copies from a tiny sample)</li>
-          <li>Requires: template DNA, two <strong>primers</strong>, <strong>Taq polymerase</strong> (thermostable), dNTPs</li>
-          <li>Three steps per cycle: <strong>Denaturation</strong> (~95&deg;C): strands separate. <strong>Annealing</strong> (~55&deg;C): primers bind. <strong>Extension</strong> (~72&deg;C): Taq extends.</li>
-          <li>n cycles = <span class="formula">2<sup>n</sup></span> copies of the target sequence</li>
-          <li>Applications: forensics, diagnostics, cloning, sequencing</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Gel Electrophoresis</h3>
-        <ul>
-          <li>Separates DNA, RNA, or protein fragments by <strong>size</strong></li>
-          <li>DNA is negatively charged (phosphate groups) and migrates toward the <strong>positive electrode (anode)</strong></li>
-          <li><strong>Smaller fragments move faster</strong> (travel farther through the gel)</li>
-          <li>Agarose gels for DNA; polyacrylamide gels (PAGE) for proteins or small DNA</li>
-          <li>Southern blot = DNA, Northern blot = RNA, Western blot = protein</li>
-        </ul>
-        <div class="mnemonic">"SNoW DRoP" = Southern/Northern/Western detect DNA/RNA/Protein.</div>
-      </div>
-      <div class="card">
-        <h3>CRISPR-Cas9</h3>
-        <ul>
-          <li>A powerful <strong>gene editing</strong> system adapted from bacterial immune defense</li>
-          <li><strong>Guide RNA (gRNA)</strong> directs the Cas9 nuclease to a specific complementary DNA sequence</li>
-          <li>Cas9 makes a <strong>double-strand break</strong> at the target site</li>
-          <li>Cell repair (NHEJ or HDR) can knock out a gene or insert a new sequence</li>
-          <li>Applications: gene therapy, agriculture, disease models, functional genomics</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Other Key Techniques</h3>
-        <ul>
-          <li><strong>Sanger sequencing</strong>: uses ddNTPs (chain terminators) to determine DNA sequence</li>
-          <li><strong>DNA fingerprinting</strong>: uses STRs (short tandem repeats) or RFLPs to identify individuals</li>
-          <li><strong>Microarrays</strong>: measure expression of thousands of genes simultaneously</li>
-          <li><strong>Transgenic organisms</strong>: contain foreign DNA from another species. Example: Bt crops (contain bacterial toxin gene for pest resistance).</li>
-          <li><strong>Gene therapy</strong>: introducing a functional gene to correct a genetic disorder</li>
-        </ul>
-      </div>
+    <div class="section-tag">Section 09</div>
+    <div class="section-title">Chromosome Changes</div>
+    <p class="section-subtitle">What happens when whole chromosomes (or large pieces) go wrong.</p>
+
+    <div class="card">
+      <h3>Aneuploidy</h3>
+      <p>When chromosomes fail to separate properly during meiosis (<strong>nondisjunction</strong>), you end up with cells that have too many or too few chromosomes.</p>
+      <table class="simple-table">
+        <tr><th>Condition</th><th>What Happened</th><th>Notes</th></tr>
+        <tr><td>Down syndrome</td><td>Trisomy 21 (extra chr. 21)</td><td>Most common autosomal trisomy</td></tr>
+        <tr><td>Turner syndrome</td><td>45, XO (missing an X)</td><td>Only viable human monosomy</td></tr>
+        <tr><td>Klinefelter syndrome</td><td>47, XXY</td><td>Male, often tall, may be infertile</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Structural Changes</h3>
+      <p>Pieces of chromosomes can also be rearranged:</p>
+      <p style="margin-left:1rem">
+        <strong>Deletion</strong>: a piece is lost (e.g., Cri-du-chat syndrome).<br>
+        <strong>Duplication</strong>: a piece is copied twice.<br>
+        <strong>Inversion</strong>: a piece is flipped 180&deg;.<br>
+        <strong>Translocation</strong>: a piece moves to a completely different chromosome.
+      </p>
     </div>
   </div>
 
-  <!-- SECTION 10 -->
+  <!-- ============================================ -->
+  <!-- SECTION 10: Biotechnology -->
+  <!-- ============================================ -->
   <div class="section" id="s10">
-    <div class="section-header"><span class="section-number">10</span><h2>Genomics &amp; Epigenetics</h2></div>
-    <div class="card-grid">
-      <div class="card">
-        <h3>Genomics</h3>
-        <ul>
-          <li><strong>Genome</strong>: the complete set of DNA in an organism</li>
-          <li>Human genome: ~3.2 billion bp, ~20,000-25,000 protein-coding genes, only ~1.5% codes for protein</li>
-          <li>Much of the genome is <strong>non-coding</strong>: introns, repetitive sequences, regulatory sequences, transposons</li>
-          <li><strong>Comparative genomics</strong>: comparing genomes across species reveals conserved (functionally important) regions</li>
-          <li><strong>Proteomics</strong>: study of the full set of proteins expressed by a cell or organism</li>
-        </ul>
+    <div class="section-tag">Section 10</div>
+    <div class="section-title">Biotechnology Basics</div>
+    <p class="section-subtitle">The toolkit scientists use to cut, copy, and edit DNA.</p>
+
+    <div class="card">
+      <h3>Restriction Enzymes &amp; Cloning</h3>
+      <p><strong>Restriction enzymes</strong> are molecular scissors that cut DNA at specific sequences. They can produce "sticky ends" that let you paste DNA from different sources together. <strong>DNA ligase</strong> seals the join.</p>
+      <p>To clone a gene: cut both the gene and a <strong>plasmid</strong> (small circular DNA) with the same restriction enzyme, mix them so the gene inserts into the plasmid, then put the plasmid into bacteria. The bacteria copy the gene every time they divide.</p>
+    </div>
+
+    <div class="card">
+      <h3>PCR (Polymerase Chain Reaction)</h3>
+      <p>PCR makes millions of copies of a specific DNA sequence in a test tube. Three steps repeat in cycles:</p>
+      <p style="margin-left:1rem">
+        1. <strong>Denature</strong> (~95 &deg;C): Heat separates the two DNA strands.<br>
+        2. <strong>Anneal</strong> (~55 &deg;C): Short primers bind to the target region.<br>
+        3. <strong>Extend</strong> (~72 &deg;C): Taq polymerase (heat-stable enzyme) builds new strands.
+      </p>
+      <p>After n cycles you have <span class="formula-inline">2<sup>n</sup></span> copies. 30 cycles = over a billion copies.</p>
+    </div>
+
+    <div class="card">
+      <h3>Gel Electrophoresis</h3>
+      <p>Separates DNA fragments by <strong>size</strong>. DNA is negatively charged, so it moves toward the positive end of the gel. <strong>Smaller pieces move faster and farther.</strong></p>
+      <div class="key-point">
+        <div class="label">Memory Trick</div>
+        <strong>SNoW DRoP</strong>: Southern blot = DNA, Northern blot = RNA, Western blot = Protein.
       </div>
-      <div class="card">
-        <h3>Epigenetics</h3>
-        <ul>
-          <li>Heritable changes in gene expression that do NOT involve changes to the DNA sequence itself</li>
-          <li><strong>DNA methylation</strong>: addition of methyl groups to cytosine (usually at CpG sites); typically <strong>silences</strong> gene expression</li>
-          <li><strong>Histone modification</strong>: acetylation (loosens chromatin, promotes transcription), methylation (can activate or silence depending on context), phosphorylation</li>
-          <li><strong>Genomic imprinting</strong>: certain genes are expressed only from one parent's allele (the other is silenced by methylation). Example: Prader-Willi and Angelman syndromes result from imprinting defects on chromosome 15.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Transposable Elements</h3>
-        <ul>
-          <li>"Jumping genes" discovered by <strong>Barbara McClintock</strong> in maize</li>
-          <li><strong>Insertion sequences</strong> (IS): simplest transposons in prokaryotes; encode only transposase</li>
-          <li><strong>Composite transposons</strong>: carry additional genes (e.g., antibiotic resistance) flanked by IS elements</li>
-          <li><strong>Retrotransposons</strong> (eukaryotes): transpose via an RNA intermediate using reverse transcriptase (copy-and-paste mechanism)</li>
-          <li>Make up a large fraction of the human genome (~45%)</li>
-        </ul>
-      </div>
+    </div>
+
+    <div class="card">
+      <h3>CRISPR-Cas9</h3>
+      <p>A gene-editing system borrowed from bacteria. A <strong>guide RNA</strong> leads the Cas9 protein to a precise spot in the genome, where Cas9 cuts both DNA strands. The cell's repair machinery can then knock out a gene or insert a new one.</p>
     </div>
   </div>
 
-  <!-- SECTION 11 -->
+  <!-- ============================================ -->
+  <!-- SECTION 11: Population Genetics -->
+  <!-- ============================================ -->
   <div class="section" id="s11">
-    <div class="section-header"><span class="section-number">11</span><h2>Population &amp; Evolutionary Genetics</h2></div>
-    <div class="card-grid">
-      <div class="card">
-        <h3>Hardy-Weinberg Equilibrium</h3>
-        <p>A population is in genetic equilibrium (allele frequencies do NOT change) if ALL five conditions are met:</p>
-        <ul>
-          <li>No mutation</li>
-          <li>Random mating</li>
-          <li>No natural selection</li>
-          <li>Infinitely large population (no genetic drift)</li>
-          <li>No gene flow (migration)</li>
-        </ul>
-        <p style="margin-top:0.5rem">Hardy-Weinberg equations for two alleles (p and q):</p>
-        <p><span class="formula">p + q = 1</span> (allele frequencies)</p>
-        <p><span class="formula">p&sup2; + 2pq + q&sup2; = 1</span> (genotype frequencies)</p>
-        <p style="margin-top:0.3rem">Where p&sup2; = frequency of AA, 2pq = frequency of Aa, q&sup2; = frequency of aa.</p>
+    <div class="section-tag">Section 11</div>
+    <div class="section-title">Population Genetics</div>
+    <p class="section-subtitle">How allele frequencies change (or don't) in a population over time.</p>
+
+    <div class="card">
+      <h3>Hardy-Weinberg Equilibrium</h3>
+      <p>If <strong>nothing is disturbing</strong> a population, allele frequencies stay the same generation after generation. The five conditions required for this (none of which are ever perfectly true in nature):</p>
+      <p style="margin-left:1rem">1. No mutation<br>2. Random mating<br>3. No natural selection<br>4. Huge population (no genetic drift)<br>5. No migration (gene flow)</p>
+
+      <p style="margin-top:0.75rem">The equations:</p>
+      <p style="margin-left:1rem">
+        <span class="formula-inline">p + q = 1</span> (allele frequencies, where p = dominant, q = recessive)<br>
+        <span class="formula-inline">p&sup2; + 2pq + q&sup2; = 1</span> (genotype frequencies: AA + Aa + aa)
+      </p>
+
+      <div class="example-box">
+        <div class="label">How to Solve a Problem</div>
+        "1 in 2,500 people has disorder X (recessive)." → q&sup2; = 1/2500 = 0.0004 → q = 0.02 → p = 0.98 → carrier frequency (2pq) = 2(0.98)(0.02) = <strong>~3.9%</strong>.
       </div>
-      <div class="card">
-        <h3>Solving H-W Problems</h3>
-        <ul>
-          <li>Usually, you are given the frequency of the <strong>recessive phenotype</strong> (q&sup2;) as your entry point</li>
-          <li>Take the square root of q&sup2; to find <strong>q</strong></li>
-          <li>Subtract from 1 to find <strong>p</strong> (since p + q = 1)</li>
-          <li>Calculate carrier frequency: <strong>2pq</strong></li>
-          <li>Example: if 1 in 10,000 individuals has a recessive disorder, q&sup2; = 0.0001, q = 0.01, p = 0.99, carrier frequency = 2(0.99)(0.01) = 0.0198 or about <span class="formula">2%</span></li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Forces of Evolution</h3>
-        <ul>
-          <li><strong>Mutation</strong>: ultimate source of new alleles; raw material for evolution</li>
-          <li><strong>Natural selection</strong>: differential survival and reproduction based on phenotype. Only force that is <strong>adaptive</strong> (produces adaptation).</li>
-          <li><strong>Genetic drift</strong>: random changes in allele frequency, especially powerful in <strong>small populations</strong>. Includes bottleneck effect and founder effect.</li>
-          <li><strong>Gene flow</strong>: movement of alleles between populations (via migration). Tends to reduce differences between populations.</li>
-          <li><strong>Non-random mating</strong>: assortative mating, inbreeding. Changes genotype frequencies (increases homozygosity) but does not change allele frequencies by itself.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Types of Natural Selection</h3>
-        <ul>
-          <li><strong>Directional selection</strong>: favors one extreme phenotype (shifts the curve)</li>
-          <li><strong>Stabilizing selection</strong>: favors the intermediate phenotype (narrows the curve). Example: human birth weight.</li>
-          <li><strong>Disruptive selection</strong>: favors both extremes over the intermediate (splits the curve)</li>
-          <li><strong>Balancing selection</strong>: maintains multiple alleles. Includes <strong>heterozygote advantage</strong> (e.g., sickle cell carriers are resistant to malaria) and frequency-dependent selection.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Inbreeding &amp; Genetic Drift</h3>
-        <ul>
-          <li><strong>Inbreeding</strong>: mating between relatives. Increases <strong>homozygosity</strong>, increases expression of deleterious recessive alleles. Measured by the <strong>inbreeding coefficient (F)</strong>.</li>
-          <li><strong>Bottleneck effect</strong>: drastic reduction in population size reduces genetic diversity</li>
-          <li><strong>Founder effect</strong>: small group establishes a new population with a subset of alleles from the original population</li>
-        </ul>
-      </div>
+    </div>
+
+    <div class="card">
+      <h3>Forces That Change Allele Frequencies</h3>
+      <dl class="vocab">
+        <dt>Mutation</dt>
+        <dd>Creates new alleles; the raw material for evolution</dd>
+        <dt>Selection</dt>
+        <dd>Organisms with favorable traits survive and reproduce more; the only force that is adaptive</dd>
+        <dt>Genetic Drift</dt>
+        <dd>Random changes in allele frequency, strongest in small populations (bottleneck effect, founder effect)</dd>
+        <dt>Gene Flow</dt>
+        <dd>Migration moves alleles between populations, making them more similar</dd>
+      </dl>
     </div>
   </div>
 
-  <!-- SECTION 12 -->
-  <div class="section" id="s12">
-    <div class="section-header"><span class="section-number">12</span><h2>Key Numbers &amp; Formulas</h2></div>
-    <div class="card-grid">
-      <div class="card card-full">
-        <h3>Numbers and Formulas to Know Cold</h3>
-        <table class="fact-table">
-          <tr><th>Item</th><th>Value</th></tr>
-          <tr><td>Monohybrid phenotypic ratio (F2)</td><td><span class="constant">3:1</span></td></tr>
-          <tr><td>Dihybrid phenotypic ratio (F2)</td><td><span class="constant">9:3:3:1</span></td></tr>
-          <tr><td>Testcross monohybrid heterozygote ratio</td><td><span class="constant">1:1</span></td></tr>
-          <tr><td>Testcross dihybrid ratio (unlinked)</td><td><span class="constant">1:1:1:1</span></td></tr>
-          <tr><td>Number of codons / amino acids</td><td><span class="constant">64 codons / 20 amino acids</span></td></tr>
-          <tr><td>Start codon</td><td><span class="constant">AUG</span> (methionine)</td></tr>
-          <tr><td>Stop codons</td><td><span class="constant">UAA, UAG, UGA</span></td></tr>
-          <tr><td>A-T hydrogen bonds / G-C hydrogen bonds</td><td><span class="constant">2 / 3</span></td></tr>
-          <tr><td>DNA synthesis direction</td><td><span class="constant">5' &rarr; 3'</span></td></tr>
-          <tr><td>RNA polymerase reads template</td><td><span class="constant">3' &rarr; 5'</span></td></tr>
-          <tr><td>Human chromosomes</td><td><span class="constant">46 (23 pairs)</span></td></tr>
-          <tr><td>Human protein-coding genes</td><td><span class="constant">~20,000-25,000</span></td></tr>
-          <tr><td>% of human genome coding for protein</td><td><span class="constant">~1.5%</span></td></tr>
-          <tr><td>Hardy-Weinberg allele frequencies</td><td><span class="constant">p + q = 1</span></td></tr>
-          <tr><td>Hardy-Weinberg genotype frequencies</td><td><span class="constant">p&sup2; + 2pq + q&sup2; = 1</span></td></tr>
-          <tr><td>1 map unit (cM)</td><td><span class="constant">1% recombination frequency</span></td></tr>
-          <tr><td>Max recombination frequency</td><td><span class="constant">50%</span></td></tr>
-          <tr><td>PCR copies after n cycles</td><td><span class="constant">2<sup>n</sup></span></td></tr>
-          <tr><td>Chi-square formula</td><td><span class="constant">&chi;&sup2; = &Sigma;(O-E)&sup2;/E</span></td></tr>
-          <tr><td>Transposable elements in human genome</td><td><span class="constant">~45%</span></td></tr>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- SECTION 13: Quiz -->
-  <div class="section" id="s13">
-    <div class="section-header"><span class="section-number">13</span><h2>Self-Test Quiz</h2></div>
-    <p style="margin-bottom:1.5rem; color: var(--text-muted);">Select an answer for each question, then check your score.</p>
+  <!-- ============================================ -->
+  <!-- QUIZ -->
+  <!-- ============================================ -->
+  <div class="section" id="quiz">
+    <div class="section-tag">Test Yourself</div>
+    <div class="section-title">Quiz</div>
+    <p class="section-subtitle">Pick the best answer, then check your score at the bottom.</p>
     <div id="quiz-container"></div>
     <div class="quiz-controls">
-      <button class="quiz-btn quiz-btn-primary" onclick="checkQuiz()">Check My Answers</button>
-      <button class="quiz-btn quiz-btn-secondary" onclick="resetQuiz()">Reset Quiz</button>
+      <button class="btn btn-primary" onclick="checkQuiz()">Check My Answers</button>
+      <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
     </div>
     <div class="quiz-score" id="quiz-score">
-      <div class="score-number" id="score-number"></div>
-      <div class="score-label" id="score-label"></div>
+      <div class="big" id="score-num"></div>
+      <div class="sub" id="score-msg"></div>
     </div>
   </div>
 
-  <!-- SECTION 14: Flashcards -->
-  <div class="section" id="s14">
-    <div class="section-header"><span class="section-number">14</span><h2>Flashcards</h2></div>
-    <p style="margin-bottom:1rem; color: var(--text-muted);">Click a card to flip it. Use the filters to focus on a specific topic.</p>
-    <div class="fc-category-filter" id="fc-filters"></div>
-    <div class="flashcard-grid" id="flashcard-container"></div>
+  <!-- ============================================ -->
+  <!-- FLASHCARDS -->
+  <!-- ============================================ -->
+  <div class="section" id="flashcards">
+    <div class="section-tag">Review</div>
+    <div class="section-title">Flashcards</div>
+    <p class="section-subtitle">Click to flip. Use the filters to focus on one topic.</p>
+    <div class="fc-filters" id="fc-filters"></div>
+    <div class="fc-grid" id="fc-container"></div>
   </div>
 
-  <!-- SECTION 15: Short Answer -->
-  <div class="section" id="s15">
-    <div class="section-header"><span class="section-number">15</span><h2>Short Answer Practice</h2></div>
-    <p style="margin-bottom:1.5rem; color: var(--text-muted);">Type your answer, then click "Grade My Answer." The grader checks for key concepts using keyword matching.</p>
-    <div id="sa-container"></div>
-    <div class="sa-note">These are graded by keyword and concept matching, not by AI. Include specific terms and concepts for the best score.</div>
-  </div>
-
-  <div class="footer">Genetics Fundamentals &mdash; Study Reference</div>
+  <div class="footer">Genetics Made Simple &mdash; Study Guide</div>
 </div>
 
 <script>
-// ===== QUIZ DATA =====
-const quizData = [
-{q:"What is the phenotypic ratio expected from a monohybrid cross between two heterozygotes (Aa x Aa)?",opts:["1:2:1","3:1","9:3:3:1","1:1"],ans:1,explain:"A monohybrid cross Aa x Aa gives a 3:1 phenotypic ratio (3 dominant : 1 recessive).",cat:"Mendelian Genetics"},
-{q:"Mendel's Law of Segregation corresponds to which event in meiosis?",opts:["Crossing over in prophase I","Separation of homologous chromosomes in anaphase I","Separation of sister chromatids in anaphase II","Cytokinesis after meiosis II"],ans:1,explain:"The Law of Segregation corresponds to the separation of homologous chromosomes (and thus allele pairs) during anaphase I of meiosis.",cat:"Mendelian Genetics"},
-{q:"In a testcross, an individual with a dominant phenotype is crossed with:",opts:["A heterozygous individual","A homozygous dominant individual","A homozygous recessive individual","Another individual with the dominant phenotype"],ans:2,explain:"A testcross uses a homozygous recessive individual (aa) to determine the genotype of the dominant phenotype individual.",cat:"Mendelian Genetics"},
-{q:"A dihybrid cross (AaBb x AaBb) produces offspring in what phenotypic ratio?",opts:["3:1","1:1:1:1","9:3:3:1","1:2:1"],ans:2,explain:"The dihybrid cross produces a 9:3:3:1 phenotypic ratio when genes assort independently.",cat:"Mendelian Genetics"},
-{q:"In the ABO blood group system, a person with type AB blood has the genotype:",opts:["I^A I^A","I^A i","I^A I^B","ii"],ans:2,explain:"Type AB blood results from the codominant I^A I^B genotype, where both A and B antigens are expressed.",cat:"Extensions of Mendelism"},
-{q:"When red (RR) and white (R'R') snapdragons are crossed and produce pink offspring, this is an example of:",opts:["Codominance","Epistasis","Incomplete dominance","Pleiotropy"],ans:2,explain:"In incomplete dominance, the heterozygote shows an intermediate phenotype (pink) between the two homozygotes.",cat:"Extensions of Mendelism"},
-{q:"One gene masking or modifying the expression of a different gene is called:",opts:["Pleiotropy","Polygenic inheritance","Codominance","Epistasis"],ans:3,explain:"Epistasis occurs when one gene's alleles mask or modify the phenotypic expression of alleles at a different locus.",cat:"Extensions of Mendelism"},
-{q:"A single gene affecting multiple phenotypic traits is referred to as:",opts:["Polygenic inheritance","Epistasis","Pleiotropy","Codominance"],ans:2,explain:"Pleiotropy means one gene influences multiple seemingly unrelated phenotypic traits, like the sickle cell allele affecting blood, spleen, and other organs.",cat:"Extensions of Mendelism"},
-{q:"X-linked recessive traits are more commonly expressed in males because:",opts:["Males have two copies of the X chromosome","The Y chromosome carries a dominant allele","Males are hemizygous for X-linked genes","Males have stronger immune systems"],ans:2,explain:"Males have only one X chromosome (hemizygous), so a single recessive allele on X will be expressed since there is no second X allele to mask it.",cat:"Chromosome Theory"},
-{q:"A Barr body is:",opts:["An extra Y chromosome","An inactivated X chromosome in female mammals","A condensed autosome","A fragment from chromosome deletion"],ans:1,explain:"In female mammals, one X chromosome is randomly inactivated in each cell and forms a condensed Barr body, providing dosage compensation.",cat:"Chromosome Theory"},
-{q:"Two genes have a recombination frequency of 8%. What is the map distance between them?",opts:["8 cM","4 cM","16 cM","80 cM"],ans:0,explain:"1% recombination = 1 centiMorgan (cM). So 8% RF = 8 cM map distance.",cat:"Linkage"},
-{q:"What is the maximum recombination frequency between two linked genes?",opts:["25%","100%","75%","50%"],ans:3,explain:"The maximum recombination frequency is 50%, at which point genes appear to assort independently even if they are on the same chromosome.",cat:"Linkage"},
-{q:"According to Chargaff's rules, in double-stranded DNA:",opts:["%A = %G","% purines = % pyrimidines","%A = %C","%G = %T"],ans:1,explain:"In double-stranded DNA, A pairs with T and G pairs with C, so the total percentage of purines (A+G) equals the total percentage of pyrimidines (T+C).",cat:"DNA Structure"},
-{q:"DNA replication is described as semiconservative because:",opts:["Both strands are completely new","Each daughter molecule has one original and one new strand","Only half the chromosome is replicated","The leading strand is conserved but the lagging strand is not"],ans:1,explain:"Semiconservative replication means each daughter DNA molecule consists of one parental (original) strand and one newly synthesized strand.",cat:"DNA Replication"},
-{q:"Which enzyme synthesizes a short RNA primer during DNA replication?",opts:["DNA polymerase III","Helicase","Primase","Ligase"],ans:2,explain:"Primase is an RNA polymerase that synthesizes the short RNA primers needed for DNA polymerase to begin adding nucleotides.",cat:"DNA Replication"},
-{q:"Okazaki fragments are found on the:",opts:["Leading strand","Lagging strand","Both strands equally","Template strand only"],ans:1,explain:"Okazaki fragments are short DNA segments synthesized discontinuously on the lagging strand because DNA polymerase can only synthesize 5' to 3'.",cat:"DNA Replication"},
-{q:"During transcription, RNA polymerase reads the template strand in which direction?",opts:["5' to 3'","3' to 5'","Both directions simultaneously","It varies by gene"],ans:1,explain:"RNA polymerase reads the template (antisense) strand 3' to 5' while synthesizing the mRNA 5' to 3'.",cat:"Transcription"},
-{q:"In eukaryotic mRNA processing, introns are removed by the:",opts:["Ribosome","Proteasome","Spliceosome","DNA polymerase"],ans:2,explain:"The spliceosome (composed of snRNPs and other proteins) removes introns and joins exons during pre-mRNA processing in the nucleus.",cat:"Transcription"},
-{q:"How many codons exist in the genetic code, and how many amino acids do they encode?",opts:["20 codons, 20 amino acids","61 codons, 20 amino acids","64 codons, 20 amino acids","64 codons, 64 amino acids"],ans:2,explain:"There are 64 codons total (4^3). Of these, 61 code for 20 amino acids and 3 are stop codons. The code is degenerate (redundant).",cat:"Genetic Code"},
-{q:"The start codon AUG codes for which amino acid?",opts:["Alanine","Tryptophan","Methionine","Leucine"],ans:2,explain:"AUG is the universal start codon and codes for methionine (formyl-methionine in prokaryotes). It also sets the reading frame.",cat:"Genetic Code"},
-{q:"In the lac operon, what happens when lactose is present and glucose is absent?",opts:["The operon is OFF","The operon is ON at a low level","The operon is ON at maximum level","The repressor binds the operator"],ans:2,explain:"Maximum lac operon expression requires both conditions: lactose present (repressor removed from operator) AND glucose absent (high cAMP, CAP-cAMP activates transcription).",cat:"Gene Regulation"},
-{q:"In the trp operon, tryptophan acts as a:",opts:["Inducer","Corepressor","Activator","Enhancer"],ans:1,explain:"In the repressible trp operon, tryptophan serves as a corepressor: it binds the repressor protein, activating it to bind the operator and shut down transcription.",cat:"Gene Regulation"},
-{q:"A mutation that changes a codon to a stop codon, producing a truncated protein, is called a:",opts:["Silent mutation","Missense mutation","Nonsense mutation","Frameshift mutation"],ans:2,explain:"A nonsense mutation creates a premature stop codon, resulting in a shortened (truncated) and usually nonfunctional protein.",cat:"Mutation"},
-{q:"An insertion of two nucleotides into a coding sequence would cause a:",opts:["Silent mutation","Missense mutation","Nonsense mutation","Frameshift mutation"],ans:3,explain:"Insertion of 2 nucleotides (not a multiple of 3) shifts the reading frame for all downstream codons, a frameshift mutation.",cat:"Mutation"},
-{q:"Xeroderma pigmentosum results from a defect in which DNA repair mechanism?",opts:["Mismatch repair","Proofreading by DNA polymerase","Nucleotide excision repair","SOS repair"],ans:2,explain:"Xeroderma pigmentosum is caused by defective nucleotide excision repair (NER), which normally removes UV-induced thymine dimers.",cat:"DNA Repair"},
-{q:"Down syndrome is typically caused by:",opts:["Monosomy of chromosome 21","Trisomy of chromosome 21","Deletion of chromosome 21","Translocation of chromosome 22"],ans:1,explain:"Down syndrome results from trisomy 21 (three copies of chromosome 21), usually caused by nondisjunction during meiosis.",cat:"Chromosome Variation"},
-{q:"Turner syndrome (45, XO) is the only viable human:",opts:["Trisomy","Monosomy","Polyploidy","Translocation"],ans:1,explain:"Turner syndrome (45, X) is the only viable monosomy in humans. All autosomal monosomies are lethal.",cat:"Chromosome Variation"},
-{q:"In PCR, Taq polymerase is used because it:",opts:["Works at room temperature","Is cheaper than other polymerases","Is thermostable and withstands the high denaturation temperatures","Does not require primers"],ans:2,explain:"Taq polymerase is isolated from the thermophilic bacterium Thermus aquaticus and can withstand the ~95°C denaturation step without being destroyed.",cat:"Biotechnology"},
-{q:"In gel electrophoresis, smaller DNA fragments:",opts:["Stay near the wells","Move farther toward the positive electrode","Move toward the negative electrode","Do not move at all"],ans:1,explain:"DNA is negatively charged and moves toward the positive electrode. Smaller fragments move faster through the gel matrix and migrate farther.",cat:"Biotechnology"},
-{q:"According to Hardy-Weinberg, if q² = 0.09, what is the carrier (heterozygote) frequency?",opts:["0.09","0.42","0.21","0.49"],ans:1,explain:"q² = 0.09, so q = 0.3, p = 0.7. Carrier frequency (2pq) = 2(0.7)(0.3) = 0.42.",cat:"Population Genetics"},
-{q:"Which of the following is the ONLY evolutionary force that is adaptive?",opts:["Genetic drift","Gene flow","Natural selection","Mutation"],ans:2,explain:"Natural selection is the only evolutionary mechanism that is adaptive, meaning it consistently leads to increased fitness and adaptation to the environment.",cat:"Population Genetics"}
+// ===== QUIZ =====
+const Q=[
+{q:"What is the phenotypic ratio from a monohybrid cross (Aa × Aa)?",o:["1:2:1","3:1","9:3:3:1","1:1"],a:1,e:"Aa × Aa gives 1 AA : 2 Aa : 1 aa. Since A is dominant, both AA and Aa look the same, so the phenotypic ratio is 3 dominant : 1 recessive."},
+{q:"In a testcross, you cross a dominant-phenotype organism with:",o:["A heterozygote","A homozygous dominant","A homozygous recessive","Another dominant organism"],a:2,e:"A testcross always uses a homozygous recessive (aa). If any recessive offspring appear, the parent being tested must be Aa."},
+{q:"Pink snapdragons from a red × white cross are an example of:",o:["Codominance","Epistasis","Incomplete dominance","Pleiotropy"],a:2,e:"In incomplete dominance the heterozygote is a blend (pink) of the two homozygotes (red and white)."},
+{q:"Why are X-linked recessive diseases more common in males?",o:["Males have two X chromosomes","The Y carries a masking allele","Males only have one X, so one recessive allele is enough","Males have weaker immune systems"],a:2,e:"Males are hemizygous (one X). A single recessive allele on that X will be expressed because there's no second X to mask it."},
+{q:"During DNA replication, which enzyme glues Okazaki fragments together?",o:["Helicase","Primase","DNA Polymerase III","Ligase"],a:3,e:"DNA ligase seals the nicks between Okazaki fragments on the lagging strand."},
+{q:"The start codon AUG codes for which amino acid?",o:["Alanine","Tryptophan","Methionine","Leucine"],a:2,e:"AUG codes for methionine and also sets the reading frame for translation."},
+{q:"An insertion of 2 nucleotides causes what kind of mutation?",o:["Silent","Missense","Nonsense","Frameshift"],a:3,e:"2 is not a multiple of 3, so the entire reading frame shifts downstream. This is a frameshift mutation."},
+{q:"In the lac operon, what two conditions are needed for maximum gene expression?",o:["Lactose absent + glucose absent","Lactose present + glucose present","Lactose present + glucose absent","Lactose absent + glucose present"],a:2,e:"Lactose must be present (to remove the repressor) AND glucose must be absent (so cAMP is high and CAP activates transcription)."},
+{q:"Down syndrome is caused by:",o:["Monosomy 21","Trisomy 21","Deletion on chromosome 21","XXY genotype"],a:1,e:"Down syndrome results from having three copies of chromosome 21 (trisomy 21), usually due to nondisjunction during meiosis."},
+{q:"If q² = 0.04 in a Hardy-Weinberg population, what is the carrier frequency (2pq)?",o:["0.04","0.32","0.20","0.64"],a:1,e:"q² = 0.04 → q = 0.2 → p = 0.8 → 2pq = 2(0.8)(0.2) = 0.32."},
+{q:"In gel electrophoresis, which fragments travel farthest?",o:["The largest","The most positively charged","The smallest","It depends on the voltage only"],a:2,e:"Smaller DNA fragments move faster and farther through the gel matrix."},
+{q:"What does CRISPR-Cas9 use to find its target in the genome?",o:["A restriction enzyme","A guide RNA","A DNA primer","A transposon"],a:1,e:"A guide RNA (gRNA) is complementary to the target sequence and directs Cas9 to cut at that exact spot."},
+{q:"Chargaff's rules state that in double-stranded DNA:",o:["%A = %G","%A = %T and %G = %C","%A = %C","%G = %T"],a:1,e:"A always pairs with T, and G always pairs with C, so their percentages must be equal in double-stranded DNA."},
+{q:"Which type of natural selection favors the average phenotype?",o:["Directional","Stabilizing","Disruptive","Balancing"],a:1,e:"Stabilizing selection favors the intermediate phenotype and narrows the distribution. Example: average human birth weight has the highest survival."},
+{q:"How many copies does PCR produce after 20 cycles?",o:["20","40","2²⁰ (about 1 million)","200"],a:2,e:"PCR doubles the target each cycle, so after n cycles you have 2ⁿ copies. 2²⁰ = 1,048,576."},
 ];
 
-// ===== FLASHCARD DATA =====
-const flashcardData = [
-{front:"What is an allele?",back:"An alternative form of a gene at a given locus on a chromosome.",cat:"Mendelian Genetics"},
-{front:"Define homozygous vs. heterozygous.",back:"Homozygous: two identical alleles (AA or aa). Heterozygous: two different alleles (Aa).",cat:"Mendelian Genetics"},
-{front:"What is Mendel's Law of Segregation?",back:"The two alleles for a gene separate during gamete formation so each gamete carries only one allele. Corresponds to separation of homologs in meiosis I.",cat:"Mendelian Genetics"},
-{front:"What is Mendel's Law of Independent Assortment?",back:"Genes on different chromosomes sort independently during gamete formation. Corresponds to random orientation of homologous pairs at the metaphase plate.",cat:"Mendelian Genetics"},
-{front:"What is a testcross?",back:"Crossing an individual of dominant phenotype (unknown genotype) with a homozygous recessive (aa) to determine whether it is AA or Aa.",cat:"Mendelian Genetics"},
-{front:"What phenotypic ratio does a dihybrid cross produce?",back:"9:3:3:1 (when genes assort independently).",cat:"Mendelian Genetics"},
-{front:"State the multiplication rule of probability.",back:"The probability of two independent events both occurring equals the product of their individual probabilities (AND rule).",cat:"Mendelian Genetics"},
-{front:"What is the chi-square test used for in genetics?",back:"To determine whether observed data fit an expected genetic ratio. Compare calculated χ² to critical value at p = 0.05.",cat:"Mendelian Genetics"},
-{front:"What is incomplete dominance?",back:"The heterozygote shows an intermediate phenotype between the two homozygotes. F2 ratio is 1:2:1. Example: pink snapdragons.",cat:"Extensions of Mendelism"},
-{front:"What is codominance?",back:"Both alleles are fully expressed in the heterozygote (not blended). Example: AB blood type with both A and B antigens present.",cat:"Extensions of Mendelism"},
-{front:"What blood type is the universal donor? Universal recipient?",back:"Type O is the universal donor (no antigens). Type AB is the universal recipient (no antibodies against A or B).",cat:"Extensions of Mendelism"},
-{front:"What is epistasis?",back:"One gene masks or modifies the expression of a different gene, altering expected dihybrid ratios (e.g., 9:3:4 for recessive epistasis).",cat:"Extensions of Mendelism"},
-{front:"Define pleiotropy.",back:"One gene affects multiple phenotypic traits. Example: the sickle cell allele affects blood cells, spleen, heart, brain, and other organs.",cat:"Extensions of Mendelism"},
-{front:"Define polygenic inheritance.",back:"Multiple genes contribute to one trait, producing continuous variation (bell curve). Examples: height, skin color.",cat:"Extensions of Mendelism"},
-{front:"What is penetrance vs. expressivity?",back:"Penetrance: % of individuals with a genotype who show the phenotype. Expressivity: the degree to which a genotype is expressed.",cat:"Extensions of Mendelism"},
-{front:"What determines sex in humans?",back:"XX = female, XY = male. The SRY gene on the Y chromosome triggers male development.",cat:"Chromosome Theory"},
-{front:"Why are X-linked recessive traits more common in males?",back:"Males are hemizygous (one X), so a single recessive allele is expressed. Females need two copies to express the trait.",cat:"Chromosome Theory"},
-{front:"What is X-inactivation?",back:"Random inactivation of one X chromosome in each cell of female mammals, forming a Barr body. Provides dosage compensation. Results in mosaic expression.",cat:"Chromosome Theory"},
-{front:"What is genetic linkage?",back:"Genes on the same chromosome tend to be inherited together because they do not assort independently.",cat:"Linkage"},
-{front:"What does 1 centiMorgan (cM) equal?",back:"1% recombination frequency between two genes. Also called 1 map unit.",cat:"Linkage"},
-{front:"What is the maximum recombination frequency?",back:"50%. At this point, genes behave as if unlinked (could be far apart on same chromosome or on different chromosomes).",cat:"Linkage"},
-{front:"How do you determine gene order in a three-point testcross?",back:"The least frequent class represents the double crossover. Comparing these to the parental class reveals which gene is in the middle.",cat:"Linkage"},
-{front:"What are the components of a DNA nucleotide?",back:"Deoxyribose sugar + phosphate group + nitrogenous base (A, T, G, or C).",cat:"DNA Structure"},
-{front:"State Chargaff's base pairing rules.",back:"A pairs with T (2 H-bonds), G pairs with C (3 H-bonds). In dsDNA: %A = %T and %G = %C.",cat:"DNA Structure"},
-{front:"What are purines and pyrimidines?",back:"Purines (two rings): Adenine, Guanine. Pyrimidines (one ring): Cytosine, Thymine, Uracil (RNA).",cat:"DNA Structure"},
-{front:"What does semiconservative replication mean?",back:"Each daughter DNA molecule contains one original (parental) strand and one newly synthesized strand. Demonstrated by Meselson-Stahl.",cat:"DNA Replication"},
-{front:"What direction does DNA polymerase synthesize?",back:"5' to 3' only. It adds nucleotides to the 3'-OH end of the growing strand.",cat:"DNA Replication"},
-{front:"What is the role of DNA ligase?",back:"Seals the nicks between Okazaki fragments on the lagging strand by forming phosphodiester bonds.",cat:"DNA Replication"},
-{front:"What is telomerase and why is it important?",back:"Telomerase extends the telomeres (repetitive ends) of linear chromosomes, preventing shortening with each replication. Active in germ cells and stem cells.",cat:"DNA Replication"},
-{front:"State the central dogma of molecular biology.",back:"DNA → (transcription) → RNA → (translation) → Protein.",cat:"Gene Expression"},
-{front:"Which strand does RNA polymerase read?",back:"The template strand (antisense), reading 3' to 5' while synthesizing mRNA 5' to 3'.",cat:"Gene Expression"},
-{front:"What are the three modifications to eukaryotic pre-mRNA?",back:"5' cap (modified guanine), 3' poly-A tail (~200 adenines), and RNA splicing (introns removed, exons joined by spliceosome).",cat:"Gene Expression"},
-{front:"What is alternative splicing?",back:"Different combinations of exons from the same pre-mRNA can produce different mature mRNAs and thus different proteins from one gene.",cat:"Gene Expression"},
-{front:"How many codons are there? How many amino acids?",back:"64 codons total (4³). 61 sense codons for 20 amino acids, plus 3 stop codons (UAA, UAG, UGA). The code is degenerate.",cat:"Genetic Code"},
-{front:"What is the start codon and what does it code for?",back:"AUG, which codes for methionine. It also sets the reading frame for translation.",cat:"Genetic Code"},
-{front:"Name the three stop codons.",back:"UAA, UAG, UGA. They are recognized by release factors, not by tRNA.",cat:"Genetic Code"},
-{front:"Name the three ribosomal sites and their functions.",back:"A site (aminoacyl): incoming charged tRNA. P site (peptidyl): tRNA with growing chain. E site (exit): empty tRNA leaves.",cat:"Gene Expression"},
-{front:"How does the lac operon work?",back:"Inducible system. Lactose (as allolactose) removes repressor from operator; CAP-cAMP (when glucose is low) enhances transcription. Both conditions needed for max expression.",cat:"Gene Regulation"},
-{front:"How does the trp operon work?",back:"Repressible system. When tryptophan is abundant, it acts as corepressor, activating the repressor to bind the operator and block transcription.",cat:"Gene Regulation"},
-{front:"List the levels of eukaryotic gene regulation.",back:"Chromatin remodeling, transcriptional (TFs, enhancers), post-transcriptional (splicing, miRNA), translational, and post-translational (protein modification/degradation).",cat:"Gene Regulation"},
-{front:"What is a silent mutation?",back:"A base substitution that does not change the amino acid (due to degeneracy of the genetic code). No effect on protein.",cat:"Mutation"},
-{front:"What is a frameshift mutation?",back:"An insertion or deletion of nucleotides (not a multiple of 3) that shifts the reading frame, usually producing a nonfunctional protein.",cat:"Mutation"},
-{front:"What is nucleotide excision repair?",back:"Repair mechanism that removes bulky DNA lesions (like thymine dimers). Defective in xeroderma pigmentosum.",cat:"DNA Repair"},
-{front:"What is nondisjunction?",back:"Failure of chromosomes to separate properly during meiosis, leading to aneuploidy (e.g., trisomy or monosomy).",cat:"Chromosome Variation"},
-{front:"What is the karyotype for Down syndrome?",back:"Trisomy 21 (47 chromosomes, three copies of chromosome 21).",cat:"Chromosome Variation"},
-{front:"Name four types of chromosomal structural changes.",back:"Deletion (segment lost), duplication (segment copied), inversion (segment flipped), translocation (segment moved to non-homologous chromosome).",cat:"Chromosome Variation"},
-{front:"What are restriction enzymes?",back:"Bacterial enzymes that cut DNA at specific palindromic sequences, producing sticky or blunt ends. Essential tools in recombinant DNA technology.",cat:"Biotechnology"},
-{front:"Describe PCR in three steps.",back:"1) Denaturation (~95°C): strands separate. 2) Annealing (~55°C): primers bind. 3) Extension (~72°C): Taq polymerase synthesizes new strands. Repeat for exponential amplification (2^n).",cat:"Biotechnology"},
-{front:"What does gel electrophoresis separate by?",back:"Size. DNA (negatively charged) migrates toward the positive electrode. Smaller fragments travel farther/faster.",cat:"Biotechnology"},
-{front:"SNoW DRoP: what does it stand for?",back:"Southern blot = DNA, Northern blot = RNA, Western blot = Protein.",cat:"Biotechnology"},
-{front:"How does CRISPR-Cas9 work?",back:"A guide RNA directs the Cas9 nuclease to a specific DNA sequence, where it makes a double-strand break. Cell repair can knock out a gene or insert new sequence.",cat:"Biotechnology"},
-{front:"State the Hardy-Weinberg equations.",back:"p + q = 1 (allele frequencies). p² + 2pq + q² = 1 (genotype frequencies). p² = AA, 2pq = Aa, q² = aa.",cat:"Population Genetics"},
-{front:"List the five conditions for Hardy-Weinberg equilibrium.",back:"No mutation, random mating, no natural selection, infinite population size (no drift), no gene flow.",cat:"Population Genetics"},
-{front:"What is genetic drift?",back:"Random changes in allele frequency, most impactful in small populations. Includes bottleneck and founder effects.",cat:"Population Genetics"},
-{front:"What is heterozygote advantage?",back:"A form of balancing selection where heterozygotes have higher fitness than either homozygote. Classic example: sickle cell carriers resist malaria.",cat:"Population Genetics"},
-{front:"What are transposable elements?",back:"\"Jumping genes\" (discovered by Barbara McClintock) that can move within the genome. Retrotransposons use RNA intermediate. ~45% of the human genome.",cat:"Genomics"},
-{front:"What is genomic imprinting?",back:"Epigenetic silencing where certain genes are expressed from only one parent's allele (the other is methylated/silenced). Example: Prader-Willi/Angelman syndromes.",cat:"Epigenetics"},
-{front:"What is epigenetics?",back:"Heritable changes in gene expression without changes to the DNA sequence. Mechanisms include DNA methylation, histone modification, and non-coding RNAs.",cat:"Epigenetics"},
-{front:"How does DNA methylation affect gene expression?",back:"Methylation of cytosines (at CpG sites) typically silences gene expression by preventing transcription factor binding and promoting chromatin condensation.",cat:"Epigenetics"}
+function buildQuiz(){const c=document.getElementById('quiz-container');c.innerHTML='';Q.forEach((q,i)=>{const d=document.createElement('div');d.className='quiz-q';d.id='qq'+i;d.innerHTML=`<div class="q-num">Question ${i+1}</div><p class="q-text">${q.q}</p><ul class="quiz-opts">${q.o.map((o,j)=>`<li><label id="ql${i}-${j}"><input type="radio" name="q${i}" value="${j}"> ${o}</label></li>`).join('')}</ul><div class="quiz-fb" id="qf${i}"></div>`;c.appendChild(d)})}
+
+function checkQuiz(){let s=0;Q.forEach((q,i)=>{const sel=document.querySelector(`input[name="q${i}"]:checked`);const fb=document.getElementById('qf'+i);q.o.forEach((_,j)=>document.getElementById(`ql${i}-${j}`).className='');if(sel){const v=+sel.value;if(v===q.a){s++;document.getElementById(`ql${i}-${v}`).className='correct';fb.className='quiz-fb show ok';fb.textContent='✓ '+q.e}else{document.getElementById(`ql${i}-${v}`).className='wrong';document.getElementById(`ql${i}-${q.a}`).className='show-right';fb.className='quiz-fb show nope';fb.textContent='✗ '+q.e}}else{document.getElementById(`ql${i}-${q.a}`).className='show-right';fb.className='quiz-fb show nope';fb.textContent='No answer selected. '+q.e}});const sc=document.getElementById('quiz-score');const pct=Math.round(s/Q.length*100);document.getElementById('score-num').textContent=s+' / '+Q.length;document.getElementById('score-msg').textContent=pct+'% — '+(pct>=90?'Outstanding!':pct>=70?'Great work!':pct>=50?'Good start. Review the sections above.':'Keep studying and try again!');sc.style.display='block';sc.scrollIntoView({behavior:'smooth',block:'center'})}
+
+function resetQuiz(){Q.forEach((q,i)=>{document.querySelectorAll(`input[name="q${i}"]`).forEach(r=>r.checked=false);q.o.forEach((_,j)=>document.getElementById(`ql${i}-${j}`).className='');const fb=document.getElementById('qf'+i);fb.className='quiz-fb'});document.getElementById('quiz-score').style.display='none';document.getElementById('quiz-container').scrollIntoView({behavior:'smooth'})}
+
+// ===== FLASHCARDS =====
+const FC=[
+{f:"What is a gene?",b:"A segment of DNA that carries the instructions for one trait or protein.",c:"Basics"},
+{f:"What is an allele?",b:"A version of a gene. For example, B (brown eyes) and b (blue eyes) are two alleles of the same gene.",c:"Basics"},
+{f:"Homozygous vs. Heterozygous?",b:"Homozygous = same alleles (BB or bb). Heterozygous = different alleles (Bb).",c:"Basics"},
+{f:"What is the Law of Segregation?",b:"The two alleles for a gene split during gamete formation, so each egg or sperm gets just one. This happens when homologous chromosomes separate in meiosis I.",c:"Mendel"},
+{f:"What ratio does a monohybrid cross give?",b:"3 dominant : 1 recessive (phenotypic ratio from Aa × Aa).",c:"Mendel"},
+{f:"What ratio does a dihybrid cross give?",b:"9:3:3:1 (phenotypic ratio from AaBb × AaBb).",c:"Mendel"},
+{f:"What is a testcross?",b:"Crossing a dominant individual with a homozygous recessive (aa) to find out if it's AA or Aa.",c:"Mendel"},
+{f:"Incomplete dominance vs. codominance?",b:"Incomplete = heterozygote is a blend (pink flowers). Codominance = both alleles fully show (AB blood type).",c:"Beyond Mendel"},
+{f:"What is epistasis?",b:"One gene overrides another. Example: ee Labradors are yellow regardless of the B gene.",c:"Beyond Mendel"},
+{f:"Why are X-linked recessive traits more common in males?",b:"Males only have one X. One recessive allele is enough for expression since there's no second X to mask it.",c:"Chromosomes"},
+{f:"What is X-inactivation?",b:"One X in each female cell is randomly shut off (Barr body). This is why calico cats have patchy fur.",c:"Chromosomes"},
+{f:"What is 1 centiMorgan?",b:"1% recombination frequency between two genes. Used to measure map distance.",c:"Chromosomes"},
+{f:"Base pairing rules?",b:"A pairs with T (2 H-bonds). G pairs with C (3 H-bonds). Purines pair with pyrimidines.",c:"DNA"},
+{f:"What is semiconservative replication?",b:"Each new DNA double helix has one old strand and one new strand.",c:"DNA"},
+{f:"What does DNA ligase do?",b:"Glues Okazaki fragments together on the lagging strand.",c:"DNA"},
+{f:"What is the Central Dogma?",b:"DNA → RNA → Protein. Transcription makes RNA; translation makes protein.",c:"Gene Expression"},
+{f:"What are the stop codons?",b:"UAA, UAG, UGA. They signal the ribosome to release the finished protein.",c:"Gene Expression"},
+{f:"What is alternative splicing?",b:"Different exon combinations from the same gene produce different proteins, increasing diversity.",c:"Gene Expression"},
+{f:"How does the lac operon turn ON?",b:"Lactose removes the repressor from the operator. Maximum expression also needs glucose to be absent (high cAMP → CAP activation).",c:"Regulation"},
+{f:"What is a frameshift mutation?",b:"An insertion or deletion (not a multiple of 3) that shifts the reading frame, scrambling all downstream codons.",c:"Mutation"},
+{f:"What is nucleotide excision repair?",b:"Removes bulky DNA damage like thymine dimers. Defective in xeroderma pigmentosum.",c:"Mutation"},
+{f:"What is nondisjunction?",b:"Failure of chromosomes to separate in meiosis, causing aneuploidy (e.g., trisomy 21 = Down syndrome).",c:"Chromosomes"},
+{f:"What is PCR?",b:"Denature → Anneal → Extend. Uses Taq polymerase (heat-stable) to copy a DNA target. 2ⁿ copies after n cycles.",c:"Biotech"},
+{f:"How does CRISPR-Cas9 work?",b:"A guide RNA leads Cas9 to a target DNA sequence, where it makes a double-strand break for gene editing.",c:"Biotech"},
+{f:"SNoW DRoP?",b:"Southern = DNA, Northern = RNA, Western = Protein.",c:"Biotech"},
+{f:"Hardy-Weinberg equations?",b:"p + q = 1 (alleles). p² + 2pq + q² = 1 (genotypes). Start from q² (recessive phenotype frequency).",c:"Pop Genetics"},
+{f:"Five conditions for Hardy-Weinberg equilibrium?",b:"No mutation, random mating, no selection, infinite population, no migration.",c:"Pop Genetics"},
+{f:"What is genetic drift?",b:"Random changes in allele frequency, strongest in small populations. Includes bottleneck and founder effects.",c:"Pop Genetics"},
 ];
 
-// ===== SHORT ANSWER DATA =====
-const shortAnswerData = [
-{q:"Explain Mendel's Law of Segregation and describe the meiotic event that accounts for it.",concepts:[{terms:["two alleles","allele pair","separate","segregat"],label:"two alleles for a gene separate during gamete formation",weight:3},{terms:["gamete","one allele","single allele"],label:"each gamete carries only one allele",weight:2},{terms:["meiosis I","anaphase I","homolog"],label:"corresponds to separation of homologous chromosomes in meiosis I",weight:3},{terms:["diploid","haploid"],label:"diploid organism produces haploid gametes",weight:1}],fullAnswer:"Mendel's Law of Segregation states that the two alleles for a gene separate during gamete formation, so each gamete carries only one allele. This corresponds to the separation of homologous chromosomes during anaphase I of meiosis, which reduces a diploid cell to haploid gametes, each with one copy of each gene.",cat:"Mendelian Genetics"},
-{q:"Compare incomplete dominance and codominance. Give an example of each.",concepts:[{terms:["incomplete","intermediate","blend"],label:"incomplete dominance: heterozygote shows intermediate phenotype",weight:2},{terms:["snapdragon","pink","red x white"],label:"example: red x white snapdragons produce pink (incomplete dominance)",weight:2},{terms:["codominan","both expressed","both alleles"],label:"codominance: both alleles fully expressed in heterozygote",weight:2},{terms:["AB","blood","I^A I^B","antigen"],label:"example: AB blood type, both A and B antigens expressed (codominance)",weight:2},{terms:["not blended","distinct"],label:"codominance is distinct expression, not blending",weight:1}],fullAnswer:"In incomplete dominance, the heterozygote shows an intermediate phenotype between the two homozygotes (e.g., red x white snapdragons produce pink F1). In codominance, both alleles are fully and distinctly expressed in the heterozygote rather than being blended (e.g., I^A I^B genotype produces type AB blood with both A and B antigens on red blood cells).",cat:"Extensions of Mendelism"},
-{q:"Explain why X-linked recessive traits are more commonly expressed in males. Include an example.",concepts:[{terms:["hemizygous","one X","single copy"],label:"males are hemizygous: only one X chromosome",weight:3},{terms:["no second","no masking","one allele enough"],label:"one copy of recessive allele is sufficient for expression in males",weight:2},{terms:["female","two copies","carrier"],label:"females need two copies of recessive allele; heterozygous females are carriers",weight:2},{terms:["hemophilia","color blind","duchenne","muscular dystrophy"],label:"examples: hemophilia, color blindness, Duchenne muscular dystrophy",weight:2}],fullAnswer:"Males have only one X chromosome (hemizygous), so a single copy of a recessive allele on the X will be expressed because there is no second X to carry a dominant allele that could mask it. Females have two X chromosomes, so they must be homozygous recessive to express the trait; heterozygous females are carriers. Examples include hemophilia, red-green color blindness, and Duchenne muscular dystrophy.",cat:"Chromosome Theory"},
-{q:"Describe the process of DNA replication, including the roles of at least four key enzymes.",concepts:[{terms:["helicase","unwind"],label:"helicase unwinds the double helix",weight:2},{terms:["primase","primer","RNA primer"],label:"primase synthesizes RNA primers",weight:2},{terms:["polymerase III","pol III","adds nucleotides","5' to 3'"],label:"DNA Pol III adds nucleotides 5' to 3'",weight:2},{terms:["ligase","seal","join","Okazaki"],label:"ligase joins Okazaki fragments",weight:2},{terms:["leading","continuous"],label:"leading strand synthesized continuously",weight:1},{terms:["lagging","discontinuous","Okazaki fragment"],label:"lagging strand synthesized as Okazaki fragments",weight:2},{terms:["semiconservative"],label:"replication is semiconservative",weight:1}],fullAnswer:"DNA replication is semiconservative. Helicase unwinds the double helix at the replication fork. Primase synthesizes short RNA primers. DNA polymerase III adds nucleotides in the 5' to 3' direction: continuously on the leading strand and as discontinuous Okazaki fragments on the lagging strand. DNA polymerase I removes RNA primers and replaces them with DNA. DNA ligase seals the nicks between Okazaki fragments to complete the lagging strand.",cat:"DNA Replication"},
-{q:"Describe the steps of eukaryotic mRNA processing and explain why alternative splicing is significant.",concepts:[{terms:["5' cap","cap","guanine"],label:"5' cap (modified guanine) added for protection and ribosome binding",weight:2},{terms:["poly-A","poly A","3' tail","adenine"],label:"3' poly-A tail added for stability and nuclear export",weight:2},{terms:["intron","exon","splic","spliceosome"],label:"introns removed and exons joined by the spliceosome",weight:3},{terms:["alternative splic"],label:"alternative splicing produces different mRNAs from one gene",weight:2},{terms:["different protein","protein diversity","multiple protein"],label:"increases protein diversity without increasing gene number",weight:2}],fullAnswer:"Eukaryotic pre-mRNA undergoes three main modifications: a 5' cap (modified guanine) is added for protection and ribosome recognition, a 3' poly-A tail is added for mRNA stability and nuclear export, and the spliceosome removes introns while joining exons. Alternative splicing allows different combinations of exons to be included in the mature mRNA, producing multiple different proteins from a single gene and greatly increasing protein diversity.",cat:"Gene Expression"},
-{q:"Compare the lac operon and the trp operon in terms of regulation. When is each turned on or off?",concepts:[{terms:["lac","inducib"],label:"lac operon is inducible",weight:2},{terms:["lactose","allolactose","inducer","remove repressor"],label:"lactose (allolactose) removes repressor, turning lac operon ON",weight:2},{terms:["glucose","cAMP","CAP"],label:"glucose absent = high cAMP, CAP-cAMP enhances lac transcription",weight:2},{terms:["trp","repressib"],label:"trp operon is repressible",weight:2},{terms:["tryptophan","corepressor","activat","bind"],label:"tryptophan acts as corepressor, activating repressor to shut trp operon OFF",weight:2},{terms:["biosynthe","make","produc"],label:"trp operon produces enzymes for tryptophan biosynthesis",weight:1}],fullAnswer:"The lac operon is an inducible system for lactose metabolism. When lactose is present, allolactose binds the repressor and removes it from the operator (ON). Maximum expression requires glucose to be absent (high cAMP), so CAP-cAMP binds and enhances transcription. The trp operon is a repressible system for tryptophan biosynthesis. When tryptophan is scarce, the operon is ON. When tryptophan is abundant, it acts as a corepressor, binding and activating the repressor to block transcription (OFF).",cat:"Gene Regulation"},
-{q:"Explain how nondisjunction leads to aneuploidy. Give two examples of human aneuploidies and their karyotypes.",concepts:[{terms:["nondisjunction","fail","separate","not separate"],label:"nondisjunction: failure of chromosomes to separate during meiosis",weight:3},{terms:["aneuploidy","extra","missing","trisomy","monosomy"],label:"results in gametes with extra or missing chromosomes",weight:2},{terms:["down","trisomy 21","47"],label:"Down syndrome: trisomy 21",weight:2},{terms:["turner","45","XO","monosomy X"],label:"Turner syndrome: 45, XO (monosomy X)",weight:2},{terms:["klinefelter","XXY"],label:"Klinefelter syndrome: 47, XXY",weight:1}],fullAnswer:"Nondisjunction is the failure of homologous chromosomes (meiosis I) or sister chromatids (meiosis II) to separate properly, resulting in gametes with an abnormal number of chromosomes. Fertilization with such a gamete produces aneuploid offspring. Down syndrome (trisomy 21, 47 chromosomes) results from an extra chromosome 21. Turner syndrome (45, XO) results from a missing X chromosome and is the only viable human monosomy.",cat:"Chromosome Variation"},
-{q:"Describe how PCR works and explain why Taq polymerase is essential to the technique.",concepts:[{terms:["denatur","95","separate","heat"],label:"denaturation: heat separates DNA strands (~95°C)",weight:2},{terms:["anneal","primer","bind","55"],label:"annealing: primers bind to target sequences (~55°C)",weight:2},{terms:["extend","72","synthes","elongat"],label:"extension: Taq polymerase synthesizes new strands (~72°C)",weight:2},{terms:["Taq","thermostable","heat stable","thermus"],label:"Taq is thermostable, survives repeated high-temperature cycles",weight:3},{terms:["exponential","2^n","amplif","million"],label:"exponential amplification: 2^n copies after n cycles",weight:1}],fullAnswer:"PCR amplifies a specific DNA sequence through repeated thermal cycles. Each cycle has three steps: denaturation (~95°C) separates the strands, annealing (~55°C) allows primers to bind flanking the target, and extension (~72°C) where Taq polymerase synthesizes new complementary strands. Taq polymerase (from Thermus aquaticus) is essential because it is thermostable and survives the repeated high-temperature denaturation steps. After n cycles, approximately 2^n copies of the target are produced.",cat:"Biotechnology"},
-{q:"A recessive genetic disorder affects 1 in 2,500 individuals. Using Hardy-Weinberg, calculate q, p, and the carrier frequency.",concepts:[{terms:["q²","q squared","1/2500","0.0004"],label:"q² = 1/2500 = 0.0004",weight:2},{terms:["q = 0.02","q=0.02","square root"],label:"q = √0.0004 = 0.02",weight:2},{terms:["p = 0.98","p=0.98","1 - q"],label:"p = 1 - 0.02 = 0.98",weight:2},{terms:["2pq","0.0392","carrier","3.92%","~4%"],label:"carrier frequency 2pq = 2(0.98)(0.02) = 0.0392 ≈ 3.9%",weight:3}],fullAnswer:"Given that q² = 1/2500 = 0.0004, take the square root to find q = 0.02. Since p + q = 1, p = 0.98. The carrier (heterozygote) frequency is 2pq = 2(0.98)(0.02) = 0.0392, or approximately 3.9% of the population are carriers.",cat:"Population Genetics"},
-{q:"What is epigenetics? Describe two major epigenetic mechanisms and give an example of an epigenetic phenomenon.",concepts:[{terms:["heritable","inherit"],label:"heritable changes in gene expression",weight:2},{terms:["without","no change","not change","DNA sequence"],label:"without altering the DNA sequence itself",weight:2},{terms:["methylat","methyl","CpG"],label:"DNA methylation: methyl groups on cytosines silence genes",weight:2},{terms:["histone","acetyl","chromatin"],label:"histone modification: e.g., acetylation loosens chromatin, promotes transcription",weight:2},{terms:["imprint","Prader-Willi","Angelman","X-inactiv","parent"],label:"example: genomic imprinting or X-inactivation",weight:2}],fullAnswer:"Epigenetics refers to heritable changes in gene expression that occur without changes to the underlying DNA sequence. Two major mechanisms are DNA methylation (addition of methyl groups to cytosines at CpG sites, typically silencing genes) and histone modification (e.g., acetylation loosens chromatin and promotes transcription, while deacetylation condenses it). Genomic imprinting is a classic example: certain genes are expressed only from one parent's allele because the other copy is epigenetically silenced by methylation.",cat:"Epigenetics"}
-];
+let activeCat='All';
+function getCats(){return['All',...new Set(FC.map(f=>f.c))]}
+function buildFilters(){document.getElementById('fc-filters').innerHTML=getCats().map(c=>`<button class="fc-btn ${c==='All'?'active':''}" onclick="filterFC('${c}')">${c}</button>`).join('')}
+function filterFC(c){activeCat=c;document.querySelectorAll('.fc-btn').forEach(b=>b.classList.toggle('active',b.textContent===c));buildFC()}
+function buildFC(){const arr=activeCat==='All'?FC:FC.filter(f=>f.c===activeCat);document.getElementById('fc-container').innerHTML=arr.map(f=>`<div class="fc" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front"><div class="tag">${f.c}</div><div class="question">${f.f}</div><div class="hint">click to flip</div></div><div class="fc-back"><div class="tag">Answer</div><div class="answer">${f.b}</div></div></div></div>`).join('')}
 
-// ===== QUIZ ENGINE =====
-function buildQuiz(){const c=document.getElementById('quiz-container');c.innerHTML='';quizData.forEach((q,i)=>{const d=document.createElement('div');d.className='quiz-question';d.id='qq-'+i;let o=q.opts.map((opt,j)=>`<li><label id="ql-${i}-${j}"><input type="radio" name="q${i}" value="${j}"> ${opt}</label></li>`).join('');d.innerHTML=`<div class="q-number">Question ${i+1} &middot; ${q.cat}</div><p class="q-text">${q.q}</p><ul class="quiz-options">${o}</ul><div class="quiz-feedback" id="qf-${i}"></div>`;c.appendChild(d)})}
-function checkQuiz(){let correct=0;quizData.forEach((q,i)=>{const s=document.querySelector(`input[name="q${i}"]:checked`);const fb=document.getElementById('qf-'+i);q.opts.forEach((_,j)=>{document.getElementById(`ql-${i}-${j}`).className=''});if(s){const v=parseInt(s.value);if(v===q.ans){correct++;document.getElementById(`ql-${i}-${v}`).className='correct';fb.className='quiz-feedback show correct-fb';fb.textContent='\u2713 Correct! '+q.explain}else{document.getElementById(`ql-${i}-${v}`).className='incorrect';document.getElementById(`ql-${i}-${q.ans}`).className='reveal-correct';fb.className='quiz-feedback show incorrect-fb';fb.textContent='\u2717 '+q.explain}}else{document.getElementById(`ql-${i}-${q.ans}`).className='reveal-correct';fb.className='quiz-feedback show incorrect-fb';fb.textContent='No answer selected. '+q.explain}});const sc=document.getElementById('quiz-score');const pct=Math.round((correct/quizData.length)*100);document.getElementById('score-number').textContent=correct+' / '+quizData.length;document.getElementById('score-label').textContent=pct+'% \u2014 '+(pct>=90?'Outstanding!':pct>=75?'Great job!':pct>=60?'Good effort. Review the sections you missed.':'Keep studying! Review the reference above and try again.');sc.style.display='block';sc.scrollIntoView({behavior:'smooth',block:'center'})}
-function resetQuiz(){quizData.forEach((q,i)=>{document.querySelectorAll(`input[name="q${i}"]`).forEach(r=>r.checked=false);q.opts.forEach((_,j)=>{document.getElementById(`ql-${i}-${j}`).className=''});const fb=document.getElementById('qf-'+i);fb.className='quiz-feedback';fb.textContent=''});document.getElementById('quiz-score').style.display='none';document.getElementById('quiz-container').scrollIntoView({behavior:'smooth'})}
-
-// ===== FLASHCARD ENGINE =====
-let activeCategory='All';
-function getCategories(){return['All',...new Set(flashcardData.map(f=>f.cat))]}
-function buildFilters(){const c=document.getElementById('fc-filters');c.innerHTML=getCategories().map(cat=>`<button class="fc-filter-btn ${cat==='All'?'active':''}" onclick="filterCards('${cat}')">${cat}</button>`).join('')}
-function filterCards(cat){activeCategory=cat;document.querySelectorAll('.fc-filter-btn').forEach(b=>{b.classList.toggle('active',b.textContent===cat)});buildFlashcards()}
-function buildFlashcards(){const c=document.getElementById('flashcard-container');const f=activeCategory==='All'?flashcardData:flashcardData.filter(f=>f.cat===activeCategory);c.innerHTML=f.map(fc=>`<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front"><div class="fc-label">${fc.cat}</div><div class="fc-question">${fc.front}</div><div class="fc-hint">click to flip</div></div><div class="flashcard-back"><div class="fc-label">Answer</div><div class="fc-answer">${fc.back}</div></div></div></div>`).join('')}
-
-// ===== SHORT ANSWER ENGINE =====
-function buildShortAnswer(){const c=document.getElementById('sa-container');c.innerHTML='';shortAnswerData.forEach((q,i)=>{const d=document.createElement('div');d.className='sa-question';d.id='sa-'+i;d.innerHTML='<div class="q-number">Short Answer '+(i+1)+' &middot; '+q.cat+'</div><p class="q-text">'+q.q+'</p><textarea class="sa-textarea" id="sa-input-'+i+'" placeholder="Type your answer here..."></textarea><div><button class="sa-submit-btn" id="sa-btn-'+i+'" onclick="gradeAnswer('+i+')">Grade My Answer</button></div><div class="sa-loading" id="sa-loading-'+i+'" style="display:none"><div class="spinner"></div><span>Evaluating your answer...</span></div><div class="sa-feedback" id="sa-fb-'+i+'"></div>';c.appendChild(d)})}
-function gradeAnswer(index){const input=document.getElementById('sa-input-'+index).value.trim();if(!input){alert('Please type an answer before submitting.');return;}const btn=document.getElementById('sa-btn-'+index);const fb=document.getElementById('sa-fb-'+index);const loading=document.getElementById('sa-loading-'+index);btn.disabled=true;loading.style.display='inline-flex';fb.className='sa-feedback';fb.removeAttribute('style');setTimeout(()=>{const q=shortAnswerData[index];const inputLower=input.toLowerCase();let totalWeight=0,earnedWeight=0;const matched=[],missed=[];q.concepts.forEach(c=>{totalWeight+=c.weight;if(c.terms.some(t=>inputLower.includes(t.toLowerCase()))){earnedWeight+=c.weight;matched.push(c.label)}else{missed.push({label:c.label,weight:c.weight})}});missed.sort((a,b)=>b.weight-a.weight);const pct=totalWeight>0?earnedWeight/totalWeight:0;let grade,icon,cls;if(pct>=0.65){grade='good';icon='\u2713 Nice work!';cls='grade-good'}else if(pct>=0.35){grade='partial';icon='\u25cb Getting there!';cls='grade-partial'}else{grade='needs_work';icon='\u2717 Keep working on this one.';cls='grade-needs-work'}let feedback='';if(matched.length>0)feedback+='You correctly addressed: '+matched.join('; ')+'. ';if(grade==='good'&&missed.length>0){feedback+='To strengthen your answer, also mention: '+missed.slice(0,2).map(m=>m.label).join('; ')+'.'}else if(grade==='partial'){feedback+='Key concepts you missed: '+missed.slice(0,3).map(m=>m.label).join('; ')+'.'}else{feedback+='Your answer needs more detail. Key concepts to include: '+missed.slice(0,3).map(m=>m.label).join('; ')+'.'}feedback+='<br><br><strong>Model answer:</strong> '+q.fullAnswer;loading.style.display='none';btn.disabled=false;fb.className='sa-feedback show '+cls;fb.innerHTML='<strong>'+icon+'</strong> '+feedback},600)}
-
-document.addEventListener('DOMContentLoaded',()=>{buildQuiz();buildFilters();buildFlashcards();buildShortAnswer()});
+document.addEventListener('DOMContentLoaded',()=>{buildQuiz();buildFilters();buildFC()});
 </script>
 </body>
 </html>
