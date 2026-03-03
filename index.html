@@ -37,7 +37,7 @@
       overflow: hidden;
     }
     .hero::after {
-      content: '🧬';
+      content: '<span aria-hidden="true">🧬</span>';
       position: absolute;
       font-size: 12rem;
       opacity: 0.06;
@@ -346,16 +346,47 @@
     .fc-back .answer { font-size: 0.95rem; line-height: 1.65; }
 
     .footer { text-align: center; padding: 2rem 1rem; color: var(--text-soft); font-size: 0.82rem; border-top: 1px solid var(--border); margin-top: 2rem; }
-  </style>
+  
+/* ─── WCAG 2.1 AA: Visible focus indicators ─── */
+:focus-visible {
+  outline: 3px solid #005fcc !important;
+  outline-offset: 2px !important;
+}
+.tab-btn:focus-visible, .nav-btn:focus-visible {
+  outline: 3px solid #005fcc !important;
+  outline-offset: 2px !important;
+}
+/* ─── Skip link ─── */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: #005fcc;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0 0 6px 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+</style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
 
 <div class="hero">
   <h1>Genetics Made Simple</h1>
   <p>The basics, explained clearly with real examples. No jargon overload.</p>
 </div>
 
-<div class="container">
+<div class="container" id="main-content" role="main">
 
   <div class="intro-box">
     This guide covers <strong>the core ideas in genetics</strong> that you actually need to understand. Each topic starts with a plain-English explanation and a concrete example before introducing any terminology. Scroll through the concepts, then test yourself with the quiz and flashcards at the bottom.
@@ -566,7 +597,7 @@
     <div class="card">
       <h3>How DNA Copies Itself</h3>
       <p>Replication is <strong>semiconservative</strong>: each new double helix contains one old strand and one brand-new strand (shown by the Meselson-Stahl experiment).</p>
-      <p>New DNA is always built in the <span class="formula-inline">5' → 3'</span> direction. This creates an asymmetry:</p>
+      <p>New DNA is always built in the <span class="formula-inline">5' <span aria-hidden="true">→</span> 3'</span> direction. This creates an asymmetry:</p>
       <p style="margin-left:1rem"><strong>Leading strand</strong>: built continuously toward the replication fork.<br>
       <strong>Lagging strand</strong>: built in short pieces called <strong>Okazaki fragments</strong>, which are later glued together.</p>
 
@@ -574,7 +605,7 @@
         <tr><th>Enzyme</th><th>What It Does</th></tr>
         <tr><td>Helicase</td><td>Unzips the double helix</td></tr>
         <tr><td>Primase</td><td>Lays down a short RNA starter (primer)</td></tr>
-        <tr><td>DNA Pol III</td><td>Builds the new strand, 5'→3', also proofreads</td></tr>
+        <tr><td>DNA Pol III</td><td>Builds the new strand, 5'<span aria-hidden="true">→</span>3', also proofreads</td></tr>
         <tr><td>DNA Pol I</td><td>Replaces RNA primers with DNA</td></tr>
         <tr><td>Ligase</td><td>Glues Okazaki fragments together</td></tr>
         <tr><td>Telomerase</td><td>Extends chromosome tips (telomeres) so they don't shrink</td></tr>
@@ -592,13 +623,13 @@
 
     <div class="card">
       <h3>The Central Dogma</h3>
-      <p style="text-align:center; font-family:'JetBrains Mono',monospace; font-size:1rem; color:var(--green-dark); margin:0.5rem 0;">DNA → <em>transcription</em> → mRNA → <em>translation</em> → Protein</p>
+      <p style="text-align:center; font-family:'JetBrains Mono',monospace; font-size:1rem; color:var(--green-dark); margin:0.5rem 0;">DNA <span aria-hidden="true">→</span> <em>transcription</em> <span aria-hidden="true">→</span> mRNA <span aria-hidden="true">→</span> <em>translation</em> <span aria-hidden="true">→</span> Protein</p>
       <p>Information flows from DNA to RNA to protein. The first step (making an RNA copy) is <strong>transcription</strong>. The second step (reading the RNA to build a protein) is <strong>translation</strong>.</p>
     </div>
 
     <div class="card">
-      <h3>Step 1: Transcription (DNA → mRNA)</h3>
-      <p>RNA polymerase reads one strand of the DNA (the <strong>template strand</strong>, read 3'→5') and builds a messenger RNA (mRNA) copy in the <span class="formula-inline">5' → 3'</span> direction. In eukaryotes, this happens in the <strong>nucleus</strong>.</p>
+      <h3>Step 1: Transcription (DNA <span aria-hidden="true">→</span> mRNA)</h3>
+      <p>RNA polymerase reads one strand of the DNA (the <strong>template strand</strong>, read 3'<span aria-hidden="true">→</span>5') and builds a messenger RNA (mRNA) copy in the <span class="formula-inline">5' <span aria-hidden="true">→</span> 3'</span> direction. In eukaryotes, this happens in the <strong>nucleus</strong>.</p>
       <p>Before the mRNA leaves the nucleus, it gets three modifications:</p>
       <p style="margin-left:1rem">1. A <strong>5' cap</strong> (protects it, helps ribosomes find it)<br>
       2. A <strong>poly-A tail</strong> on the 3' end (protects from degradation)<br>
@@ -610,7 +641,7 @@
     </div>
 
     <div class="card">
-      <h3>Step 2: Translation (mRNA → Protein)</h3>
+      <h3>Step 2: Translation (mRNA <span aria-hidden="true">→</span> Protein)</h3>
       <p>Ribosomes read the mRNA three letters at a time. Each group of three (a <strong>codon</strong>) specifies one amino acid. Transfer RNA (tRNA) molecules deliver the right amino acid by matching their <strong>anticodon</strong> to the mRNA codon.</p>
       <p><strong>Key numbers:</strong> <span class="formula-inline">64 codons</span> code for <span class="formula-inline">20 amino acids</span> (the code is redundant).</p>
       <p><strong>Start codon:</strong> <span class="formula-inline">AUG</span> (methionine) sets the reading frame.</p>
@@ -635,13 +666,13 @@
       <p>Bacteria group related genes together under one on/off switch called an <strong>operon</strong>. The two you need to know:</p>
 
       <p style="margin-top:0.75rem"><strong>lac operon</strong> (inducible, for digesting lactose):</p>
-      <p style="margin-left:1rem">No lactose → repressor blocks transcription (OFF)<br>
-      Lactose present → lactose removes the repressor (ON)<br>
+      <p style="margin-left:1rem">No lactose <span aria-hidden="true">→</span> repressor blocks transcription (OFF)<br>
+      Lactose present <span aria-hidden="true">→</span> lactose removes the repressor (ON)<br>
       For <em>maximum</em> expression, glucose must also be absent (high cAMP activates CAP protein, which boosts transcription).</p>
 
       <p style="margin-top:0.75rem"><strong>trp operon</strong> (repressible, for making tryptophan):</p>
-      <p style="margin-left:1rem">No tryptophan → operon is ON (cell needs to make it)<br>
-      Tryptophan abundant → tryptophan activates the repressor, which shuts things down (OFF). Why make it if you already have it?</p>
+      <p style="margin-left:1rem">No tryptophan <span aria-hidden="true">→</span> operon is ON (cell needs to make it)<br>
+      Tryptophan abundant <span aria-hidden="true">→</span> tryptophan activates the repressor, which shuts things down (OFF). Why make it if you already have it?</p>
     </div>
 
     <div class="card">
@@ -788,7 +819,7 @@
 
       <div class="example-box">
         <div class="label">How to Solve a Problem</div>
-        "1 in 2,500 people has disorder X (recessive)." → q&sup2; = 1/2500 = 0.0004 → q = 0.02 → p = 0.98 → carrier frequency (2pq) = 2(0.98)(0.02) = <strong>~3.9%</strong>.
+        "1 in 2,500 people has disorder X (recessive)." <span aria-hidden="true">→</span> q&sup2; = 1/2500 = 0.0004 <span aria-hidden="true">→</span> q = 0.02 <span aria-hidden="true">→</span> p = 0.98 <span aria-hidden="true">→</span> carrier frequency (2pq) = 2(0.98)(0.02) = <strong>~3.9%</strong>.
       </div>
     </div>
 
@@ -851,7 +882,7 @@ const Q=[
 {q:"An insertion of 2 nucleotides causes what kind of mutation?",o:["Silent","Missense","Nonsense","Frameshift"],a:3,e:"2 is not a multiple of 3, so the entire reading frame shifts downstream. This is a frameshift mutation."},
 {q:"In the lac operon, what two conditions are needed for maximum gene expression?",o:["Lactose absent + glucose absent","Lactose present + glucose present","Lactose present + glucose absent","Lactose absent + glucose present"],a:2,e:"Lactose must be present (to remove the repressor) AND glucose must be absent (so cAMP is high and CAP activates transcription)."},
 {q:"Down syndrome is caused by:",o:["Monosomy 21","Trisomy 21","Deletion on chromosome 21","XXY genotype"],a:1,e:"Down syndrome results from having three copies of chromosome 21 (trisomy 21), usually due to nondisjunction during meiosis."},
-{q:"If q² = 0.04 in a Hardy-Weinberg population, what is the carrier frequency (2pq)?",o:["0.04","0.32","0.20","0.64"],a:1,e:"q² = 0.04 → q = 0.2 → p = 0.8 → 2pq = 2(0.8)(0.2) = 0.32."},
+{q:"If q² = 0.04 in a Hardy-Weinberg population, what is the carrier frequency (2pq)?",o:["0.04","0.32","0.20","0.64"],a:1,e:"q² = 0.04 <span aria-hidden="true">→</span> q = 0.2 <span aria-hidden="true">→</span> p = 0.8 <span aria-hidden="true">→</span> 2pq = 2(0.8)(0.2) = 0.32."},
 {q:"In gel electrophoresis, which fragments travel farthest?",o:["The largest","The most positively charged","The smallest","It depends on the voltage only"],a:2,e:"Smaller DNA fragments move faster and farther through the gel matrix."},
 {q:"What does CRISPR-Cas9 use to find its target in the genome?",o:["A restriction enzyme","A guide RNA","A DNA primer","A transposon"],a:1,e:"A guide RNA (gRNA) is complementary to the target sequence and directs Cas9 to cut at that exact spot."},
 {q:"Chargaff's rules state that in double-stranded DNA:",o:["%A = %G","%A = %T and %G = %C","%A = %C","%G = %T"],a:1,e:"A always pairs with T, and G always pairs with C, so their percentages must be equal in double-stranded DNA."},
@@ -861,7 +892,7 @@ const Q=[
 
 function buildQuiz(){const c=document.getElementById('quiz-container');c.innerHTML='';Q.forEach((q,i)=>{const d=document.createElement('div');d.className='quiz-q';d.id='qq'+i;d.innerHTML=`<div class="q-num">Question ${i+1}</div><p class="q-text">${q.q}</p><ul class="quiz-opts">${q.o.map((o,j)=>`<li><label id="ql${i}-${j}"><input type="radio" name="q${i}" value="${j}"> ${o}</label></li>`).join('')}</ul><div class="quiz-fb" id="qf${i}"></div>`;c.appendChild(d)})}
 
-function checkQuiz(){let s=0;Q.forEach((q,i)=>{const sel=document.querySelector(`input[name="q${i}"]:checked`);const fb=document.getElementById('qf'+i);q.o.forEach((_,j)=>document.getElementById(`ql${i}-${j}`).className='');if(sel){const v=+sel.value;if(v===q.a){s++;document.getElementById(`ql${i}-${v}`).className='correct';fb.className='quiz-fb show ok';fb.textContent='✓ '+q.e}else{document.getElementById(`ql${i}-${v}`).className='wrong';document.getElementById(`ql${i}-${q.a}`).className='show-right';fb.className='quiz-fb show nope';fb.textContent='✗ '+q.e}}else{document.getElementById(`ql${i}-${q.a}`).className='show-right';fb.className='quiz-fb show nope';fb.textContent='No answer selected. '+q.e}});const sc=document.getElementById('quiz-score');const pct=Math.round(s/Q.length*100);document.getElementById('score-num').textContent=s+' / '+Q.length;document.getElementById('score-msg').textContent=pct+'% — '+(pct>=90?'Outstanding!':pct>=70?'Great work!':pct>=50?'Good start. Review the sections above.':'Keep studying and try again!');sc.style.display='block';sc.scrollIntoView({behavior:'smooth',block:'center'})}
+function checkQuiz(){let s=0;Q.forEach((q,i)=>{const sel=document.querySelector(`input[name="q${i}"]:checked`);const fb=document.getElementById('qf'+i);q.o.forEach((_,j)=>document.getElementById(`ql${i}-${j}`).className='');if(sel){const v=+sel.value;if(v===q.a){s++;document.getElementById(`ql${i}-${v}`).className='correct';fb.className='quiz-fb show ok';fb.textContent='<span aria-hidden="true">✓</span> '+q.e}else{document.getElementById(`ql${i}-${v}`).className='wrong';document.getElementById(`ql${i}-${q.a}`).className='show-right';fb.className='quiz-fb show nope';fb.textContent='<span aria-hidden="true">✗</span> '+q.e}}else{document.getElementById(`ql${i}-${q.a}`).className='show-right';fb.className='quiz-fb show nope';fb.textContent='No answer selected. '+q.e}});const sc=document.getElementById('quiz-score');const pct=Math.round(s/Q.length*100);document.getElementById('score-num').textContent=s+' / '+Q.length;document.getElementById('score-msg').textContent=pct+'% — '+(pct>=90?'Outstanding!':pct>=70?'Great work!':pct>=50?'Good start. Review the sections above.':'Keep studying and try again!');sc.style.display='block';sc.scrollIntoView({behavior:'smooth',block:'center'})}
 
 function resetQuiz(){Q.forEach((q,i)=>{document.querySelectorAll(`input[name="q${i}"]`).forEach(r=>r.checked=false);q.o.forEach((_,j)=>document.getElementById(`ql${i}-${j}`).className='');const fb=document.getElementById('qf'+i);fb.className='quiz-fb'});document.getElementById('quiz-score').style.display='none';document.getElementById('quiz-container').scrollIntoView({behavior:'smooth'})}
 
@@ -882,14 +913,14 @@ const FC=[
 {f:"Base pairing rules?",b:"A pairs with T (2 H-bonds). G pairs with C (3 H-bonds). Purines pair with pyrimidines.",c:"DNA"},
 {f:"What is semiconservative replication?",b:"Each new DNA double helix has one old strand and one new strand.",c:"DNA"},
 {f:"What does DNA ligase do?",b:"Glues Okazaki fragments together on the lagging strand.",c:"DNA"},
-{f:"What is the Central Dogma?",b:"DNA → RNA → Protein. Transcription makes RNA; translation makes protein.",c:"Gene Expression"},
+{f:"What is the Central Dogma?",b:"DNA <span aria-hidden="true">→</span> RNA <span aria-hidden="true">→</span> Protein. Transcription makes RNA; translation makes protein.",c:"Gene Expression"},
 {f:"What are the stop codons?",b:"UAA, UAG, UGA. They signal the ribosome to release the finished protein.",c:"Gene Expression"},
 {f:"What is alternative splicing?",b:"Different exon combinations from the same gene produce different proteins, increasing diversity.",c:"Gene Expression"},
-{f:"How does the lac operon turn ON?",b:"Lactose removes the repressor from the operator. Maximum expression also needs glucose to be absent (high cAMP → CAP activation).",c:"Regulation"},
+{f:"How does the lac operon turn ON?",b:"Lactose removes the repressor from the operator. Maximum expression also needs glucose to be absent (high cAMP <span aria-hidden="true">→</span> CAP activation).",c:"Regulation"},
 {f:"What is a frameshift mutation?",b:"An insertion or deletion (not a multiple of 3) that shifts the reading frame, scrambling all downstream codons.",c:"Mutation"},
 {f:"What is nucleotide excision repair?",b:"Removes bulky DNA damage like thymine dimers. Defective in xeroderma pigmentosum.",c:"Mutation"},
 {f:"What is nondisjunction?",b:"Failure of chromosomes to separate in meiosis, causing aneuploidy (e.g., trisomy 21 = Down syndrome).",c:"Chromosomes"},
-{f:"What is PCR?",b:"Denature → Anneal → Extend. Uses Taq polymerase (heat-stable) to copy a DNA target. 2ⁿ copies after n cycles.",c:"Biotech"},
+{f:"What is PCR?",b:"Denature <span aria-hidden="true">→</span> Anneal <span aria-hidden="true">→</span> Extend. Uses Taq polymerase (heat-stable) to copy a DNA target. 2ⁿ copies after n cycles.",c:"Biotech"},
 {f:"How does CRISPR-Cas9 work?",b:"A guide RNA leads Cas9 to a target DNA sequence, where it makes a double-strand break for gene editing.",c:"Biotech"},
 {f:"SNoW DRoP?",b:"Southern = DNA, Northern = RNA, Western = Protein.",c:"Biotech"},
 {f:"Hardy-Weinberg equations?",b:"p + q = 1 (alleles). p² + 2pq + q² = 1 (genotypes). Start from q² (recessive phenotype frequency).",c:"Pop Genetics"},
@@ -907,7 +938,7 @@ document.addEventListener('DOMContentLoaded',()=>{buildQuiz();buildFilters();bui
 </script>
 
   <div style="max-width: 800px; margin: 40px auto; padding: 20px 30px; background: #fff8e1; border-left: 4px solid #f9a825; border-radius: 8px; font-size: 14px; line-height: 1.6; color: #555;">
-  <div style="font-weight: bold; font-size: 15px; margin-bottom: 10px;">⚠️ Important Notice</div>
+  <div style="font-weight: bold; font-size: 15px; margin-bottom: 10px;"><span aria-hidden="true">⚠️</span> Important Notice</div>
   <p style="margin: 0 0 10px 0;">These study resources are provided free of charge for educational purposes only. They are intended as supplemental study aids and should not be used as a substitute for your course textbooks, lecture materials, or the guidance of your instructors.</p>
   <p style="margin: 0 0 10px 0;">While every effort has been made to ensure accuracy, this content may contain errors, omissions, or information that is out of date. Science is constantly evolving, and material that was accurate at the time of writing may no longer reflect current understanding. Always verify important facts, formulas, and concepts against your official course materials.</p>
   <p style="margin: 0 0 10px 0;">No guarantees are made regarding the completeness, accuracy, or reliability of any information presented on these sites. Use at your own discretion. If you spot an error, we appreciate you letting us know so it can be corrected.</p>
