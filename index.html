@@ -37,13 +37,14 @@
       overflow: hidden;
     }
     .hero::after {
-      content: '<span aria-hidden="true">🧬</span>';
+      content: '🧬';
       position: absolute;
       font-size: 12rem;
       opacity: 0.06;
       top: -1.5rem;
       right: -1rem;
       pointer-events: none;
+      aria-hidden: true;
     }
     .hero h1 {
       font-family: 'Fraunces', serif;
@@ -141,6 +142,50 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       margin-bottom: 0.2rem;
+    }
+
+    /* ---- WORKED EXAMPLE BOX ---- */
+    .worked-example {
+      background: #f0f4ff;
+      border: 1px solid #b8c8f0;
+      border-left: 4px solid var(--blue);
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+      font-size: 0.93rem;
+      line-height: 1.8;
+    }
+    .worked-example .we-label {
+      font-weight: 700;
+      color: var(--blue);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+    }
+    .worked-example .we-problem {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px dashed #b8c8f0;
+    }
+    .worked-example .we-step {
+      margin: 0.35rem 0;
+    }
+    .worked-example .we-step-num {
+      font-weight: 700;
+      color: var(--blue);
+    }
+    .worked-example .we-answer {
+      margin-top: 0.6rem;
+      padding: 0.4rem 0.75rem;
+      background: #dce9ff;
+      border-radius: 4px;
+      font-weight: 600;
+      color: #1e3a6e;
     }
 
     .key-point {
@@ -345,41 +390,53 @@
     .fc-back .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; margin-bottom: 0.6rem; }
     .fc-back .answer { font-size: 0.95rem; line-height: 1.65; }
 
-    .footer { text-align: center; padding: 2rem 1rem; color: var(--text-soft); font-size: 0.82rem; border-top: 1px solid var(--border); margin-top: 2rem; }
-  
-/* ─── WCAG 2.1 AA: Visible focus indicators ─── */
-:focus-visible {
-  outline: 3px solid #005fcc !important;
-  outline-offset: 2px !important;
-}
-.tab-btn:focus-visible, .nav-btn:focus-visible {
-  outline: 3px solid #005fcc !important;
-  outline-offset: 2px !important;
-}
-/* ─── Skip link ─── */
-.skip-link {
-  position: absolute;
-  top: -100px;
-  left: 1rem;
-  background: #005fcc;
-  color: #fff;
-  padding: 0.6rem 1.2rem;
-  border-radius: 0 0 6px 6px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  text-decoration: none;
-  z-index: 9999;
-  transition: top 0.2s;
-}
-.skip-link:focus {
-  top: 0;
-}
+    /* ---- ADA: sr-only ---- */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
 
-</style>
+    /* ---- WCAG 2.1 AA: Visible focus indicators ---- */
+    :focus-visible {
+      outline: 3px solid #005fcc !important;
+      outline-offset: 2px !important;
+    }
+    .tab-btn:focus-visible, .nav-btn:focus-visible {
+      outline: 3px solid #005fcc !important;
+      outline-offset: 2px !important;
+    }
+    /* ---- Skip link ---- */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 1rem;
+      background: #005fcc;
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border-radius: 0 0 6px 6px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      z-index: 9999;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+
+    .footer { text-align: center; padding: 2rem 1rem; color: var(--text-soft); font-size: 0.82rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+  </style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
+<!-- Live announce region for screen readers -->
+<div id="live-announce" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
 <div class="hero">
   <h1>Genetics Made Simple</h1>
@@ -395,7 +452,7 @@
   <!-- ============================================ -->
   <!-- SECTION 1: What Is a Gene? -->
   <!-- ============================================ -->
-  <div class="section" id="s1">
+  <section class="section" id="s1">
     <div class="section-tag">Section 01</div>
     <div class="section-title">What Is a Gene?</div>
     <p class="section-subtitle">The basic vocabulary you need before anything else makes sense.</p>
@@ -429,13 +486,22 @@
         <dt>Recessive</dt>
         <dd>Only shows up when you have two copies (bb)</dd>
       </dl>
+
+      <div class="worked-example">
+        <div class="we-label">&#128221; Worked Example</div>
+        <div class="we-problem">A student is told: "Your genotype for tongue-rolling is Tt." What does this mean? What is the phenotype?</div>
+        <div class="we-step"><span class="we-step-num">Step 1 &mdash;</span> Identify what the letters mean. T = dominant allele (can roll tongue). t = recessive allele (cannot roll).</div>
+        <div class="we-step"><span class="we-step-num">Step 2 &mdash;</span> Tt means heterozygous: one dominant allele, one recessive allele.</div>
+        <div class="we-step"><span class="we-step-num">Step 3 &mdash;</span> Because T is dominant, one copy of T is enough for the trait to show.</div>
+        <div class="we-answer">&#10003; Answer: The genotype is Tt (heterozygous). The phenotype is tongue-roller, because dominant alleles mask recessive ones.</div>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- ============================================ -->
   <!-- SECTION 2: Mendel's Laws -->
   <!-- ============================================ -->
-  <div class="section" id="s2">
+  <section class="section" id="s2">
     <div class="section-tag">Section 02</div>
     <div class="section-title">Mendel's Laws</div>
     <p class="section-subtitle">Two rules that predict how traits are passed from parents to offspring.</p>
@@ -463,8 +529,9 @@
       <p>The easiest way to predict offspring is a <strong>Punnett square</strong>. Here are the two crosses you will see over and over:</p>
 
       <p><strong>Monohybrid cross</strong> (one gene, both parents Aa):</p>
-      <table class="simple-table">
-        <tr><th></th><th>A</th><th>a</th></tr>
+      <table class="simple-table" aria-label="Monohybrid Punnett square">
+        <caption class="sr-only">Monohybrid cross Punnett square: Aa x Aa</caption>
+        <tr><th scope="col"></th><th scope="col">A</th><th scope="col">a</th></tr>
         <tr><td><strong>A</strong></td><td>AA</td><td>Aa</td></tr>
         <tr><td><strong>a</strong></td><td>Aa</td><td>aa</td></tr>
       </table>
@@ -477,13 +544,31 @@
         <div class="label">Key Point</div>
         A <strong>testcross</strong> is when you cross a dominant-phenotype individual with a homozygous recessive (aa) to figure out whether the dominant individual is AA or Aa. If any recessive offspring appear, the parent must be Aa.
       </div>
+
+      <div class="worked-example">
+        <div class="we-label">&#128221; Worked Example &mdash; Monohybrid Cross</div>
+        <div class="we-problem">Two brown-eyed parents (both Bb) have children together. What fraction of their children will have blue eyes (bb)?</div>
+        <div class="we-step"><span class="we-step-num">Step 1 &mdash;</span> Set up the Punnett square. Each parent is Bb, so their gametes are B or b.</div>
+        <div class="we-step"><span class="we-step-num">Step 2 &mdash;</span> Fill in the four boxes: BB, Bb, Bb, bb.</div>
+        <div class="we-step"><span class="we-step-num">Step 3 &mdash;</span> Count phenotypes: 3 have at least one B (brown eyes), 1 is bb (blue eyes).</div>
+        <div class="we-answer">&#10003; Answer: 1/4 (25%) of their children are expected to have blue eyes.</div>
+      </div>
+
+      <div class="worked-example">
+        <div class="we-label">&#128221; Worked Example &mdash; Testcross</div>
+        <div class="we-problem">You have a brown dog (B_). You don't know if it's BB or Bb. You cross it with a white dog (bb) and get 8 puppies: 4 brown, 4 white. Is the brown dog BB or Bb?</div>
+        <div class="we-step"><span class="we-step-num">Step 1 &mdash;</span> If the brown dog were BB, all offspring would be Bb (brown). You'd get 0 white pups.</div>
+        <div class="we-step"><span class="we-step-num">Step 2 &mdash;</span> If the brown dog were Bb, offspring would be Bb or bb. You'd expect 50% brown, 50% white.</div>
+        <div class="we-step"><span class="we-step-num">Step 3 &mdash;</span> You got 4 brown and 4 white &mdash; that 50/50 split matches the Bb prediction.</div>
+        <div class="we-answer">&#10003; Answer: The brown dog is Bb (heterozygous). The white offspring prove it carries a recessive allele.</div>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- ============================================ -->
   <!-- SECTION 3: Beyond Simple Dominance -->
   <!-- ============================================ -->
-  <div class="section" id="s3">
+  <section class="section" id="s3">
     <div class="section-tag">Section 03</div>
     <div class="section-title">Beyond Simple Dominance</div>
     <p class="section-subtitle">Not every trait follows the neat dominant/recessive pattern.</p>
@@ -494,7 +579,7 @@
         <p>The heterozygote is a <strong>blend</strong> of the two homozygotes.</p>
         <div class="example-box">
           <div class="label">Example</div>
-          Red flower (RR) × White flower (R'R') = <strong>Pink</strong> flower (RR'). The F2 ratio becomes 1 red : 2 pink : 1 white instead of 3:1.
+          Red flower (RR) &times; White flower (R'R') = <strong>Pink</strong> flower (RR'). The F2 ratio becomes 1 red : 2 pink : 1 white instead of 3:1.
         </div>
       </div>
       <div class="card">
@@ -511,12 +596,22 @@
       <h3>ABO Blood Types (Multiple Alleles)</h3>
       <p>Three alleles exist in the population (I<sup>A</sup>, I<sup>B</sup>, and i), but each person only carries two. I<sup>A</sup> and I<sup>B</sup> are codominant with each other and both are dominant over i.</p>
       <table class="simple-table">
-        <tr><th>Genotype</th><th>Blood Type</th><th>Antigens on Cells</th><th>Antibodies in Blood</th></tr>
+        <caption class="sr-only">ABO blood type genotypes and corresponding phenotypes, antigens, and antibodies</caption>
+        <tr><th scope="col">Genotype</th><th scope="col">Blood Type</th><th scope="col">Antigens on Cells</th><th scope="col">Antibodies in Blood</th></tr>
         <tr><td>I<sup>A</sup>I<sup>A</sup> or I<sup>A</sup>i</td><td>A</td><td>A</td><td>Anti-B</td></tr>
         <tr><td>I<sup>B</sup>I<sup>B</sup> or I<sup>B</sup>i</td><td>B</td><td>B</td><td>Anti-A</td></tr>
         <tr><td>I<sup>A</sup>I<sup>B</sup></td><td>AB</td><td>A and B</td><td>Neither</td></tr>
         <tr><td>ii</td><td>O</td><td>Neither</td><td>Anti-A and Anti-B</td></tr>
       </table>
+
+      <div class="worked-example">
+        <div class="we-label">&#128221; Worked Example &mdash; Blood Types</div>
+        <div class="we-problem">A mother has blood type A (I<sup>A</sup>i) and a father has blood type B (I<sup>B</sup>i). What blood types can their children have?</div>
+        <div class="we-step"><span class="we-step-num">Step 1 &mdash;</span> List each parent's gametes. Mom makes I<sup>A</sup> or i. Dad makes I<sup>B</sup> or i.</div>
+        <div class="we-step"><span class="we-step-num">Step 2 &mdash;</span> Fill in the Punnett square: I<sup>A</sup>I<sup>B</sup>, I<sup>A</sup>i, I<sup>B</sup>i, ii.</div>
+        <div class="we-step"><span class="we-step-num">Step 3 &mdash;</span> Read off blood types: AB (I<sup>A</sup>I<sup>B</sup>), A (I<sup>A</sup>i), B (I<sup>B</sup>i), O (ii).</div>
+        <div class="we-answer">&#10003; Answer: Children can be blood type A, B, AB, or O &mdash; all four types are possible from this cross.</div>
+      </div>
     </div>
 
     <div class="grid-2">
@@ -534,12 +629,12 @@
         <p><strong>Polygenic</strong>: many genes affect one trait, creating a smooth bell curve. Height and skin color are classic examples.</p>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- ============================================ -->
   <!-- SECTION 4: Chromosomes & Sex Linkage -->
   <!-- ============================================ -->
-  <div class="section" id="s4">
+  <section class="section" id="s4">
     <div class="section-tag">Section 04</div>
     <div class="section-title">Chromosomes &amp; Sex Linkage</div>
     <p class="section-subtitle">Why some traits are more common in one sex, and how genes that sit close together on the same chromosome get inherited as a package.</p>
@@ -561,6 +656,15 @@
         <div class="label">Key Point</div>
         <strong>X-inactivation</strong>: In every cell of a female mammal, one X chromosome is randomly shut off (forming a Barr body). This is why calico cats have patches of orange and black fur; different cells inactivated different X chromosomes.
       </div>
+
+      <div class="worked-example">
+        <div class="we-label">&#128221; Worked Example &mdash; X-Linked Trait</div>
+        <div class="we-problem">Color blindness is X-linked recessive. A woman who is a carrier (X<sup>C</sup>X<sup>c</sup>) has children with a man who has normal vision (X<sup>C</sup>Y). What is the probability of having a color-blind son?</div>
+        <div class="we-step"><span class="we-step-num">Step 1 &mdash;</span> List gametes. Mom makes X<sup>C</sup> or X<sup>c</sup>. Dad makes X<sup>C</sup> or Y.</div>
+        <div class="we-step"><span class="we-step-num">Step 2 &mdash;</span> Fill Punnett square: X<sup>C</sup>X<sup>C</sup> (normal daughter), X<sup>C</sup>X<sup>c</sup> (carrier daughter), X<sup>C</sup>Y (normal son), X<sup>c</sup>Y (color-blind son).</div>
+        <div class="we-step"><span class="we-step-num">Step 3 &mdash;</span> One out of four total offspring is a color-blind son (X<sup>c</sup>Y).</div>
+        <div class="we-answer">&#10003; Answer: 1/4 (25%) probability of a color-blind son. But among sons only, it's 50%.</div>
+      </div>
     </div>
 
     <div class="card">
@@ -572,12 +676,12 @@
         <strong>1% recombination = 1 centiMorgan (cM) = 1 map unit.</strong> The farther apart two genes are on a chromosome, the more often crossing over happens between them. Maximum recombination = 50%.
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- ============================================ -->
   <!-- SECTION 5: DNA Structure & Replication -->
   <!-- ============================================ -->
-  <div class="section" id="s5">
+  <section class="section" id="s5">
     <div class="section-tag">Section 05</div>
     <div class="section-title">DNA Structure &amp; Replication</div>
     <p class="section-subtitle">What DNA looks like and how it copies itself.</p>
@@ -592,44 +696,54 @@
         <div class="label">Memory Trick</div>
         <strong>Purines</strong> (A, G) have two rings. <strong>Pyrimidines</strong> (C, T, U) have one ring. A purine always pairs with a pyrimidine.
       </div>
+
+      <div class="worked-example">
+        <div class="we-label">&#128221; Worked Example &mdash; Complementary Strands</div>
+        <div class="we-problem">One strand of DNA reads: 5'-ATCGGT-3'. What is the sequence of the complementary strand?</div>
+        <div class="we-step"><span class="we-step-num">Step 1 &mdash;</span> Apply base-pairing rules: A&harr;T, T&harr;A, C&harr;G, G&harr;C.</div>
+        <div class="we-step"><span class="we-step-num">Step 2 &mdash;</span> Write the complementary bases: A&#8594;T, T&#8594;A, C&#8594;G, G&#8594;C, G&#8594;C, T&#8594;A = TAGCCA.</div>
+        <div class="we-step"><span class="we-step-num">Step 3 &mdash;</span> Remember the strands are antiparallel, so the complement runs 3'&#8594;5' when the original is 5'&#8594;3'. Written 5'&#8594;3', the complement reads: ACCGAT.</div>
+        <div class="we-answer">&#10003; Answer: The complementary strand is 3'-TAGCCA-5' (or written conventionally 5'-ACCGAT-3').</div>
+      </div>
     </div>
 
     <div class="card">
       <h3>How DNA Copies Itself</h3>
       <p>Replication is <strong>semiconservative</strong>: each new double helix contains one old strand and one brand-new strand (shown by the Meselson-Stahl experiment).</p>
-      <p>New DNA is always built in the <span class="formula-inline">5' <span aria-hidden="true">→</span> 3'</span> direction. This creates an asymmetry:</p>
+      <p>New DNA is always built in the <span class="formula-inline">5' &rarr; 3'</span> direction. This creates an asymmetry:</p>
       <p style="margin-left:1rem"><strong>Leading strand</strong>: built continuously toward the replication fork.<br>
       <strong>Lagging strand</strong>: built in short pieces called <strong>Okazaki fragments</strong>, which are later glued together.</p>
 
       <table class="simple-table">
-        <tr><th>Enzyme</th><th>What It Does</th></tr>
+        <caption class="sr-only">DNA replication enzymes and their functions</caption>
+        <tr><th scope="col">Enzyme</th><th scope="col">What It Does</th></tr>
         <tr><td>Helicase</td><td>Unzips the double helix</td></tr>
         <tr><td>Primase</td><td>Lays down a short RNA starter (primer)</td></tr>
-        <tr><td>DNA Pol III</td><td>Builds the new strand, 5'<span aria-hidden="true">→</span>3', also proofreads</td></tr>
+        <tr><td>DNA Pol III</td><td>Builds the new strand, 5'&rarr;3', also proofreads</td></tr>
         <tr><td>DNA Pol I</td><td>Replaces RNA primers with DNA</td></tr>
         <tr><td>Ligase</td><td>Glues Okazaki fragments together</td></tr>
         <tr><td>Telomerase</td><td>Extends chromosome tips (telomeres) so they don't shrink</td></tr>
       </table>
     </div>
-  </div>
+  </section>
 
   <!-- ============================================ -->
   <!-- SECTION 6: Gene Expression -->
   <!-- ============================================ -->
-  <div class="section" id="s6">
+  <section class="section" id="s6">
     <div class="section-tag">Section 06</div>
     <div class="section-title">From Gene to Protein</div>
     <p class="section-subtitle">How the information in DNA becomes a working protein, in two major steps.</p>
 
     <div class="card">
       <h3>The Central Dogma</h3>
-      <p style="text-align:center; font-family:'JetBrains Mono',monospace; font-size:1rem; color:var(--green-dark); margin:0.5rem 0;">DNA <span aria-hidden="true">→</span> <em>transcription</em> <span aria-hidden="true">→</span> mRNA <span aria-hidden="true">→</span> <em>translation</em> <span aria-hidden="true">→</span> Protein</p>
+      <p style="text-align:center; font-family:'JetBrains Mono',monospace; font-size:1rem; color:var(--green-dark); margin:0.5rem 0;">DNA <span aria-hidden="true">&rarr;</span> <em>transcription</em> <span aria-hidden="true">&rarr;</span> mRNA <span aria-hidden="true">&rarr;</span> <em>translation</em> <span aria-hidden="true">&rarr;</span> Protein</p>
       <p>Information flows from DNA to RNA to protein. The first step (making an RNA copy) is <strong>transcription</strong>. The second step (reading the RNA to build a protein) is <strong>translation</strong>.</p>
     </div>
 
     <div class="card">
-      <h3>Step 1: Transcription (DNA <span aria-hidden="true">→</span> mRNA)</h3>
-      <p>RNA polymerase reads one strand of the DNA (the <strong>template strand</strong>, read 3'<span aria-hidden="true">→</span>5') and builds a messenger RNA (mRNA) copy in the <span class="formula-inline">5' <span aria-hidden="true">→</span> 3'</span> direction. In eukaryotes, this happens in the <strong>nucleus</strong>.</p>
+      <h3>Step 1: Transcription (DNA &rarr; mRNA)</h3>
+      <p>RNA polymerase reads one strand of the DNA (the <strong>template strand</strong>, read 3'&rarr;5') and builds a messenger RNA (mRNA) copy in the <span class="formula-inline">5' &rarr; 3'</span> direction. In eukaryotes, this happens in the <strong>nucleus</strong>.</p>
       <p>Before the mRNA leaves the nucleus, it gets three modifications:</p>
       <p style="margin-left:1rem">1. A <strong>5' cap</strong> (protects it, helps ribosomes find it)<br>
       2. A <strong>poly-A tail</strong> on the 3' end (protects from degradation)<br>
@@ -641,7 +755,7 @@
     </div>
 
     <div class="card">
-      <h3>Step 2: Translation (mRNA <span aria-hidden="true">→</span> Protein)</h3>
+      <h3>Step 2: Translation (mRNA &rarr; Protein)</h3>
       <p>Ribosomes read the mRNA three letters at a time. Each group of three (a <strong>codon</strong>) specifies one amino acid. Transfer RNA (tRNA) molecules deliver the right amino acid by matching their <strong>anticodon</strong> to the mRNA codon.</p>
       <p><strong>Key numbers:</strong> <span class="formula-inline">64 codons</span> code for <span class="formula-inline">20 amino acids</span> (the code is redundant).</p>
       <p><strong>Start codon:</strong> <span class="formula-inline">AUG</span> (methionine) sets the reading frame.</p>
@@ -650,13 +764,22 @@
         <div class="label">Example</div>
         The mRNA sequence AUG-GCA-UAA would be read as: start (Met) - Ala - STOP. The protein would be just two amino acids long.
       </div>
+
+      <div class="worked-example">
+        <div class="we-label">&#128221; Worked Example &mdash; Transcription &amp; Translation</div>
+        <div class="we-problem">A DNA template strand reads: 3'-TAC-CGT-ATT-ACT-5'. What is the mRNA sequence? What amino acids does it code for? (Use: CGU = Arg, AUG = Met/Start, UAA = Stop, GCA = Ala; for AUG the first is START)</div>
+        <div class="we-step"><span class="we-step-num">Step 1 &mdash;</span> Transcribe DNA to mRNA. RNA polymerase reads 3'&#8594;5' and builds 5'&#8594;3'. Complement each base, replacing T with U: TAC&#8594;AUG, CGT&#8594;GCA, ATT&#8594;UAA, ACT&#8594;UGA.</div>
+        <div class="we-step"><span class="we-step-num">Step 2 &mdash;</span> Read the mRNA codons: AUG = Start / Met, GCA = Ala, UAA = STOP.</div>
+        <div class="we-step"><span class="we-step-num">Step 3 &mdash;</span> UGA at the end is another stop codon &mdash; but UAA comes first and halts translation.</div>
+        <div class="we-answer">&#10003; Answer: mRNA = 5'-AUG-GCA-UAA-UGA-3'. The resulting protein is Met-Ala (two amino acids), then translation stops at UAA.</div>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- ============================================ -->
   <!-- SECTION 7: Gene Regulation -->
   <!-- ============================================ -->
-  <div class="section" id="s7">
+  <section class="section" id="s7">
     <div class="section-tag">Section 07</div>
     <div class="section-title">Gene Regulation</div>
     <p class="section-subtitle">Cells don't use every gene all the time. Here's how they turn genes on and off.</p>
@@ -666,13 +789,22 @@
       <p>Bacteria group related genes together under one on/off switch called an <strong>operon</strong>. The two you need to know:</p>
 
       <p style="margin-top:0.75rem"><strong>lac operon</strong> (inducible, for digesting lactose):</p>
-      <p style="margin-left:1rem">No lactose <span aria-hidden="true">→</span> repressor blocks transcription (OFF)<br>
-      Lactose present <span aria-hidden="true">→</span> lactose removes the repressor (ON)<br>
+      <p style="margin-left:1rem">No lactose &rarr; repressor blocks transcription (OFF)<br>
+      Lactose present &rarr; lactose removes the repressor (ON)<br>
       For <em>maximum</em> expression, glucose must also be absent (high cAMP activates CAP protein, which boosts transcription).</p>
 
       <p style="margin-top:0.75rem"><strong>trp operon</strong> (repressible, for making tryptophan):</p>
-      <p style="margin-left:1rem">No tryptophan <span aria-hidden="true">→</span> operon is ON (cell needs to make it)<br>
-      Tryptophan abundant <span aria-hidden="true">→</span> tryptophan activates the repressor, which shuts things down (OFF). Why make it if you already have it?</p>
+      <p style="margin-left:1rem">No tryptophan &rarr; operon is ON (cell needs to make it)<br>
+      Tryptophan abundant &rarr; tryptophan activates the repressor, which shuts things down (OFF). Why make it if you already have it?</p>
+
+      <div class="worked-example">
+        <div class="we-label">&#128221; Worked Example &mdash; lac Operon</div>
+        <div class="we-problem">A bacterium is placed in a medium containing BOTH glucose and lactose. Is the lac operon ON, OFF, or only partly on?</div>
+        <div class="we-step"><span class="we-step-num">Step 1 &mdash;</span> Check the repressor status. Lactose is present, so the allolactose derivative removes the repressor from the operator. The operon CAN be transcribed.</div>
+        <div class="we-step"><span class="we-step-num">Step 2 &mdash;</span> Check catabolite activation. Glucose is present, so cAMP levels are LOW. CAP protein is NOT activated. The operon runs at a low, baseline level.</div>
+        <div class="we-step"><span class="we-step-num">Step 3 &mdash;</span> The bacterium prefers glucose (easier energy). When glucose is available it keeps cAMP low to discourage use of lactose genes.</div>
+        <div class="we-answer">&#10003; Answer: The lac operon is partially on (repressor is removed) but NOT at maximum, because glucose is present and CAP is not activated. Full expression requires lactose present AND glucose absent.</div>
+      </div>
     </div>
 
     <div class="card">
@@ -685,12 +817,12 @@
         <strong>After translation</strong>: Proteins can be modified, activated, or tagged for destruction.
       </p>
     </div>
-  </div>
+  </section>
 
   <!-- ============================================ -->
   <!-- SECTION 8: Mutations -->
   <!-- ============================================ -->
-  <div class="section" id="s8">
+  <section class="section" id="s8">
     <div class="section-tag">Section 08</div>
     <div class="section-title">Mutations &amp; DNA Repair</div>
     <p class="section-subtitle">What happens when the DNA instructions get a typo.</p>
@@ -698,11 +830,21 @@
     <div class="card">
       <h3>Point Mutations (Single Base Changes)</h3>
       <table class="simple-table">
-        <tr><th>Type</th><th>What Happens</th><th>Effect</th></tr>
+        <caption class="sr-only">Types of point mutations, what happens, and the effect on the protein</caption>
+        <tr><th scope="col">Type</th><th scope="col">What Happens</th><th scope="col">Effect</th></tr>
         <tr><td>Silent</td><td>Base changes but the amino acid stays the same</td><td>None (thanks to code redundancy)</td></tr>
         <tr><td>Missense</td><td>Base changes, different amino acid inserted</td><td>May or may not affect protein function</td></tr>
         <tr><td>Nonsense</td><td>Base change creates a premature STOP codon</td><td>Truncated protein, usually broken</td></tr>
       </table>
+
+      <div class="worked-example">
+        <div class="we-label">&#128221; Worked Example &mdash; Point Mutations</div>
+        <div class="we-problem">An mRNA codon changes from GAA (Glutamate) to GAG. What type of mutation is this? What happens to the protein?</div>
+        <div class="we-step"><span class="we-step-num">Step 1 &mdash;</span> Identify the change. Only the third base changed: A &rarr; G.</div>
+        <div class="we-step"><span class="we-step-num">Step 2 &mdash;</span> Look up both codons. GAA = Glutamate. GAG = also Glutamate. (The genetic code is redundant; multiple codons can specify the same amino acid.)</div>
+        <div class="we-step"><span class="we-step-num">Step 3 &mdash;</span> The amino acid did NOT change, so the protein is unaffected.</div>
+        <div class="we-answer">&#10003; Answer: This is a silent mutation. The DNA changed but the protein is identical. This is common with third-position changes (the "wobble" position).</div>
+      </div>
     </div>
 
     <div class="card">
@@ -712,6 +854,15 @@
         <div class="label">Example</div>
         Original: <span class="formula-inline">AUG-GCA-UUC-...</span><br>
         Delete one "G": <span class="formula-inline">AUG-CAU-UC...</span> Everything after the deletion is misread.
+      </div>
+
+      <div class="worked-example">
+        <div class="we-label">&#128221; Worked Example &mdash; Frameshift</div>
+        <div class="we-problem">Original mRNA: AUG-GCA-UUC-GAA. One nucleotide (C) is deleted from codon 2, giving: AUG-GAU-UCG-AA... What happens?</div>
+        <div class="we-step"><span class="we-step-num">Step 1 &mdash;</span> Original reading: AUG (Met) - GCA (Ala) - UUC (Phe) - GAA (Glu).</div>
+        <div class="we-step"><span class="we-step-num">Step 2 &mdash;</span> After deleting C from position 4: AUG-GAU-UCG-AA... New reading: AUG (Met) - GAU (Asp) - UCG (Ser) - and then everything downstream continues to be misread.</div>
+        <div class="we-step"><span class="we-step-num">Step 3 &mdash;</span> Only the first codon (Met) is correct. All subsequent amino acids are wrong, and a premature stop codon often appears by chance.</div>
+        <div class="we-answer">&#10003; Answer: The protein is almost certainly nonfunctional. Frameshifts are the most disruptive mutations because they scramble the entire message downstream.</div>
       </div>
     </div>
 
@@ -725,12 +876,12 @@
         <strong>Base excision repair</strong>: Fixes individual damaged bases.
       </p>
     </div>
-  </div>
+  </section>
 
   <!-- ============================================ -->
-  <!-- SECTION 9: Chromosome Changes & Biotech -->
+  <!-- SECTION 9: Chromosome Changes -->
   <!-- ============================================ -->
-  <div class="section" id="s9">
+  <section class="section" id="s9">
     <div class="section-tag">Section 09</div>
     <div class="section-title">Chromosome Changes</div>
     <p class="section-subtitle">What happens when whole chromosomes (or large pieces) go wrong.</p>
@@ -739,7 +890,8 @@
       <h3>Aneuploidy</h3>
       <p>When chromosomes fail to separate properly during meiosis (<strong>nondisjunction</strong>), you end up with cells that have too many or too few chromosomes.</p>
       <table class="simple-table">
-        <tr><th>Condition</th><th>What Happened</th><th>Notes</th></tr>
+        <caption class="sr-only">Common aneuploidies, their chromosomal basis, and clinical notes</caption>
+        <tr><th scope="col">Condition</th><th scope="col">What Happened</th><th scope="col">Notes</th></tr>
         <tr><td>Down syndrome</td><td>Trisomy 21 (extra chr. 21)</td><td>Most common autosomal trisomy</td></tr>
         <tr><td>Turner syndrome</td><td>45, XO (missing an X)</td><td>Only viable human monosomy</td></tr>
         <tr><td>Klinefelter syndrome</td><td>47, XXY</td><td>Male, often tall, may be infertile</td></tr>
@@ -756,12 +908,12 @@
         <strong>Translocation</strong>: a piece moves to a completely different chromosome.
       </p>
     </div>
-  </div>
+  </section>
 
   <!-- ============================================ -->
   <!-- SECTION 10: Biotechnology -->
   <!-- ============================================ -->
-  <div class="section" id="s10">
+  <section class="section" id="s10">
     <div class="section-tag">Section 10</div>
     <div class="section-title">Biotechnology Basics</div>
     <p class="section-subtitle">The toolkit scientists use to cut, copy, and edit DNA.</p>
@@ -776,11 +928,20 @@
       <h3>PCR (Polymerase Chain Reaction)</h3>
       <p>PCR makes millions of copies of a specific DNA sequence in a test tube. Three steps repeat in cycles:</p>
       <p style="margin-left:1rem">
-        1. <strong>Denature</strong> (~95 &deg;C): Heat separates the two DNA strands.<br>
-        2. <strong>Anneal</strong> (~55 &deg;C): Short primers bind to the target region.<br>
-        3. <strong>Extend</strong> (~72 &deg;C): Taq polymerase (heat-stable enzyme) builds new strands.
+        1. <strong>Denature</strong> (~95&deg;C): Heat separates the two DNA strands.<br>
+        2. <strong>Anneal</strong> (~55&deg;C): Short primers bind to the target region.<br>
+        3. <strong>Extend</strong> (~72&deg;C): Taq polymerase (heat-stable enzyme) builds new strands.
       </p>
       <p>After n cycles you have <span class="formula-inline">2<sup>n</sup></span> copies. 30 cycles = over a billion copies.</p>
+
+      <div class="worked-example">
+        <div class="we-label">&#128221; Worked Example &mdash; PCR Copy Number</div>
+        <div class="we-problem">You start with 1 copy of a DNA fragment and run 10 PCR cycles. How many copies do you have? What about 20 cycles?</div>
+        <div class="we-step"><span class="we-step-num">Step 1 &mdash;</span> Use the formula: copies = 2<sup>n</sup>, where n = number of cycles.</div>
+        <div class="we-step"><span class="we-step-num">Step 2 &mdash;</span> 10 cycles: 2<sup>10</sup> = 1,024 copies (roughly 1 thousand).</div>
+        <div class="we-step"><span class="we-step-num">Step 3 &mdash;</span> 20 cycles: 2<sup>20</sup> = 1,048,576 copies (over 1 million).</div>
+        <div class="we-answer">&#10003; Answer: 10 cycles &rarr; ~1,024 copies. 20 cycles &rarr; ~1 million copies. Each cycle doubles the amount &mdash; this is exponential growth.</div>
+      </div>
     </div>
 
     <div class="card">
@@ -796,12 +957,12 @@
       <h3>CRISPR-Cas9</h3>
       <p>A gene-editing system borrowed from bacteria. A <strong>guide RNA</strong> leads the Cas9 protein to a precise spot in the genome, where Cas9 cuts both DNA strands. The cell's repair machinery can then knock out a gene or insert a new one.</p>
     </div>
-  </div>
+  </section>
 
   <!-- ============================================ -->
   <!-- SECTION 11: Population Genetics -->
   <!-- ============================================ -->
-  <div class="section" id="s11">
+  <section class="section" id="s11">
     <div class="section-tag">Section 11</div>
     <div class="section-title">Population Genetics</div>
     <p class="section-subtitle">How allele frequencies change (or don't) in a population over time.</p>
@@ -819,7 +980,17 @@
 
       <div class="example-box">
         <div class="label">How to Solve a Problem</div>
-        "1 in 2,500 people has disorder X (recessive)." <span aria-hidden="true">→</span> q&sup2; = 1/2500 = 0.0004 <span aria-hidden="true">→</span> q = 0.02 <span aria-hidden="true">→</span> p = 0.98 <span aria-hidden="true">→</span> carrier frequency (2pq) = 2(0.98)(0.02) = <strong>~3.9%</strong>.
+        "1 in 2,500 people has disorder X (recessive)." &rarr; q&sup2; = 1/2500 = 0.0004 &rarr; q = 0.02 &rarr; p = 0.98 &rarr; carrier frequency (2pq) = 2(0.98)(0.02) = <strong>~3.9%</strong>.
+      </div>
+
+      <div class="worked-example">
+        <div class="we-label">&#128221; Worked Example &mdash; Hardy-Weinberg</div>
+        <div class="we-problem">In a population of 10,000 people, 400 have cystic fibrosis (an autosomal recessive disease, genotype ff). What fraction of the population are carriers (Ff)?</div>
+        <div class="we-step"><span class="we-step-num">Step 1 &mdash;</span> Find q&sup2;. The 400 affected people are ff. q&sup2; = 400/10,000 = 0.04.</div>
+        <div class="we-step"><span class="we-step-num">Step 2 &mdash;</span> Find q. Take the square root: q = &radic;0.04 = 0.2. This is the frequency of the recessive allele f.</div>
+        <div class="we-step"><span class="we-step-num">Step 3 &mdash;</span> Find p. Since p + q = 1, p = 1 &minus; 0.2 = 0.8. This is the frequency of the dominant allele F.</div>
+        <div class="we-step"><span class="we-step-num">Step 4 &mdash;</span> Find carrier frequency. Carriers are Ff, so 2pq = 2(0.8)(0.2) = 0.32.</div>
+        <div class="we-answer">&#10003; Answer: 32% of the population are carriers (Ff). That's 3,200 people who carry the allele but show no symptoms!</div>
       </div>
     </div>
 
@@ -836,12 +1007,12 @@
         <dd>Migration moves alleles between populations, making them more similar</dd>
       </dl>
     </div>
-  </div>
+  </section>
 
   <!-- ============================================ -->
   <!-- QUIZ -->
   <!-- ============================================ -->
-  <div class="section" id="quiz">
+  <section class="section" id="quiz">
     <div class="section-tag">Test Yourself</div>
     <div class="section-title">Quiz</div>
     <p class="section-subtitle">Pick the best answer, then check your score at the bottom.</p>
@@ -850,51 +1021,118 @@
       <button class="btn btn-primary" onclick="checkQuiz()">Check My Answers</button>
       <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
     </div>
-    <div class="quiz-score" id="quiz-score">
+    <div class="quiz-score" id="quiz-score" role="status">
       <div class="big" id="score-num"></div>
       <div class="sub" id="score-msg"></div>
     </div>
-  </div>
+  </section>
 
   <!-- ============================================ -->
   <!-- FLASHCARDS -->
   <!-- ============================================ -->
-  <div class="section" id="flashcards">
+  <section class="section" id="flashcards">
     <div class="section-tag">Review</div>
     <div class="section-title">Flashcards</div>
-    <p class="section-subtitle">Click to flip. Use the filters to focus on one topic.</p>
-    <div class="fc-filters" id="fc-filters"></div>
+    <p class="section-subtitle">Click or press Enter to flip. Use the filters to focus on one topic.</p>
+    <label for="fc-filter-select" class="sr-only">Filter flashcards by topic</label>
+    <div class="fc-filters" id="fc-filters" role="group" aria-label="Filter flashcards by topic"></div>
     <div class="fc-grid" id="fc-container"></div>
-  </div>
+  </section>
 
   <div class="footer">Genetics Made Simple &mdash; Study Guide</div>
 </div>
 
 <script>
 // ===== QUIZ =====
+// NOTE: All arrow symbols use Unicode \u2192 (\u2192) to avoid HTML span tags breaking innerHTML
 const Q=[
-{q:"What is the phenotypic ratio from a monohybrid cross (Aa × Aa)?",o:["1:2:1","3:1","9:3:3:1","1:1"],a:1,e:"Aa × Aa gives 1 AA : 2 Aa : 1 aa. Since A is dominant, both AA and Aa look the same, so the phenotypic ratio is 3 dominant : 1 recessive."},
-{q:"In a testcross, you cross a dominant-phenotype organism with:",o:["A heterozygote","A homozygous dominant","A homozygous recessive","Another dominant organism"],a:2,e:"A testcross always uses a homozygous recessive (aa). If any recessive offspring appear, the parent being tested must be Aa."},
-{q:"Pink snapdragons from a red × white cross are an example of:",o:["Codominance","Epistasis","Incomplete dominance","Pleiotropy"],a:2,e:"In incomplete dominance the heterozygote is a blend (pink) of the two homozygotes (red and white)."},
-{q:"Why are X-linked recessive diseases more common in males?",o:["Males have two X chromosomes","The Y carries a masking allele","Males only have one X, so one recessive allele is enough","Males have weaker immune systems"],a:2,e:"Males are hemizygous (one X). A single recessive allele on that X will be expressed because there's no second X to mask it."},
-{q:"During DNA replication, which enzyme glues Okazaki fragments together?",o:["Helicase","Primase","DNA Polymerase III","Ligase"],a:3,e:"DNA ligase seals the nicks between Okazaki fragments on the lagging strand."},
-{q:"The start codon AUG codes for which amino acid?",o:["Alanine","Tryptophan","Methionine","Leucine"],a:2,e:"AUG codes for methionine and also sets the reading frame for translation."},
-{q:"An insertion of 2 nucleotides causes what kind of mutation?",o:["Silent","Missense","Nonsense","Frameshift"],a:3,e:"2 is not a multiple of 3, so the entire reading frame shifts downstream. This is a frameshift mutation."},
-{q:"In the lac operon, what two conditions are needed for maximum gene expression?",o:["Lactose absent + glucose absent","Lactose present + glucose present","Lactose present + glucose absent","Lactose absent + glucose present"],a:2,e:"Lactose must be present (to remove the repressor) AND glucose must be absent (so cAMP is high and CAP activates transcription)."},
-{q:"Down syndrome is caused by:",o:["Monosomy 21","Trisomy 21","Deletion on chromosome 21","XXY genotype"],a:1,e:"Down syndrome results from having three copies of chromosome 21 (trisomy 21), usually due to nondisjunction during meiosis."},
-{q:"If q² = 0.04 in a Hardy-Weinberg population, what is the carrier frequency (2pq)?",o:["0.04","0.32","0.20","0.64"],a:1,e:"q² = 0.04 <span aria-hidden="true">→</span> q = 0.2 <span aria-hidden="true">→</span> p = 0.8 <span aria-hidden="true">→</span> 2pq = 2(0.8)(0.2) = 0.32."},
-{q:"In gel electrophoresis, which fragments travel farthest?",o:["The largest","The most positively charged","The smallest","It depends on the voltage only"],a:2,e:"Smaller DNA fragments move faster and farther through the gel matrix."},
-{q:"What does CRISPR-Cas9 use to find its target in the genome?",o:["A restriction enzyme","A guide RNA","A DNA primer","A transposon"],a:1,e:"A guide RNA (gRNA) is complementary to the target sequence and directs Cas9 to cut at that exact spot."},
-{q:"Chargaff's rules state that in double-stranded DNA:",o:["%A = %G","%A = %T and %G = %C","%A = %C","%G = %T"],a:1,e:"A always pairs with T, and G always pairs with C, so their percentages must be equal in double-stranded DNA."},
-{q:"Which type of natural selection favors the average phenotype?",o:["Directional","Stabilizing","Disruptive","Balancing"],a:1,e:"Stabilizing selection favors the intermediate phenotype and narrows the distribution. Example: average human birth weight has the highest survival."},
-{q:"How many copies does PCR produce after 20 cycles?",o:["20","40","2²⁰ (about 1 million)","200"],a:2,e:"PCR doubles the target each cycle, so after n cycles you have 2ⁿ copies. 2²⁰ = 1,048,576."},
+{q:"What is the phenotypic ratio from a monohybrid cross (Aa \u00d7 Aa)?",o:["1:2:1","3:1","9:3:3:1","1:1"],a:1,e:"\u2713 Aa \u00d7 Aa gives 1 AA : 2 Aa : 1 aa. Since A is dominant, both AA and Aa look the same, so the phenotypic ratio is 3 dominant : 1 recessive."},
+{q:"In a testcross, you cross a dominant-phenotype organism with:",o:["A heterozygote","A homozygous dominant","A homozygous recessive","Another dominant organism"],a:2,e:"\u2713 A testcross always uses a homozygous recessive (aa). If any recessive offspring appear, the parent being tested must be Aa."},
+{q:"Pink snapdragons from a red \u00d7 white cross are an example of:",o:["Codominance","Epistasis","Incomplete dominance","Pleiotropy"],a:2,e:"\u2713 In incomplete dominance the heterozygote is a blend (pink) of the two homozygotes (red and white)."},
+{q:"Why are X-linked recessive diseases more common in males?",o:["Males have two X chromosomes","The Y carries a masking allele","Males only have one X, so one recessive allele is enough","Males have weaker immune systems"],a:2,e:"\u2713 Males are hemizygous (one X). A single recessive allele on that X will be expressed because there\u2019s no second X to mask it."},
+{q:"During DNA replication, which enzyme glues Okazaki fragments together?",o:["Helicase","Primase","DNA Polymerase III","Ligase"],a:3,e:"\u2713 DNA ligase seals the nicks between Okazaki fragments on the lagging strand."},
+{q:"The start codon AUG codes for which amino acid?",o:["Alanine","Tryptophan","Methionine","Leucine"],a:2,e:"\u2713 AUG codes for methionine and also sets the reading frame for translation."},
+{q:"An insertion of 2 nucleotides causes what kind of mutation?",o:["Silent","Missense","Nonsense","Frameshift"],a:3,e:"\u2713 2 is not a multiple of 3, so the entire reading frame shifts downstream. This is a frameshift mutation."},
+{q:"In the lac operon, what two conditions are needed for maximum gene expression?",o:["Lactose absent + glucose absent","Lactose present + glucose present","Lactose present + glucose absent","Lactose absent + glucose present"],a:2,e:"\u2713 Lactose must be present (to remove the repressor) AND glucose must be absent (so cAMP is high and CAP activates transcription)."},
+{q:"Down syndrome is caused by:",o:["Monosomy 21","Trisomy 21","Deletion on chromosome 21","XXY genotype"],a:1,e:"\u2713 Down syndrome results from having three copies of chromosome 21 (trisomy 21), usually due to nondisjunction during meiosis."},
+{q:"If q\u00b2 = 0.04 in a Hardy-Weinberg population, what is the carrier frequency (2pq)?",o:["0.04","0.32","0.20","0.64"],a:1,e:"\u2713 q\u00b2 = 0.04 \u2192 q = 0.2 \u2192 p = 0.8 \u2192 2pq = 2(0.8)(0.2) = 0.32."},
+{q:"In gel electrophoresis, which fragments travel farthest?",o:["The largest","The most positively charged","The smallest","It depends on the voltage only"],a:2,e:"\u2713 Smaller DNA fragments move faster and farther through the gel matrix."},
+{q:"What does CRISPR-Cas9 use to find its target in the genome?",o:["A restriction enzyme","A guide RNA","A DNA primer","A transposon"],a:1,e:"\u2713 A guide RNA (gRNA) is complementary to the target sequence and directs Cas9 to cut at that exact spot."},
+{q:"Chargaff\u2019s rules state that in double-stranded DNA:",o:["%A = %G","%A = %T and %G = %C","%A = %C","%G = %T"],a:1,e:"\u2713 A always pairs with T, and G always pairs with C, so their percentages must be equal in double-stranded DNA."},
+{q:"Which type of natural selection favors the average phenotype?",o:["Directional","Stabilizing","Disruptive","Balancing"],a:1,e:"\u2713 Stabilizing selection favors the intermediate phenotype and narrows the distribution. Example: average human birth weight has the highest survival."},
+{q:"How many copies does PCR produce after 20 cycles?",o:["20","40","2\u00b2\u2070 (about 1 million)","200"],a:2,e:"\u2713 PCR doubles the target each cycle, so after n cycles you have 2\u207F copies. 2\u00b2\u2070 = 1,048,576."},
 ];
 
-function buildQuiz(){const c=document.getElementById('quiz-container');c.innerHTML='';Q.forEach((q,i)=>{const d=document.createElement('div');d.className='quiz-q';d.id='qq'+i;d.innerHTML=`<div class="q-num">Question ${i+1}</div><p class="q-text">${q.q}</p><ul class="quiz-opts">${q.o.map((o,j)=>`<li><label id="ql${i}-${j}"><input type="radio" name="q${i}" value="${j}"> ${o}</label></li>`).join('')}</ul><div class="quiz-fb" id="qf${i}"></div>`;c.appendChild(d)})}
+function buildQuiz(){
+  const c=document.getElementById('quiz-container');
+  c.innerHTML='';
+  Q.forEach((q,i)=>{
+    const d=document.createElement('div');
+    d.className='quiz-q';
+    d.id='qq'+i;
+    const fieldsetId='qfs'+i;
+    d.innerHTML=
+      '<div class="q-num">Question '+(i+1)+'</div>'+
+      '<fieldset id="'+fieldsetId+'">'+
+        '<legend class="q-text">'+q.q+'</legend>'+
+        '<ul class="quiz-opts">'+
+          q.o.map((o,j)=>
+            '<li><label id="ql'+i+'-'+j+'"><input type="radio" name="q'+i+'" value="'+j+'" aria-label="Option '+(j+1)+': '+o+'"> '+o+'</label></li>'
+          ).join('')+
+        '</ul>'+
+      '</fieldset>'+
+      '<div class="quiz-fb" id="qf'+i+'" role="alert" aria-live="polite"></div>';
+    c.appendChild(d);
+  });
+}
 
-function checkQuiz(){let s=0;Q.forEach((q,i)=>{const sel=document.querySelector(`input[name="q${i}"]:checked`);const fb=document.getElementById('qf'+i);q.o.forEach((_,j)=>document.getElementById(`ql${i}-${j}`).className='');if(sel){const v=+sel.value;if(v===q.a){s++;document.getElementById(`ql${i}-${v}`).className='correct';fb.className='quiz-fb show ok';fb.textContent='<span aria-hidden="true">✓</span> '+q.e}else{document.getElementById(`ql${i}-${v}`).className='wrong';document.getElementById(`ql${i}-${q.a}`).className='show-right';fb.className='quiz-fb show nope';fb.textContent='<span aria-hidden="true">✗</span> '+q.e}}else{document.getElementById(`ql${i}-${q.a}`).className='show-right';fb.className='quiz-fb show nope';fb.textContent='No answer selected. '+q.e}});const sc=document.getElementById('quiz-score');const pct=Math.round(s/Q.length*100);document.getElementById('score-num').textContent=s+' / '+Q.length;document.getElementById('score-msg').textContent=pct+'% — '+(pct>=90?'Outstanding!':pct>=70?'Great work!':pct>=50?'Good start. Review the sections above.':'Keep studying and try again!');sc.style.display='block';sc.scrollIntoView({behavior:'smooth',block:'center'})}
+function checkQuiz(){
+  let s=0;
+  Q.forEach((q,i)=>{
+    const sel=document.querySelector('input[name="q'+i+'"]:checked');
+    const fb=document.getElementById('qf'+i);
+    q.o.forEach((_,j)=>document.getElementById('ql'+i+'-'+j).className='');
+    if(sel){
+      const v=+sel.value;
+      if(v===q.a){
+        s++;
+        document.getElementById('ql'+i+'-'+v).className='correct';
+        fb.className='quiz-fb show ok';
+        fb.innerHTML=q.e;
+      } else {
+        document.getElementById('ql'+i+'-'+v).className='wrong';
+        document.getElementById('ql'+i+'-'+q.a).className='show-right';
+        fb.className='quiz-fb show nope';
+        fb.innerHTML=q.e;
+      }
+    } else {
+      document.getElementById('ql'+i+'-'+q.a).className='show-right';
+      fb.className='quiz-fb show nope';
+      fb.innerHTML='No answer selected. '+q.e;
+    }
+  });
+  const sc=document.getElementById('quiz-score');
+  const pct=Math.round(s/Q.length*100);
+  document.getElementById('score-num').textContent=s+' / '+Q.length;
+  document.getElementById('score-msg').textContent=pct+'% \u2014 '+(pct>=90?'Outstanding!':pct>=70?'Great work!':pct>=50?'Good start. Review the sections above.':'Keep studying and try again!');
+  sc.style.display='block';
+  // Announce score to screen readers
+  document.getElementById('live-announce').textContent='Quiz graded. You scored '+s+' out of '+Q.length+', '+pct+'%.';
+  sc.scrollIntoView({behavior:'smooth',block:'center'});
+}
 
-function resetQuiz(){Q.forEach((q,i)=>{document.querySelectorAll(`input[name="q${i}"]`).forEach(r=>r.checked=false);q.o.forEach((_,j)=>document.getElementById(`ql${i}-${j}`).className='');const fb=document.getElementById('qf'+i);fb.className='quiz-fb'});document.getElementById('quiz-score').style.display='none';document.getElementById('quiz-container').scrollIntoView({behavior:'smooth'})}
+function resetQuiz(){
+  Q.forEach((q,i)=>{
+    document.querySelectorAll('input[name="q'+i+'"]').forEach(r=>r.checked=false);
+    q.o.forEach((_,j)=>document.getElementById('ql'+i+'-'+j).className='');
+    const fb=document.getElementById('qf'+i);
+    fb.className='quiz-fb';
+    fb.innerHTML='';
+  });
+  document.getElementById('quiz-score').style.display='none';
+  document.getElementById('live-announce').textContent='Quiz reset.';
+  document.getElementById('quiz-container').scrollIntoView({behavior:'smooth'});
+}
 
 // ===== FLASHCARDS =====
 const FC=[
@@ -902,43 +1140,83 @@ const FC=[
 {f:"What is an allele?",b:"A version of a gene. For example, B (brown eyes) and b (blue eyes) are two alleles of the same gene.",c:"Basics"},
 {f:"Homozygous vs. Heterozygous?",b:"Homozygous = same alleles (BB or bb). Heterozygous = different alleles (Bb).",c:"Basics"},
 {f:"What is the Law of Segregation?",b:"The two alleles for a gene split during gamete formation, so each egg or sperm gets just one. This happens when homologous chromosomes separate in meiosis I.",c:"Mendel"},
-{f:"What ratio does a monohybrid cross give?",b:"3 dominant : 1 recessive (phenotypic ratio from Aa × Aa).",c:"Mendel"},
-{f:"What ratio does a dihybrid cross give?",b:"9:3:3:1 (phenotypic ratio from AaBb × AaBb).",c:"Mendel"},
-{f:"What is a testcross?",b:"Crossing a dominant individual with a homozygous recessive (aa) to find out if it's AA or Aa.",c:"Mendel"},
+{f:"What ratio does a monohybrid cross give?",b:"3 dominant : 1 recessive (phenotypic ratio from Aa \u00d7 Aa).",c:"Mendel"},
+{f:"What ratio does a dihybrid cross give?",b:"9:3:3:1 (phenotypic ratio from AaBb \u00d7 AaBb).",c:"Mendel"},
+{f:"What is a testcross?",b:"Crossing a dominant individual with a homozygous recessive (aa) to find out if it\u2019s AA or Aa.",c:"Mendel"},
 {f:"Incomplete dominance vs. codominance?",b:"Incomplete = heterozygote is a blend (pink flowers). Codominance = both alleles fully show (AB blood type).",c:"Beyond Mendel"},
 {f:"What is epistasis?",b:"One gene overrides another. Example: ee Labradors are yellow regardless of the B gene.",c:"Beyond Mendel"},
-{f:"Why are X-linked recessive traits more common in males?",b:"Males only have one X. One recessive allele is enough for expression since there's no second X to mask it.",c:"Chromosomes"},
+{f:"Why are X-linked recessive traits more common in males?",b:"Males only have one X. One recessive allele is enough for expression since there\u2019s no second X to mask it.",c:"Chromosomes"},
 {f:"What is X-inactivation?",b:"One X in each female cell is randomly shut off (Barr body). This is why calico cats have patchy fur.",c:"Chromosomes"},
 {f:"What is 1 centiMorgan?",b:"1% recombination frequency between two genes. Used to measure map distance.",c:"Chromosomes"},
 {f:"Base pairing rules?",b:"A pairs with T (2 H-bonds). G pairs with C (3 H-bonds). Purines pair with pyrimidines.",c:"DNA"},
 {f:"What is semiconservative replication?",b:"Each new DNA double helix has one old strand and one new strand.",c:"DNA"},
 {f:"What does DNA ligase do?",b:"Glues Okazaki fragments together on the lagging strand.",c:"DNA"},
-{f:"What is the Central Dogma?",b:"DNA <span aria-hidden="true">→</span> RNA <span aria-hidden="true">→</span> Protein. Transcription makes RNA; translation makes protein.",c:"Gene Expression"},
+{f:"What is the Central Dogma?",b:"DNA \u2192 RNA \u2192 Protein. Transcription makes RNA; translation makes protein.",c:"Gene Expression"},
 {f:"What are the stop codons?",b:"UAA, UAG, UGA. They signal the ribosome to release the finished protein.",c:"Gene Expression"},
 {f:"What is alternative splicing?",b:"Different exon combinations from the same gene produce different proteins, increasing diversity.",c:"Gene Expression"},
-{f:"How does the lac operon turn ON?",b:"Lactose removes the repressor from the operator. Maximum expression also needs glucose to be absent (high cAMP <span aria-hidden="true">→</span> CAP activation).",c:"Regulation"},
+{f:"How does the lac operon turn ON?",b:"Lactose removes the repressor from the operator. Maximum expression also needs glucose to be absent (high cAMP \u2192 CAP activation).",c:"Regulation"},
 {f:"What is a frameshift mutation?",b:"An insertion or deletion (not a multiple of 3) that shifts the reading frame, scrambling all downstream codons.",c:"Mutation"},
 {f:"What is nucleotide excision repair?",b:"Removes bulky DNA damage like thymine dimers. Defective in xeroderma pigmentosum.",c:"Mutation"},
 {f:"What is nondisjunction?",b:"Failure of chromosomes to separate in meiosis, causing aneuploidy (e.g., trisomy 21 = Down syndrome).",c:"Chromosomes"},
-{f:"What is PCR?",b:"Denature <span aria-hidden="true">→</span> Anneal <span aria-hidden="true">→</span> Extend. Uses Taq polymerase (heat-stable) to copy a DNA target. 2ⁿ copies after n cycles.",c:"Biotech"},
+{f:"What is PCR?",b:"Denature \u2192 Anneal \u2192 Extend. Uses Taq polymerase (heat-stable) to copy a DNA target. 2\u207F copies after n cycles.",c:"Biotech"},
 {f:"How does CRISPR-Cas9 work?",b:"A guide RNA leads Cas9 to a target DNA sequence, where it makes a double-strand break for gene editing.",c:"Biotech"},
 {f:"SNoW DRoP?",b:"Southern = DNA, Northern = RNA, Western = Protein.",c:"Biotech"},
-{f:"Hardy-Weinberg equations?",b:"p + q = 1 (alleles). p² + 2pq + q² = 1 (genotypes). Start from q² (recessive phenotype frequency).",c:"Pop Genetics"},
+{f:"Hardy-Weinberg equations?",b:"p + q = 1 (alleles). p\u00b2 + 2pq + q\u00b2 = 1 (genotypes). Start from q\u00b2 (recessive phenotype frequency).",c:"Pop Genetics"},
 {f:"Five conditions for Hardy-Weinberg equilibrium?",b:"No mutation, random mating, no selection, infinite population, no migration.",c:"Pop Genetics"},
 {f:"What is genetic drift?",b:"Random changes in allele frequency, strongest in small populations. Includes bottleneck and founder effects.",c:"Pop Genetics"},
 ];
 
 let activeCat='All';
-function getCats(){return['All',...new Set(FC.map(f=>f.c))]}
-function buildFilters(){document.getElementById('fc-filters').innerHTML=getCats().map(c=>`<button class="fc-btn ${c==='All'?'active':''}" onclick="filterFC('${c}')">${c}</button>`).join('')}
-function filterFC(c){activeCat=c;document.querySelectorAll('.fc-btn').forEach(b=>b.classList.toggle('active',b.textContent===c));buildFC()}
-function buildFC(){const arr=activeCat==='All'?FC:FC.filter(f=>f.c===activeCat);document.getElementById('fc-container').innerHTML=arr.map(f=>`<div class="fc" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front"><div class="tag">${f.c}</div><div class="question">${f.f}</div><div class="hint">click to flip</div></div><div class="fc-back"><div class="tag">Answer</div><div class="answer">${f.b}</div></div></div></div>`).join('')}
+function getCats(){return['All',...new Set(FC.map(f=>f.c))];}
+function buildFilters(){
+  document.getElementById('fc-filters').innerHTML=getCats().map(c=>
+    '<button class="fc-btn '+(c==='All'?'active':'')+'" onclick="filterFC(\''+c+'\')" aria-pressed="'+(c==='All'?'true':'false')+'">'+c+'</button>'
+  ).join('');
+}
+function filterFC(c){
+  activeCat=c;
+  document.querySelectorAll('.fc-btn').forEach(b=>{
+    const isActive=b.textContent===c;
+    b.classList.toggle('active',isActive);
+    b.setAttribute('aria-pressed',isActive?'true':'false');
+  });
+  buildFC();
+  document.getElementById('live-announce').textContent='Showing '+(c==='All'?'all':''+c)+' flashcards.';
+}
+function buildFC(){
+  const arr=activeCat==='All'?FC:FC.filter(f=>f.c===activeCat);
+  document.getElementById('fc-container').innerHTML=arr.map((f,i)=>
+    '<div class="fc" tabindex="0" role="button" aria-label="Flashcard: '+f.f.replace(/"/g,'&quot;')+'. Press Enter or Space to flip." aria-pressed="false" onclick="flipCard(this)" onkeydown="fcKeyDown(event,this)">'+
+      '<div class="fc-inner">'+
+        '<div class="fc-front">'+
+          '<div class="tag">'+f.c+'</div>'+
+          '<div class="question">'+f.f+'</div>'+
+          '<div class="hint">click to flip</div>'+
+        '</div>'+
+        '<div class="fc-back">'+
+          '<div class="tag">Answer</div>'+
+          '<div class="answer">'+f.b+'</div>'+
+        '</div>'+
+      '</div>'+
+    '</div>'
+  ).join('');
+}
+function flipCard(el){
+  const flipped=el.classList.toggle('flipped');
+  el.setAttribute('aria-pressed',flipped?'true':'false');
+}
+function fcKeyDown(e,el){
+  if(e.key==='Enter'||e.key===' '){
+    e.preventDefault();
+    flipCard(el);
+  }
+}
 
-document.addEventListener('DOMContentLoaded',()=>{buildQuiz();buildFilters();buildFC()});
+document.addEventListener('DOMContentLoaded',()=>{buildQuiz();buildFilters();buildFC();});
 </script>
 
   <div style="max-width: 800px; margin: 40px auto; padding: 20px 30px; background: #fff8e1; border-left: 4px solid #f9a825; border-radius: 8px; font-size: 14px; line-height: 1.6; color: #555;">
-  <div style="font-weight: bold; font-size: 15px; margin-bottom: 10px;"><span aria-hidden="true">⚠️</span> Important Notice</div>
+  <div style="font-weight: bold; font-size: 15px; margin-bottom: 10px;"><span aria-hidden="true">&#9888;&#65039;</span> Important Notice</div>
   <p style="margin: 0 0 10px 0;">These study resources are provided free of charge for educational purposes only. They are intended as supplemental study aids and should not be used as a substitute for your course textbooks, lecture materials, or the guidance of your instructors.</p>
   <p style="margin: 0 0 10px 0;">While every effort has been made to ensure accuracy, this content may contain errors, omissions, or information that is out of date. Science is constantly evolving, and material that was accurate at the time of writing may no longer reflect current understanding. Always verify important facts, formulas, and concepts against your official course materials.</p>
   <p style="margin: 0 0 10px 0;">No guarantees are made regarding the completeness, accuracy, or reliability of any information presented on these sites. Use at your own discretion. If you spot an error, we appreciate you letting us know so it can be corrected.</p>
